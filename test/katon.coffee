@@ -9,12 +9,11 @@ describe 'katon', ->
     katon.powPath = '/tmp/.pow'
     katon.katonPath = '/tmp/.katon'
   
-  # Before each tests repare directories 
+  # Before each tests reset directories 
   beforeEach ->
     paths = ['/tmp/.pow', '/tmp/app']
     rm '-rf', paths
     mkdir paths
-
 
   describe 'link', ->
 
