@@ -1,0 +1,24 @@
+{
+  "name": "katon",
+  "version": "0.0.0",
+  "bin": {
+    "katon": "./bin/katon"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec --watch ./**/*.coffee --compilers coffee:coffee-script ./test/*.coffee"
+  },
+  "devDependencies": {
+    "coffee-script": "*",
+    "mocha": "1.8.x",
+    "chai": "1.7.x",
+    "sinon": "1.7.x",
+    "grunt": "~0.4.1",
+    "grunt-contrib": "0.4.0"
+  },
+  "dependencies" : {
+    "commander": "1.2.0",
+    "shelljs": "0.1.4",
+    "forever-monitor": "1.2.2",
+    "http-proxy": "0.10.x"
+  }
+}
