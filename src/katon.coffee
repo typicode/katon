@@ -1,5 +1,4 @@
 require 'shelljs/global'
-forever = require 'forever-monitor'
 
 # This module is the katon CLI.
 # It just creates/removes files, symlinks, etc...
