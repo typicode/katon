@@ -1,5 +1,4 @@
 assert = require 'assert'
-sinon = require 'sinon'
 katon = require '../src/katon'
 
 describe 'katon', ->
