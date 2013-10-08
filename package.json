@@ -20,6 +20,7 @@
     "commander": "1.2.0",
     "shelljs": "0.1.4",
     "forever-monitor": "1.2.2",
-    "http-proxy": "0.10.x"
+    "http-proxy": "0.10.x",
+    "eco": "*"
   }
 }

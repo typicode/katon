@@ -7,6 +7,7 @@ program
   .version('0.0.1')
   .option('link', 'Link the current dir')
   .option('unlink', 'Unlink the current dir')
+  .option('setup', 'Setup katon daemon')
   .parse(process.argv);
 
 if (program.link) katon.link();

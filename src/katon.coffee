@@ -1,4 +1,5 @@
 require 'shelljs/global'
+eco = require 'eco'
 
 # This module is the katon CLI.
 # It just creates/removes files, symlinks, etc...
@@ -7,6 +8,7 @@ module.exports =
   # Pow and Katon paths
   powPath: "#{env.HOME}/.pow"
   katonPath: "#{env.HOME}/.katon"
+  launchAgentsPath: "#{env.HOME}/Library/LaunchAgents/katon.plist"
 
   # Link:
   # Creates a pow proxy and a symlink into katon path.
@@ -22,3 +24,13 @@ module.exports =
     name = path.split('/').pop()
     # NOTE: rm won't remove symlink so an exec is used instead.
     exec "rm #{@powPath}/#{name} #{@katonPath}/#{name}"
+
+  # Install:
+  # Renders katon.plist.eco with the good env variables and
+  # put it in $HOME/Library/LaunchAgents/
+  setup: ->
+    template = cat "#{__dirname}/../plist/katon.plist.eco"
+    plistContent = eco.render template,
+      nodePath: which 'node'
+      daemonPath: "#{__dirname}/../lib/daemon.js"
+    plistContent.to "#{@launchAgentsPath}/katon.plist"

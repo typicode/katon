@@ -7,6 +7,7 @@ describe 'katon', ->
   before ->
     katon.powPath = '/tmp/.pow'
     katon.katonPath = '/tmp/.katon'
+    katon.launchAgentsPath = '/tmp'
   
   # Before each tests reset directories 
   beforeEach ->
@@ -42,3 +43,12 @@ describe 'katon', ->
 
     it 'should rm the symlink in .katon', ->
       assert !test '-L', "/tmp/.katon/app"
+
+  describe 'setup', ->
+
+    beforeEach ->
+      rm '-rf', '/tmp/katon.plist'
+      katon.setup()
+      
+    it 'should put a katon.plist in katon.launchAgentsPath', ->
+      assert test '-e', '/tmp/katon.plist'
