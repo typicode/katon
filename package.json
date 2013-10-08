@@ -5,7 +5,8 @@
     "katon": "./bin/katon"
   },
   "scripts": {
-    "test": "mocha --reporter spec --watch ./**/*.coffee --compilers coffee:coffee-script ./test/*.coffee"
+    "test": "mocha --reporter spec --watch ./**/*.coffee --compilers coffee:coffee-script ./test/*.coffee",
+    "prepublish": "grunt coffee"
   },
   "devDependencies": {
     "coffee-script": "*",
