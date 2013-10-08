@@ -10,13 +10,15 @@ describe 'katon', ->
   
   # Before each tests reset directories 
   beforeEach ->
-    paths = ['/tmp/.pow', '/tmp/app']
+    paths = ['/tmp/.pow', '/tmp/.katon', '/tmp/app']
     rm '-rf', paths
     mkdir paths
 
   describe 'link', ->
 
     beforeEach ->
+      # katon.link should create the /tmp/.katon so it's removed before the test
+      rm '-rf', '/tmp/.katon'
       katon.link '/tmp/app'
 
     it 'should create a proxy file in .pow', ->
