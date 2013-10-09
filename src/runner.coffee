@@ -8,7 +8,7 @@ module.exports =
 
   start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
-    nodePath = which 'node'
+    nodePath = process.argv[0]
     cd path
     try
       @forever.start [nodePath, 'app.js'],
