@@ -8,9 +8,13 @@ module.exports =
 
   start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
+    nodePath = which 'node'
     cd path
-    @forever.start ['npm', 'start'],
-      max: 1
-      silent: false
-      env:
-        PORT: port
+    try
+      @forever.start [nodePath, 'app.js'],
+        max: 1
+        silent: false
+        env:
+          PORT: port
+    catch error
+      console.log error
