@@ -8,7 +8,7 @@ module.exports =
   # Pow and Katon paths
   powPath: "#{env.HOME}/.pow"
   katonPath: "#{env.HOME}/.katon"
-  launchAgentsPath: "#{env.HOME}/Library/LaunchAgents/katon.plist"
+  launchAgentsPath: "#{env.HOME}/Library/LaunchAgents"
 
   # Link:
   # Creates a pow proxy and a symlink into katon path.

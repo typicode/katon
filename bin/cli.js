@@ -12,3 +12,4 @@ program
 
 if (program.link) katon.link();
 if (program.unlink) katon.unlink();
+if (program.setup) katon.setup();

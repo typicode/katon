@@ -7,6 +7,7 @@ module.exports =
   forever: forever
 
   start: (path, port) ->
+    console.log "Starting #{path} port: #{port}"
     cd path
     @forever.start ['npm', 'start'],
       max: 1
