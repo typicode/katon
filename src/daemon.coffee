@@ -8,6 +8,10 @@ apps = {}
 router = {}
 proxyServer = null
 
+# If the daemon is run by launchd it will lack some paths
+# so we're adding them right now
+env.PATH = env.PATH + ':/usr/local/bin:/usr/local/share/npm/bin'
+
 stopAll = ->
   console.log "Stopping all apps"
   for app in apps
