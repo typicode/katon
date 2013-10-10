@@ -18,4 +18,10 @@ describe 'runner', ->
     it 'starts express app', ->
       assert runner.forever.start.called
       assert runner.forever.start.calledWith ['npm', 'start' ],
-        max: 1, silent: false, env: PORT: 4000
+        max: 1
+        silent: false
+        watch: true
+        watchDirectory: '/tmp/app'
+        watchIgnoreDotFiles: true
+        env:
+          PORT: 4000
