@@ -1,6 +1,15 @@
 {
   "name": "katon",
   "version": "0.0.0",
+  "description": "Katon",
+  "keywords": [
+    "katon"
+  ],
+  "author": "Typicode",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/typicode/katon.git"
+  },
   "bin": {
     "katon": "./bin/katon"
   },
@@ -22,5 +31,6 @@
     "forever-monitor": "1.2.2",
     "http-proxy": "0.10.x",
     "eco": "*"
-  }
+  },
+  "license": "MIT"
 }
