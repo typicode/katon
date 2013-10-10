@@ -8,12 +8,14 @@ module.exports =
 
   start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
-    nodePath = process.argv[0]
     cd path
     try
-      @forever.start [nodePath, 'app.js'],
+      @forever.start ['npm', 'start'],
         max: 1
         silent: false
+        watch: true
+        watchDirectory: path
+        watchIgnoreDotFiles: true
         env:
           PORT: port
     catch error
