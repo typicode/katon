@@ -11,6 +11,7 @@ program
   .option('install-pow', 'Install or update pow')
   .parse(process.argv);
 
+if (program.args.length === 0) program.help();
 if (program.link) katon.link();
 if (program.unlink) katon.unlink();
 if (program.setup) katon.setup();
