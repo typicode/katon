@@ -17,6 +17,7 @@ module.exports =
     "4000".to "#{@powPath}/#{name}"
     mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
     exec "ln -s #{path} #{@katonPath}"
+    console.log "Application is now available at http://#{name}.dev"
 
   # Unlink:
   # Destroys what was created by link.
@@ -24,8 +25,9 @@ module.exports =
     name = path.split('/').pop()
     # NOTE: rm won't remove symlink so an exec is used instead.
     exec "rm #{@powPath}/#{name} #{@katonPath}/#{name}"
+    console.log "Successfully removed #{name}"
 
-  # Install:
+  # Setup:
   # Renders katon.plist.eco with the good env variables and
   # put it in $HOME/Library/LaunchAgents/
   setup: ->
@@ -34,3 +36,4 @@ module.exports =
       nodePath: which 'node'
       daemonPath: "#{__dirname}/../lib/daemon.js"
     plistContent.to "#{@launchAgentsPath}/katon.plist"
+    console.log 'Katon was successfully set up'
