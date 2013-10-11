@@ -37,3 +37,7 @@ module.exports =
       daemonPath: "#{__dirname}/../lib/daemon.js"
     plistContent.to "#{@launchAgentsPath}/katon.plist"
     console.log 'Katon was successfully set up'
+
+  installPow: ->
+    console.log 'Installing Pow'
+    exec 'curl get.pow.cx | sh'
