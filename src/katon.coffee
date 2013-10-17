@@ -1,4 +1,5 @@
 require 'shelljs/global'
+foo = require 'foo-shelljs'
 eco = require 'eco'
 
 # This module is the katon CLI.
@@ -15,16 +16,15 @@ module.exports =
   link: (path = pwd())->
     name = path.split('/').pop()
     "4000".to "#{@powPath}/#{name}"
-    mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
-    exec "ln -s #{path} #{@katonPath}"
+    foo.mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
+    foo.exec "ln -s #{path} #{@katonPath}"
     console.log "Application is now available at http://#{name}.dev"
 
   # Unlink:
   # Destroys what was created by link.
   unlink: (path = pwd()) ->
     name = path.split('/').pop()
-    # NOTE: rm won't remove symlink so an exec is used instead.
-    exec "rm #{@powPath}/#{name} #{@katonPath}/#{name}"
+    foo.rm '-f', "#{@powPath}/#{name}", "#{@katonPath}/#{name}"
     console.log "Successfully removed #{name}"
 
   # Setup:
@@ -35,9 +35,9 @@ module.exports =
     plistContent = eco.render template,
       nodePath: which 'node'
       daemonPath: "#{__dirname}/../lib/daemon.js"
-    plistContent.to "#{@launchAgentsPath}/katon.plist"
+    foo.to plistContent, "#{@launchAgentsPath}/katon.plist"
     console.log 'Katon was successfully set up'
 
   installPow: ->
     console.log 'Installing Pow'
-    exec 'curl get.pow.cx | sh'
+    foo.exec 'curl get.pow.cx | sh'

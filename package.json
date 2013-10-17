@@ -14,7 +14,7 @@
     "katon": "./bin/katon"
   },
   "scripts": {
-    "test": "mocha --reporter spec --compilers coffee:coffee-script ./test/*.coffee",
+    "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script ./test/*.coffee",
     "prepublish": "grunt coffee"
   },
   "devDependencies": {
@@ -27,9 +27,10 @@
   },
   "dependencies" : {
     "commander": "1.2.0",
-    "shelljs": "0.1.4",
+    "shelljs": "*",
     "forever-monitor": "1.2.2",
     "http-proxy": "0.10.x",
+    "foo-shelljs": "git://github.com/typicode/foo-shelljs.git",
     "eco": "*"
   },
   "license": "MIT"
