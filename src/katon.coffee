@@ -27,16 +27,21 @@ module.exports =
     foo.rm '-f', "#{@powPath}/#{name}", "#{@katonPath}/#{name}"
     console.log "Successfully removed #{name}"
 
-  # Setup:
+  # Load:
   # Renders katon.plist.eco with the good env variables and
   # put it in $HOME/Library/LaunchAgents/
-  setup: ->
+  load: ->
     template = cat "#{__dirname}/../plist/katon.plist.eco"
     plistContent = eco.render template,
       nodePath: which 'node'
       daemonPath: "#{__dirname}/../lib/daemon.js"
     foo.to plistContent, "#{@launchAgentsPath}/katon.plist"
-    console.log 'Katon was successfully set up'
+    console.log 'Katon daemon was successfully set up'
+
+  # Unload:
+  # Removes katon.plist from $HOME/Library/LaunchAgents/
+  unload: ->
+    foo.rm "#{@launchAgentsPath}/katon.plist"
 
   installPow: ->
     console.log 'Installing Pow'
