@@ -7,7 +7,7 @@ program
   .version('0.0.1')
   .option('link', 'Link the current dir')
   .option('unlink', 'Unlink the current dir')
-  .option('setup', 'load katon daemon')
+  .option('load', 'load katon daemon')
   .option('unload', 'unload katon daemon')
   .option('install-pow', 'Install or update pow')
   .parse(process.argv);
