@@ -36,11 +36,13 @@ module.exports =
       nodePath: which 'node'
       daemonPath: "#{__dirname}/../lib/daemon.js"
     foo.to plistContent, "#{@launchAgentsPath}/katon.plist"
+    foo.exec "launchctl load -Fw #{@launchAgentsPath}/katon.plist"
     console.log 'Katon daemon was successfully set up'
 
   # Unload:
   # Removes katon.plist from $HOME/Library/LaunchAgents/
   unload: ->
+    foo.exec "launchctl unload #{@launchAgentsPath}/katon.plist"
     foo.rm "#{@launchAgentsPath}/katon.plist"
 
   installPow: ->
