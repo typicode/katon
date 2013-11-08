@@ -4,7 +4,7 @@ logan = require 'logan'
 eco   = require 'eco'
 
 logan.set
-  info: ['\n%\n', 'green']
+  info: ['\n  %\n', 'green']
 
 # This module is the katon CLI.
 # It just creates/removes files, symlinks, etc...
