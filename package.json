@@ -28,9 +28,9 @@
   "dependencies" : {
     "commander": "1.2.0",
     "shelljs": "*",
+    "shoutjs": "*",
     "forever-monitor": "1.2.2",
     "http-proxy": "0.10.x",
-    "foo-shelljs": "git://github.com/typicode/foo-shelljs.git",
     "eco": "*"
   },
   "license": "MIT"
