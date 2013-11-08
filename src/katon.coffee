@@ -1,6 +1,6 @@
 require 'shelljs/global'
-foo = require 'foo-shelljs'
-eco = require 'eco'
+shout = require 'shout'
+eco   = require 'eco'
 
 # This module is the katon CLI.
 # It just creates/removes files, symlinks, etc...
@@ -16,15 +16,15 @@ module.exports =
   link: (path = pwd())->
     name = path.split('/').pop()
     "4000".to "#{@powPath}/#{name}"
-    foo.mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
-    foo.exec "ln -s #{path} #{@katonPath}"
+    shout.mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
+    shout.exec "ln -s #{path} #{@katonPath}"
     console.log "Application is now available at http://#{name}.dev"
 
   # Unlink:
   # Destroys what was created by link.
   unlink: (path = pwd()) ->
     name = path.split('/').pop()
-    foo.rm '-f', "#{@powPath}/#{name}", "#{@katonPath}/#{name}"
+    shout.rm '-f', "#{@powPath}/#{name}", "#{@katonPath}/#{name}"
     console.log "Successfully removed #{name}"
 
   # Load:
@@ -35,16 +35,16 @@ module.exports =
     plistContent = eco.render template,
       nodePath: which 'node'
       daemonPath: "#{__dirname}/../lib/daemon.js"
-    foo.to plistContent, "#{@launchAgentsPath}/katon.plist"
-    foo.exec "launchctl load -Fw #{@launchAgentsPath}/katon.plist"
+    shout.to plistContent, "#{@launchAgentsPath}/katon.plist"
+    shout.exec "launchctl load -Fw #{@launchAgentsPath}/katon.plist"
     console.log 'Katon daemon was successfully set up'
 
   # Unload:
   # Removes katon.plist from $HOME/Library/LaunchAgents/
   unload: ->
-    foo.exec "launchctl unload #{@launchAgentsPath}/katon.plist"
-    foo.rm "#{@launchAgentsPath}/katon.plist"
+    shout.exec "launchctl unload #{@launchAgentsPath}/katon.plist"
+    shout.rm "#{@launchAgentsPath}/katon.plist"
 
   installPow: ->
     console.log 'Installing Pow'
-    foo.exec 'curl get.pow.cx | sh'
+    shout.exec 'curl get.pow.cx | sh'
