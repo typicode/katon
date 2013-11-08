@@ -1,5 +1,5 @@
 require 'shelljs/global'
-shout = require 'shout'
+shout = require 'shoutjs'
 logan = require 'logan'
 eco   = require 'eco'
 
