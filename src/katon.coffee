@@ -32,7 +32,7 @@ module.exports =
     name = path.split('/').pop()
 
     console.log();
-    shout.rm '-f', "#{@powPath}/#{name}", "#{@katonPath}/#{name}"
+    shout.exec "rm -f #{@powPath}/#{name} #{@katonPath}/#{name}"
     logan.info "Successfully removed #{name}"
 
   # Load:
