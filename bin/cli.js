@@ -15,5 +15,6 @@ program
 if (program.args.length === 0) program.help();
 if (program.link) katon.link();
 if (program.unlink) katon.unlink();
-if (program.setup) katon.setup();
+if (program.load) katon.load();
+if (program.unload) katon.unload();
 if (program.installPow) katon.installPow();
