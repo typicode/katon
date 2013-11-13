@@ -16,6 +16,7 @@ module.exports =
         watch: true
         watchDirectory: path
         watchIgnoreDotFiles: true
+        outFile: "#{env.HOME}/.katon/logs"
         env:
           PORT: port
     catch error
