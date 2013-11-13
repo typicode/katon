@@ -19,6 +19,8 @@ module.exports =
   # Creates a pow proxy and a symlink into katon path.
   link: (path = pwd())->
     name = path.split('/').pop()
+
+    console.log();
     shout.to "#{@powPath}/#{name}", "4000"
     shout.mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
     shout.exec "ln -s #{path} #{@katonPath}"
@@ -28,6 +30,8 @@ module.exports =
   # Destroys what was created by link.
   unlink: (path = pwd()) ->
     name = path.split('/').pop()
+
+    console.log();
     shout.rm '-f', "#{@powPath}/#{name}", "#{@katonPath}/#{name}"
     logan.info "Successfully removed #{name}"
 
@@ -39,15 +43,19 @@ module.exports =
     plistContent = eco.render template,
       nodePath: which 'node'
       daemonPath: "#{__dirname}/../lib/daemon.js"
+
+    console.log();
     shout.to "#{@launchAgentsPath}/katon.plist", plistContent
     shout.exec "launchctl load -Fw #{@launchAgentsPath}/katon.plist"
-    logan.info 'Katon daemon was successfully set up'
+    logan.info 'Katon daemon was successfully loaded'
 
   # Unload:
   # Removes katon.plist from $HOME/Library/LaunchAgents/
   unload: ->
+    console.log();
     shout.exec "launchctl unload #{@launchAgentsPath}/katon.plist"
     shout.rm "#{@launchAgentsPath}/katon.plist"
+    logan.info 'Katon daemon was successfully unloaded'
 
   installPow: ->
     logan.info 'Installing Pow'
