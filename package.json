@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git://github.com/typicode/katon.git"
   },
+  "bugs": {"url": "https://github.com/typicode/katon/issues"},
   "bin": {
     "katon": "./bin/katon"
   },
