@@ -28,6 +28,7 @@
   },
   "dependencies" : {
     "commander": "1.2.0",
+    "logan": "*",
     "shelljs": "*",
     "shoutjs": "*",
     "forever-monitor": "1.2.2",
