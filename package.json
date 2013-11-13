@@ -12,7 +12,7 @@
   },
   "bugs": {"url": "https://github.com/typicode/katon/issues"},
   "bin": {
-    "katon": "./bin/cli"
+    "katon": "./bin/cli.js"
   },
   "scripts": {
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script ./test/*.coffee",
