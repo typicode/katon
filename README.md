@@ -5,6 +5,7 @@
 ```bash
 $ express foo && cd foo
 $ npm install
+
 $ katon link
 # Open http://foo.dev/
 ```
