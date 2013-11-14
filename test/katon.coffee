@@ -61,3 +61,8 @@ describe 'katon', ->
 
     it 'should remove the katon.plist in katon.launchAgentsPath', ->
       assert !test '-e', '/tmp/katon.plist'
+
+  describe 'list', ->
+
+    it 'should be present in katon', ->
+      assert katon.hasOwnProperty 'list'

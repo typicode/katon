@@ -5,6 +5,7 @@ eco   = require 'eco'
 
 logan.set
   info: ['\n  %\n', 'green']
+  lsEntry: ['  % -> %', 'cyan . .']
 
 # This module is the katon CLI.
 # It just creates/removes files, symlinks, etc...
@@ -60,3 +61,13 @@ module.exports =
   installPow: ->
     logan.info 'Installing Pow'
     shout.exec 'curl get.pow.cx | sh'
+
+  list: ->
+    for link in ls "#{@katonPath}"
+      target = exec(
+        "readlink #{@katonPath}/#{link}"
+        silent: true
+      )
+      .output
+      .trim()
+      logan.lsEntry(link, target)

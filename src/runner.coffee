@@ -6,6 +6,7 @@ module.exports =
 
   forever: forever
 
+  # Starts server with a full path and port
   start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
     cd path
@@ -16,7 +17,7 @@ module.exports =
         watch: true
         watchDirectory: path
         watchIgnoreDotFiles: true
-        outFile: "#{env.HOME}/.katon/logs"
+        outFile: "#{path}/katon.logs"
         env:
           PORT: port
     catch error

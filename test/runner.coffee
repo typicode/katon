@@ -23,5 +23,6 @@ describe 'runner', ->
         watch: true
         watchDirectory: '/tmp/app'
         watchIgnoreDotFiles: true
+        outFile: "/tmp/app/katon.logs"
         env:
           PORT: 4000

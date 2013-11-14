@@ -15,32 +15,41 @@ $ katon link
 ```bash
 $ npm install -g katon
 $ katon install-pow # in case Pow is not installed
-$ katon start
+$ katon load
 ```
-
 
 ## Usage
 
 ```bash
-$ katon start
-# Starts Katon daemon
+$ katon load
+# Load Katon daemon
 
-$ katon stop
-# Stops Katon daemon
+$ katon unload
+# Unload Katon daemon
 
 $ katon link
-# Links the current dir to ~/.katon/<current_directory>
+# Link the current dir to ~/.katon/<current_directory>
 # and create a Pow proxy ~/.pow/<current_directory>
 
 $ katon unlink
-# Removes link and file created by katon link
+# Remove link and file created by katon link
 
 $ katon list
-# Lists apps linked in ~/.katon
+# List apps linked in ~/.katon
 
 $ katon install
-# Installs or updates Pow
+# Install or update Pow
 ```
+
+## Logs
+
+```bash
+$ tail -f <app_directory>/katon.logs
+```
+
+## Feedback
+
+Contribute, feel free to give feedback.
 
 ## Test
 
