@@ -1,4 +1,4 @@
-# katon
+# Katon
 
 ## Quick start
 
