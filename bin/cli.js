@@ -12,9 +12,10 @@ program
   .option('install-pow', 'Install or update pow')
   .parse(process.argv);
 
-if (program.args.length === 0) program.help();
-if (program.link) katon.link();
-if (program.unlink) katon.unlink();
-if (program.load) katon.load();
-if (program.unload) katon.unload();
-if (program.installPow) katon.installPow();
+if (program.link)       { katon.link(); return; }
+if (program.unlink)     { katon.unlink(); return; }
+if (program.load)       { katon.load(); return; }
+if (program.unload)     { katon.unload(); return; }
+if (program.installPow) { katon.installPow(); return; }
+
+program.help();
