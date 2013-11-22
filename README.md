@@ -42,9 +42,21 @@ $ katon unlink foo
 $ katon list
 # List apps linked in ~/.katon
 
-$ katon install
+$ katon install-pow
 # Install or update Pow
+
+$ katon uninstall-pow
+# Uninstall pow
 ```
+
+## Uninstall
+
+```bash
+$ katon uninstall-pow
+$ npm remove katon && rm -rf ~/.katon
+```
+
+
 
 ## Logs
 
