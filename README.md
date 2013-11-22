@@ -5,9 +5,8 @@
 ```bash
 $ express foo && cd foo
 $ npm install
-
 $ katon link
-# Open http://foo.dev/
+$ open http://foo.dev/
 ```
 
 ## Install
@@ -21,6 +20,9 @@ $ katon load
 ## Usage
 
 ```bash
+$ katon -h
+# Usage information
+
 $ katon load
 # Load Katon daemon
 
@@ -32,7 +34,10 @@ $ katon link
 # and create a Pow proxy ~/.pow/<current_directory>
 
 $ katon unlink
-# Remove link and file created by katon link
+# Unlink current dir
+
+$ katon unlink foo
+# Unlink foo app
 
 $ katon list
 # List apps linked in ~/.katon
