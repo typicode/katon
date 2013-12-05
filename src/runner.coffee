@@ -7,16 +7,15 @@ module.exports =
 
   forever: forever
 
-  run: (path, port) ->
+  start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
-    command = @getCommand 'path'
+    console.log @getForeverOptions(path, port)
     try
-      @forever.start @getForeverOptions(path, port)
+      @forever.start @getCommand(path).split(' '), @getForeverOptions(path, port)
     catch error
       console.log error
 
   getForeverOptions: (path, port) ->
-    command: @getCommand path
     sourceDir: path
     max: 1
     silent: false
@@ -29,7 +28,7 @@ module.exports =
       cat "#{path}/.katon"
     else if test '-e', "#{path}/package.json"
       pack = JSON.parse(fs.readFileSync "#{path}/package.json")
-      start = pack.start
+      start = pack.scripts?.start
       main = pack.main
       if start?
         if which('nodemon')?
@@ -42,4 +41,4 @@ module.exports =
         else
           "node #{main}"
     else
-      console.error 'Error: Can\'t find a package.json or .katon file'
+      console.error "Error: Can\'t find a package.json or .katon file in #{path}"

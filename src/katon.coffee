@@ -6,6 +6,8 @@ eco   = require 'eco'
 logan.set
   info: ['\n  %\n', 'green']
   lsEntry: ['  % -> %', 'cyan . .']
+  success: ['  %: %', '. green']
+  error: ['  %: %', '. red']
 
 # This module is the katon CLI.
 # It just creates/removes files, symlinks, etc...
@@ -18,15 +20,17 @@ module.exports =
 
   # Link:
   # Creates a pow proxy and a symlink into katon path.
-  link: (path = pwd(), execString)->
+  link: (path = pwd())->
     name = path.split('/').pop()
 
     console.log()
     shout.to "#{@powPath}/#{name}", "4000"
     shout.mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
     shout.exec "ln -s #{path} #{@katonPath}"
-    shout.to "#{path}/.katon", execString if execString?
     logan.info "Application is now available at http://#{name}.dev"
+
+  exec: (path, execString) ->
+    shout.to "#{path}/.katon", execString if execString?
 
   # Unlink:
   # Destroys what was created by link.
@@ -63,6 +67,10 @@ module.exports =
     logan.info 'Installing Pow'
     shout.exec 'curl get.pow.cx | sh'
 
+  uninstallPow: ->
+    logan.info 'Uninstalling Pow'
+    shout.exec 'curl get.pow.cx/uninstall.sh | sh'
+
   list: ->
     for link in ls "#{@katonPath}"
       target = exec(
@@ -72,3 +80,15 @@ module.exports =
       .output
       .trim()
       logan.lsEntry(link, target)
+
+  status: ->
+    if which('pow')?
+      logan.success 'Pow', 'installed'
+    else
+      logan.error 'Pow', 'not installed - try katon install-pow'
+
+    if exec('launchctl list | grep katon', silent: true).output is ''
+      logan.error 'Katon', 'not running - try katon load'
+    else
+      logan.success 'Katon', 'running'
+

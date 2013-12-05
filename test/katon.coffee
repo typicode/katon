@@ -24,7 +24,7 @@ describe 'katon', ->
     beforeEach ->
       # katon.link should create the /tmp/.katon so it's removed before the test
       rm '-rf', '/tmp/.katon'
-      katon.link '/tmp/app', 'grunt'
+      katon.link '/tmp/app'
 
     it 'should create a proxy file in .pow', ->
       assert.equal cat('/tmp/.pow/app'), 4000
@@ -34,6 +34,11 @@ describe 'katon', ->
 
     it 'should create a symlink in .katon directory', ->
       assert test '-L', "/tmp/.katon/app"
+
+  describe 'exec', ->
+
+    beforeEach ->
+      katon.exec '/tmp/app', 'grunt'
 
     it 'should create a .katon file if an execString is provided', ->
       assert.equal cat('/tmp/app/.katon'), 'grunt'
@@ -69,7 +74,24 @@ describe 'katon', ->
     it 'should remove the katon.plist in katon.launchAgentsPath', ->
       assert !test '-e', '/tmp/katon.plist'
 
+
+  describe 'installPow', ->
+
+    it 'should be present in katon', ->
+      assert katon.hasOwnProperty 'installPow'
+
+
+  describe 'uninstallPow', ->
+
+    it 'should be present in katon', ->
+      assert katon.hasOwnProperty 'uninstallPow'
+
   describe 'list', ->
 
     it 'should be present in katon', ->
       assert katon.hasOwnProperty 'list'
+
+  describe 'status', ->
+
+    it 'should be present in katon', ->
+      assert katon.hasOwnProperty 'status'

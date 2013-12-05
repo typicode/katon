@@ -46,7 +46,7 @@ describe 'runner', ->
       describe 'has a start attribute', ->
 
         beforeEach ->
-          '{"start": "node app"}'.to '/tmp/app/package.json'
+          '{"scripts": {start": "node app"}}'.to '/tmp/app/package.json'
 
         describe 'and nodemon is installed', ->
 
@@ -101,7 +101,7 @@ describe 'runner', ->
       describe 'path contains .katon and package.json', ->
 
         beforeEach ->
-          '{"start": "node app"}'.to '/tmp/app/package.json'
+          '{"scripts": {start": "node app"}}'.to '/tmp/app/package.json'
           'grunt'.to '/tmp/app/.katon'
 
         it 'should return .katon content', ->
