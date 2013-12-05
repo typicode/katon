@@ -1,5 +1,8 @@
 assert = require 'assert'
+logan = require 'logan'
 katon = require '../src/katon'
+
+logan.silent = true
 
 describe 'katon', ->
 
