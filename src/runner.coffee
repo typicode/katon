@@ -9,7 +9,6 @@ module.exports =
 
   run: (path, port) ->
     console.log "Starting #{path} port: #{port}"
-    cd path
     command = @getCommand 'path'
     try
       @forever.start @getForeverOptions(path, port)
