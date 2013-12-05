@@ -18,13 +18,14 @@ module.exports =
 
   # Link:
   # Creates a pow proxy and a symlink into katon path.
-  link: (path = pwd())->
+  link: (path = pwd(), execString)->
     name = path.split('/').pop()
 
     console.log()
     shout.to "#{@powPath}/#{name}", "4000"
     shout.mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
     shout.exec "ln -s #{path} #{@katonPath}"
+    shout.to "#{path}/.katon", execString if execString?
     logan.info "Application is now available at http://#{name}.dev"
 
   # Unlink:

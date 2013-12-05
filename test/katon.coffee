@@ -24,7 +24,7 @@ describe 'katon', ->
     beforeEach ->
       # katon.link should create the /tmp/.katon so it's removed before the test
       rm '-rf', '/tmp/.katon'
-      katon.link '/tmp/app'
+      katon.link '/tmp/app', 'grunt'
 
     it 'should create a proxy file in .pow', ->
       assert.equal cat('/tmp/.pow/app'), 4000
@@ -34,6 +34,9 @@ describe 'katon', ->
 
     it 'should create a symlink in .katon directory', ->
       assert test '-L', "/tmp/.katon/app"
+
+    it 'should create a .katon file if an execString is provided', ->
+      assert.equal cat('/tmp/app/.katon'), 'grunt'
 
   describe 'unlink', ->
 
