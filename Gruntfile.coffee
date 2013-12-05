@@ -16,6 +16,10 @@ module.exports = (grunt) ->
         files: 'src/**/*.coffee'
         tasks: 'coffee'
 
+    coffeelint:
+      files: ['src/**/*.coffee', 'test/**/*.coffee']
+
   grunt.loadNpmTasks 'grunt-contrib'
+  grunt.loadNpmTasks 'grunt-coffeelint'
 
   grunt.registerTask 'default', ['coffee']

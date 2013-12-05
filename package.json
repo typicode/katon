@@ -10,7 +10,9 @@
     "type": "git",
     "url": "git://github.com/typicode/katon.git"
   },
-  "bugs": {"url": "https://github.com/typicode/katon/issues"},
+  "bugs": {
+    "url": "https://github.com/typicode/katon/issues"
+  },
   "bin": {
     "katon": "./bin/cli.js"
   },
@@ -24,9 +26,10 @@
     "chai": "1.7.x",
     "sinon": "1.7.x",
     "grunt": "~0.4.1",
-    "grunt-contrib": "0.4.0"
+    "grunt-contrib": "0.4.0",
+    "grunt-coffeelint": "0.0.7"
   },
-  "dependencies" : {
+  "dependencies": {
     "commander": "2.0.0",
     "logan": "*",
     "shelljs": "*",

@@ -21,7 +21,7 @@ module.exports =
   link: (path = pwd())->
     name = path.split('/').pop()
 
-    console.log();
+    console.log()
     shout.to "#{@powPath}/#{name}", "4000"
     shout.mkdir "#{@katonPath}" unless test '-d', "#{@katonPath}"
     shout.exec "ln -s #{path} #{@katonPath}"
@@ -32,7 +32,7 @@ module.exports =
   unlink: (path = pwd()) ->
     name = path.split('/').pop()
 
-    console.log();
+    console.log()
     shout.exec "rm -f #{@powPath}/#{name} #{@katonPath}/#{name}"
     logan.info "Successfully removed #{name}"
 
@@ -45,7 +45,7 @@ module.exports =
       nodePath: which 'node'
       daemonPath: "#{__dirname}/../lib/daemon.js"
 
-    console.log();
+    console.log()
     shout.to "#{@launchAgentsPath}/katon.plist", plistContent
     shout.exec "launchctl load -Fw #{@launchAgentsPath}/katon.plist"
     logan.info 'Katon daemon was successfully loaded'
@@ -53,7 +53,7 @@ module.exports =
   # Unload:
   # Removes katon.plist from $HOME/Library/LaunchAgents/
   unload: ->
-    console.log();
+    console.log()
     shout.exec "launchctl unload #{@launchAgentsPath}/katon.plist"
     shout.rm "#{@launchAgentsPath}/katon.plist"
     logan.info 'Katon daemon was successfully unloaded'
