@@ -3,10 +3,10 @@
 ## Quick start
 
 ```bash
-$ express foo && cd foo
+$ express my-app && cd my-app
 $ npm install
 $ katon link
-$ open http://foo.dev/
+$ open http://my-app.dev/
 ```
 
 ## Install
@@ -34,11 +34,15 @@ $ katon link
 # Link the current dir to ~/.katon/<current_directory>
 # and create a Pow proxy ~/.pow/<current_directory>
 
+$ katon link /path/to/my-app
+
+$ katon link --exec 'node server.js'
+
 $ katon unlink
 # Unlink current dir
 
-$ katon unlink foo
-# Unlink foo app
+$ katon unlink my-app
+# Unlink my-app
 
 $ katon list
 # List apps linked in ~/.katon
@@ -48,6 +52,8 @@ $ katon install-pow
 
 $ katon uninstall-pow
 # Uninstall pow
+
+$ katon status
 ```
 
 ## Uninstall

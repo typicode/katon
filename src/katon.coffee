@@ -92,3 +92,8 @@ module.exports =
     else
       logan.success 'Katon', 'running'
 
+    if which('nodemon')?
+      logan.succes 'Nodemon', 'installed'
+    else
+      logan.error 'Nodemon', 'not installed'
+
