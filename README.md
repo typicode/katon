@@ -13,7 +13,8 @@ $ open http://foo.dev/
 
 ```bash
 $ npm install -g katon
-$ katon install-pow # in case Pow is not installed
+$ katon install-pow      # In case Pow is not installed
+$ npm install -g nodemon # For auto restart feature
 $ katon load
 ```
 
@@ -55,8 +56,6 @@ $ katon uninstall-pow
 $ katon uninstall-pow
 $ npm remove katon && rm -rf ~/.katon
 ```
-
-
 
 ## Logs
 
