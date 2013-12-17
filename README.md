@@ -69,6 +69,21 @@ $ npm remove katon && rm -rf ~/.katon
 $ tail -f <app_directory>/katon.logs
 ```
 
+## Using grunt
+
+TODO update Gruntfile
+
+```bash
+$ katon link --exec 'grunt server'
+```
+
+## Serving static files
+
+```bash
+$ npm install -g node-static
+$ katon link --exec 'static'
+```
+
 ## Feedback
 
 Contribute, feel free to give feedback.
