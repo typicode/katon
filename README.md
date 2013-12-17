@@ -1,5 +1,7 @@
 # Katon
 
+[![Build Status](https://travis-ci.org/typicode/katon.png)](https://travis-ci.org/typicode/katon)
+
 ## Quick start
 
 ```bash
