@@ -10,11 +10,11 @@ describe 'runner', ->
     rm '-rf', '/tmp/app'
     mkdir '/tmp/app'
 
-  describe 'run(command, port)', ->
+  describe 'start(command, port)', ->
 
     before ->
       '{"scripts": {"start": "node app"}}'.to '/tmp/app/package.json'
-      runner.run '/tmp/app', 4000
+      runner.start '/tmp/app', 4000
 
     it 'starts express app', ->
       assert runner.forever.start.called

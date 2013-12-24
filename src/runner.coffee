@@ -7,7 +7,7 @@ module.exports =
 
   forever: forever
 
-  run: (path, port) ->
+  start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
     try
       @forever.start @getCommand(path).split(' '), @getForeverOptions(path, port)
