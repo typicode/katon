@@ -46,7 +46,7 @@ describe 'runner', ->
       describe 'has a start attribute', ->
 
         beforeEach ->
-          '{"scripts": {start": "node app"}}'.to '/tmp/app/package.json'
+          '{"scripts": {"start": "node app"}}'.to '/tmp/app/package.json'
 
         describe 'and nodemon is installed', ->
 
