@@ -13,6 +13,7 @@ describe 'runner', ->
   describe 'run(command, port)', ->
 
     before ->
+      '{"scripts": {"start": "node app"}}'.to '/tmp/app/package.json'
       runner.run '/tmp/app', 4000
 
     it 'starts express app', ->
@@ -29,7 +30,6 @@ describe 'runner', ->
     it 'should return forever start options', ->
       actual = runner.getForeverOptions('/tmp/app', 4000)
       expected =
-        command: 'node app'
         sourceDir: '/tmp/app'
         max: 1
         silent: false

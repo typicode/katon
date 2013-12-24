@@ -7,9 +7,8 @@ module.exports =
 
   forever: forever
 
-  start: (path, port) ->
+  run: (path, port) ->
     console.log "Starting #{path} port: #{port}"
-    console.log @getForeverOptions(path, port)
     try
       @forever.start @getCommand(path).split(' '), @getForeverOptions(path, port)
     catch error
@@ -41,4 +40,4 @@ module.exports =
         else
           "node #{main}"
     else
-      console.error "Error: Can\'t find a package.json or .katon file in #{path}"
+      throw "Error: Can\'t find a package.json or .katon file in #{path}"
