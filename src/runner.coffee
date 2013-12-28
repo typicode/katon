@@ -26,9 +26,9 @@ module.exports =
     if test '-e', "#{path}/.katon"
       cat "#{path}/.katon"
     else if test '-e', "#{path}/package.json"
-      pack = JSON.parse(fs.readFileSync "#{path}/package.json")
-      start = pack.scripts?.start
-      main = pack.main
+      pkg = JSON.parse(fs.readFileSync "#{path}/package.json")
+      start = pkg.scripts?.start
+      main = pkg.main
       if start?
         if which('nodemon')?
           start.replace 'node', 'nodemon'
