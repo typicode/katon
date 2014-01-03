@@ -14,3 +14,11 @@ describe 'program', ->
 
     it 'should call katon.link', ->
       assert program.katon.link.called
+
+  describe 'unlink', ->
+
+    before ->
+      program.run ['node', 'katon', 'unlink']
+
+    it 'should call katon.unlink', ->
+      assert program.katon.unlink.called
