@@ -9,10 +9,7 @@ module.exports =
 
   start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
-    try
-      @forever.start @getCommand(path).split(' '), @getForeverOptions(path, port)
-    catch error
-      console.log error
+    @forever.start @getCommand(path).split(' '), @getForeverOptions(path, port)
 
   getForeverOptions: (path, port) ->
     sourceDir: path
@@ -39,5 +36,5 @@ module.exports =
           "nodemon #{main}"
         else
           "node #{main}"
-    else
-      throw "Error: Can\'t find a package.json or .katon file in #{path}"
+    else 
+      'static'

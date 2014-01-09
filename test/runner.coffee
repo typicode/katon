@@ -41,7 +41,7 @@ describe 'runner', ->
 
   describe 'getCommand(path)', ->
 
-    describe 'contains package.json', ->
+    describe 'directory has a package.json', ->
 
       describe 'has a start attribute', ->
 
@@ -73,7 +73,6 @@ describe 'runner', ->
       describe 'has a main field and no start field', ->
 
         beforeEach ->
-          rm '/tmp/app/package.json'
           '{"main": "index"}'.to '/tmp/app/package.json'
 
         describe 'and nodemon is installed', ->
@@ -106,3 +105,24 @@ describe 'runner', ->
 
         it 'should return .katon content', ->
           assert.equal runner.getCommand('/tmp/app'), 'grunt'
+
+    describe 'directory has no package.json', ->
+
+      beforeEach ->
+        rm '/tmp/app/package.json'
+
+      describe 'has a .katon file', ->
+
+        beforeEach ->
+          'grunt'.to '/tmp/app/.katon'
+
+        it 'should return .katon content', ->
+          assert.equal runner.getCommand('/tmp/app'), 'grunt'
+
+      describe 'has no katon file', ->
+
+        beforeEach ->
+          rm '/tmp/app/.katon'
+
+        it 'should return .katon content', ->
+          assert.equal runner.getCommand('/tmp/app'), 'static'
