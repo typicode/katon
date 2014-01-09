@@ -19,7 +19,7 @@ module.exports =
   launchAgentsPath: "#{env.HOME}/Library/LaunchAgents"
 
   # Creates a pow proxy and a symlink into katon path.
-  link: (path = pwd())->
+  link: (path) ->
     name = path.split('/').pop()
 
     console.log()
@@ -32,8 +32,8 @@ module.exports =
     shout.to "#{path}/.katon", execString if execString?
 
   # Destroys what was created by link.
-  unlink: (path = pwd()) ->
-    name = path.split('/').pop()
+  unlink: (pathOrName) ->
+    name = pathOrName.split('/').pop()
 
     console.log()
     shout.exec "rm -f #{@powPath}/#{name} #{@katonPath}/#{name}"

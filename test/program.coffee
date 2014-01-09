@@ -25,7 +25,7 @@ describe 'program', ->
       runCmd 'link'
 
     it 'should call katon.link', ->
-      assertCalled 'link'
+      assertCalledWith 'link', process.cwd
 
   describe 'link --exec foo', ->
 
@@ -33,10 +33,9 @@ describe 'program', ->
       runCmd 'link --exec foo'
 
     it 'should call katon.link', ->
-      assertCalled 'link'
+      assertCalledWith 'link', process.cwd
 
     it 'should call katon.exec', ->
-      assertCalled 'exec'
       assertCalledWith 'exec', 'foo'
 
   describe 'unlink', ->
@@ -45,15 +44,14 @@ describe 'program', ->
       runCmd 'unlink'
 
     it 'should call katon.unlink', ->
-      assertCalled 'unlink'
+      assertCalledWith 'unlink', process.cwd
 
   describe 'unlink --name <app>', ->
 
     before ->
-      runCmd 'unlink foo'
+      runCmd 'unlink --name foo'
 
-    it 'should call katon.unlink with <app_name>', ->
-      assertCalled 'unlink'
+    it 'should call katon.unlink with <app> name', ->
       assertCalledWith 'unlink', 'foo'
 
   describe 'list', ->

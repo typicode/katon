@@ -35,11 +35,14 @@ module.exports =
     argv = require('optimist').parse argv
 
     if 'link' in argv._
-      @katon.link()
+      @katon.link process.cwd
       if argv.exec then @katon.exec(argv.exec)
     
     if 'unlink' in argv._
-      @katon.unlink(argv.name)
+      if argv.name
+        @katon.unlink argv.name
+      else
+        @katon.unlink process.cwd
 
     if 'list' in argv._
       @katon.list()
@@ -53,4 +56,4 @@ module.exports =
     if 'status' in argv._
       @katon.status()
 
-    
+
