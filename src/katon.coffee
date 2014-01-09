@@ -18,7 +18,6 @@ module.exports =
   katonPath: "#{env.HOME}/.katon"
   launchAgentsPath: "#{env.HOME}/Library/LaunchAgents"
 
-  # Link:
   # Creates a pow proxy and a symlink into katon path.
   link: (path = pwd())->
     name = path.split('/').pop()
@@ -32,7 +31,6 @@ module.exports =
   exec: (path, execString) ->
     shout.to "#{path}/.katon", execString if execString?
 
-  # Unlink:
   # Destroys what was created by link.
   unlink: (path = pwd()) ->
     name = path.split('/').pop()
@@ -41,10 +39,9 @@ module.exports =
     shout.exec "rm -f #{@powPath}/#{name} #{@katonPath}/#{name}"
     logan.info "Successfully removed #{name}"
 
-  # Load:
   # Renders katon.plist.eco with the good env variables and
   # put it in $HOME/Library/LaunchAgents/
-  load: ->
+  start: ->
     template = cat "#{__dirname}/../plist/katon.plist.eco"
     plistContent = eco.render template,
       nodePath: which 'node'
@@ -55,9 +52,8 @@ module.exports =
     shout.exec "launchctl load -Fw #{@launchAgentsPath}/katon.plist"
     logan.info 'Katon daemon was successfully loaded'
 
-  # Unload:
   # Removes katon.plist from $HOME/Library/LaunchAgents/
-  unload: ->
+  stop: ->
     console.log()
     shout.exec "launchctl unload #{@launchAgentsPath}/katon.plist"
     shout.rm "#{@launchAgentsPath}/katon.plist"

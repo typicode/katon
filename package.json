@@ -36,7 +36,8 @@
     "shoutjs": "*",
     "forever-monitor": "1.2.2",
     "http-proxy": "0.10.x",
-    "eco": "*"
+    "eco": "*",
+    "optimist": "~0.6.0"
   },
   "license": "MIT"
 }

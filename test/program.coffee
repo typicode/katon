@@ -2,36 +2,96 @@ assert = require 'assert'
 sinon = require 'sinon'
 program = require '../src/program'
 
+# Test helpers
+runCmd = (commands) ->
+  program.run "node katon #{commands}".split ' '
+
+assertCalled = (command) ->
+  assert program.katon[command].called #, "katon.#{command} wasn't called"
+
+assertCalledWith = (command, arg) ->
+  assert program.katon[command].calledWith arg
+
+# Tests
 describe 'program', ->
 
   before ->
-    program.katon.link = sinon.spy()
-    program.katon.exec = sinon.spy()
-    program.katon.unlink = sinon.spy()
+    for method of program.katon
+      program.katon[method] = sinon.spy()
 
   describe 'link', ->
 
     before ->
-      program.run ['node', 'katon', 'link']
+      runCmd 'link'
 
     it 'should call katon.link', ->
-      assert program.katon.link.called
+      assertCalled 'link'
 
   describe 'link --exec foo', ->
 
     before ->
-      program.run ['node', 'link', '--exec', 'foo']
+      runCmd 'link --exec foo'
 
     it 'should call katon.link', ->
-      assert program.katon.link.called
+      assertCalled 'link'
 
     it 'should call katon.exec', ->
-      assert program.katon.exec.called
+      assertCalled 'exec'
+      assertCalledWith 'exec', 'foo'
 
   describe 'unlink', ->
 
     before ->
-      program.run ['node', 'katon', 'unlink']
+      runCmd 'unlink'
 
     it 'should call katon.unlink', ->
-      assert program.katon.unlink.called
+      assertCalled 'unlink'
+
+  describe 'unlink --name <app>', ->
+
+    before ->
+      runCmd 'unlink foo'
+
+    it 'should call katon.unlink with <app_name>', ->
+      assertCalled 'unlink'
+      assertCalledWith 'unlink', 'foo'
+
+  describe 'list', ->
+
+    before ->
+      runCmd 'list'
+
+    it 'should call katon.list', ->
+      assertCalled 'list'
+
+  describe 'start', ->
+
+    before ->
+      runCmd 'start'
+
+    it 'should call katon.start', ->
+      assertCalled 'start'
+
+  describe 'stop', ->
+
+    before ->
+      runCmd 'stop'
+
+    it 'should call katon.stop', ->
+      assertCalled 'stop'
+
+  describe 'status', ->
+
+    before ->
+      runCmd 'status'
+
+    it 'should call katon.status', ->
+      assertCalled 'status'
+
+  describe 'help', ->
+
+    before ->
+      runCmd 'help'
+
+    it 'should output help', ->
+      assertCalled 'link'

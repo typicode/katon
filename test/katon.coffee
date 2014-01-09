@@ -56,20 +56,20 @@ describe 'katon', ->
     it 'should rm the symlink in .katon', ->
       assert !test '-L', "/tmp/.katon/app"
 
-  describe 'load', ->
+  describe 'start', ->
 
     beforeEach ->
       rm '-rf', '/tmp/katon.plist'
-      katon.load()
+      katon.start()
       
     it 'should put a katon.plist in katon.launchAgentsPath', ->
       assert test '-e', '/tmp/katon.plist'
 
-  describe 'unload', ->
+  describe 'stop', ->
 
     beforeEach ->
       exec 'touch /tmp/katon.plist'
-      katon.unload()
+      katon.stop()
 
     it 'should remove the katon.plist in katon.launchAgentsPath', ->
       assert !test '-e', '/tmp/katon.plist'
