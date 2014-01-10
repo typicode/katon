@@ -1,6 +1,6 @@
 assert = require 'assert'
 sinon = require 'sinon'
-runner = require '../src/runner'
+runner = require '../../src/daemon/runner'
 
 describe 'runner', ->
 

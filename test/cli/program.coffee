@@ -1,6 +1,6 @@
 assert = require 'assert'
 sinon = require 'sinon'
-program = require '../src/program'
+program = require '../../src/cli/program'
 
 # Test helpers
 runCmd = (commands) ->

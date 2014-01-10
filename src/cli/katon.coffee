@@ -42,7 +42,7 @@ module.exports =
   # Renders katon.plist.eco with the good env variables and
   # put it in $HOME/Library/LaunchAgents/
   start: ->
-    template = cat "#{__dirname}/../plist/katon.plist.eco"
+    template = cat "#{__dirname}/../../plist/katon.plist.eco"
     plistContent = eco.render template,
       nodePath: which 'node'
       daemonPath: "#{__dirname}/../lib/daemon.js"

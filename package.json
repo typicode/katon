@@ -17,7 +17,7 @@
     "katon": "./bin/cli.js"
   },
   "scripts": {
-    "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script ./test/*.coffee",
+    "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script ./test/**/*.coffee",
     "prepublish": "grunt coffee"
   },
   "devDependencies": {

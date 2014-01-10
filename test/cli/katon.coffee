@@ -1,6 +1,6 @@
 assert = require 'assert'
 logan = require 'logan'
-katon = require '../src/katon'
+katon = require '../../src/cli/katon'
 
 # No logs during tests
 logan.silent = true
