@@ -7,6 +7,10 @@ module.exports =
 
   forever: forever
 
+  nodemonPath: 'nodemon'
+
+  staticPath: 'static'
+
   start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
     @forever.start @getCommand(path).split(' '), @getForeverOptions(path, port)
