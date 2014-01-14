@@ -7,9 +7,9 @@ module.exports =
 
   forever: forever
 
-  nodemonPath: 'nodemon'
+  nodemonPath: 'node_modules/.bin/nodemon'
 
-  staticPath: 'static'
+  staticPath: 'node_modules/.bin/static'
 
   start: (path, port) ->
     console.log "Starting #{path} port: #{port}"

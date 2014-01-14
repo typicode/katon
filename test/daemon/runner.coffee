@@ -1,6 +1,6 @@
 assert = require 'assert'
 sinon = require 'sinon'
-runner = require '../src/runner'
+runner = require '../../src/daemon/runner'
 
 describe 'runner', ->
 
@@ -18,6 +18,16 @@ describe 'runner', ->
 
     it 'starts express app', ->
       assert runner.forever.start.called
+
+  describe 'nodemonPath', ->
+
+    it 'should exist', ->
+      assert test '-e', runner.nodemonPath
+
+  describe 'staticBinPath', ->
+
+      it 'should exist', ->
+        assert test '-e', runner.staticPath  
 
   describe 'getForeverOptions(path, port)', ->
 

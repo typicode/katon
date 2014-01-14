@@ -37,7 +37,9 @@
     "forever-monitor": "1.2.2",
     "http-proxy": "0.10.x",
     "eco": "*",
-    "optimist": "~0.6.0"
+    "optimist": "~0.6.0",
+    "nodemon": "~1.0.8",
+    "node-static": "~0.7.3"
   },
   "license": "MIT"
 }
