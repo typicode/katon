@@ -49,6 +49,7 @@ describe 'runner', ->
 
       assert.deepEqual actual, expected
 
+
   describe 'getCommand(path)', ->
 
     describe 'directory has a package.json', ->
@@ -58,54 +59,16 @@ describe 'runner', ->
         beforeEach ->
           '{"scripts": {"start": "node app"}}'.to '/tmp/app/package.json'
 
-        describe 'and nodemon is installed', ->
-
-          beforeEach ->
-            sinon.stub(global, 'which').withArgs('nodemon').returns('/some/path')
-
-          afterEach ->
-            which.restore()
-
-          it 'should replace node with nodemon', ->
-            assert.equal runner.getCommand('/tmp/app'), 'nodemon app'
-
-        describe 'and nodemon isn\'t installed', ->
-
-          beforeEach ->
-            sinon.stub(global, 'which').withArgs('nodemon').returns()
-
-          afterEach ->
-            which.restore()
-
-          it 'should return start content', ->
-            assert.equal runner.getCommand('/tmp/app'), 'node app'
+        it 'should replace node with nodemon', ->
+          assert.equal runner.getCommand('/tmp/app'), "#{runner.nodemonPath} app"
 
       describe 'has a main field and no start field', ->
 
         beforeEach ->
           '{"main": "index"}'.to '/tmp/app/package.json'
 
-        describe 'and nodemon is installed', ->
-
-          beforeEach ->
-            sinon.stub(global, 'which').withArgs('nodemon').returns('/some/path')
-
-          afterEach ->
-            which.restore()
-
-          it 'should use nodemon to start the main script', ->
-            assert.equal runner.getCommand('/tmp/app'), 'nodemon index'
-
-        describe 'and nodemon isn\'t installed', ->
-
-          beforeEach ->
-            sinon.stub(global, 'which').withArgs('nodemon').returns()
-
-          afterEach ->
-            which.restore()
-
-          it 'should use node to start the main script', ->
-            assert.equal runner.getCommand('/tmp/app'), 'node index'
+        it 'should use nodemon without args to start the main script', ->
+            assert.equal runner.getCommand('/tmp/app'), runner.nodemonPath
 
       describe 'path contains .katon and package.json', ->
 
@@ -134,5 +97,93 @@ describe 'runner', ->
         beforeEach ->
           rm '/tmp/app/.katon'
 
-        it 'should return .katon content', ->
-          assert.equal runner.getCommand('/tmp/app'), 'static'
+        it 'should use static to serve directory', ->
+          assert.equal runner.getCommand('/tmp/app'), runner.staticPath
+
+  # describe 'getCommand(path)', ->
+
+  #   describe 'directory has a package.json', ->
+
+  #     describe 'has a start attribute', ->
+
+  #       beforeEach ->
+  #         '{"scripts": {"start": "node app"}}'.to '/tmp/app/package.json'
+
+  #       describe 'and nodemon is installed', ->
+
+  #         beforeEach ->
+  #           sinon.stub(global, 'which').withArgs('nodemon').returns('/some/path')
+
+  #         afterEach ->
+  #           which.restore()
+
+  #         it 'should replace node with nodemon', ->
+  #           assert.equal runner.getCommand('/tmp/app'), 'nodemon app'
+
+  #       describe 'and nodemon isn\'t installed', ->
+
+  #         beforeEach ->
+  #           sinon.stub(global, 'which').withArgs('nodemon').returns()
+
+  #         afterEach ->
+  #           which.restore()
+
+  #         it 'should return start content', ->
+  #           assert.equal runner.getCommand('/tmp/app'), 'node app'
+
+  #     describe 'has a main field and no start field', ->
+
+  #       beforeEach ->
+  #         '{"main": "index"}'.to '/tmp/app/package.json'
+
+  #       describe 'and nodemon is installed', ->
+
+  #         beforeEach ->
+  #           sinon.stub(global, 'which').withArgs('nodemon').returns('/some/path')
+
+  #         afterEach ->
+  #           which.restore()
+
+  #         it 'should use nodemon to start the main script', ->
+  #           assert.equal runner.getCommand('/tmp/app'), 'nodemon index'
+
+  #       describe 'and nodemon isn\'t installed', ->
+
+  #         beforeEach ->
+  #           sinon.stub(global, 'which').withArgs('nodemon').returns()
+
+  #         afterEach ->
+  #           which.restore()
+
+  #         it 'should use node to start the main script', ->
+  #           assert.equal runner.getCommand('/tmp/app'), 'node index'
+
+  #     describe 'path contains .katon and package.json', ->
+
+  #       beforeEach ->
+  #         '{"scripts": {start": "node app"}}'.to '/tmp/app/package.json'
+  #         'grunt'.to '/tmp/app/.katon'
+
+  #       it 'should return .katon content', ->
+  #         assert.equal runner.getCommand('/tmp/app'), 'grunt'
+
+  #   describe 'directory has no package.json', ->
+
+  #     beforeEach ->
+  #       rm '/tmp/app/package.json'
+
+  #     describe 'has a .katon file', ->
+
+  #       beforeEach ->
+  #         'grunt'.to '/tmp/app/.katon'
+
+  #       it 'should return .katon content', ->
+  #         assert.equal runner.getCommand('/tmp/app'), 'grunt'
+
+  #     describe 'has no katon file', ->
+
+  #       beforeEach ->
+  #         rm '/tmp/app/.katon'
+
+  #       it 'should return .katon content', ->
+  #         assert.equal runner.getCommand('/tmp/app'), 'static'

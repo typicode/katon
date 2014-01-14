@@ -13,6 +13,7 @@ module.exports =
 
   start: (path, port) ->
     console.log "Starting #{path} port: #{port}"
+    console.log path, @getCommand(path)
     @forever.start @getCommand(path).split(' '), @getForeverOptions(path, port)
 
   getForeverOptions: (path, port) ->
@@ -30,15 +31,10 @@ module.exports =
       pkg = JSON.parse(fs.readFileSync "#{path}/package.json")
       start = pkg.scripts?.start
       main = pkg.main
-      if start?
-        if which('nodemon')?
-          start.replace 'node', 'nodemon'
-        else
-          start
-      else if main?
-        if which('nodemon')?
-          "nodemon #{main}"
-        else
-          "node #{main}"
+      if main?
+        @nodemonPath
+        # start.replace 'node', @nodemonPath
+      else
+        start
     else 
-      'static'
+      @staticPath

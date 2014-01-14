@@ -83,4 +83,4 @@ describe 'program', ->
     before -> runCmd 'help'
 
     it 'should output help', ->
-      assertCalled 'link'
+      assertCalled 'help'

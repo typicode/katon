@@ -22,4 +22,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib'
   grunt.loadNpmTasks 'grunt-coffeelint'
 
-  grunt.registerTask 'default', ['clean', 'coffee']
+  grunt.registerTask 'default', ['clean', 'coffee', 'watch']

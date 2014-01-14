@@ -4,10 +4,10 @@ logan = require 'logan'
 eco   = require 'eco'
 
 logan.set
-  info: ['\n  %\n', 'green']
+  info:    ['\n  %\n', 'green']
   lsEntry: ['  % -> %', 'cyan . .']
   success: ['  %: %', '. green']
-  error: ['  %: %', '. red']
+  error:   ['  %: %', '. red']
 
 # This module is the katon CLI.
 # It just creates/removes files, symlinks, etc...
@@ -17,6 +17,36 @@ module.exports =
   powPath: "#{env.HOME}/.pow"
   katonPath: "#{env.HOME}/.katon"
   launchAgentsPath: "#{env.HOME}/Library/LaunchAgents"
+
+  help: ->
+    help = """
+
+      Usage: katon <command> [options]
+
+      Commands:
+        link                 Link current directory
+        link --exec <cmd>    Use custom cmd to start server
+           
+        unlink               Unlink current directory
+        unlink --name <app>  Unlink app
+     
+        list                 List linked apps
+           
+        start                Start Katon daemon
+        stop                 Stop Katon daemon
+           
+        install-pow          Install Pow
+           
+        status               Katon status information
+
+      Examples:
+        katon install
+        katon link
+        katon link --exec \'grunt server watch\'
+        katon link --exec \'python -m SimpleHTTPServer -p %PORT%\'
+    
+    """
+    console.log help
 
   # Creates a pow proxy and a symlink into katon path.
   link: (path) ->
@@ -45,7 +75,7 @@ module.exports =
     template = cat "#{__dirname}/../../plist/katon.plist.eco"
     plistContent = eco.render template,
       nodePath: which 'node'
-      daemonPath: "#{__dirname}/../lib/daemon.js"
+      daemonPath: "#{__dirname}/../daemon/daemon.js"
 
     console.log()
     shout.to "#{@launchAgentsPath}/katon.plist", plistContent

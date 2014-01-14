@@ -3,36 +3,12 @@ katon = require './katon'
 module.exports = 
   
   katon: katon
-
-  usage: """
-
-    Usage: katon <command> [options]
-
-    Commands:
-      link                 Link current directory
-      link --exec <cmd>    Use custom cmd to start server
-         
-      unlink               Unlink current directory
-      unlink --name <app>  Unlink app
-   
-      list                 List linked apps
-         
-      start                Start Katon daemon
-      stop                 Stop Katon daemon
-         
-      install-pow          Install Pow
-         
-      status               Katon status information
-
-    Examples:
-      katon install
-      katon link
-      katon link --exec \'grunt server watch\'
-      katon link --exec \'python -m SimpleHTTPServer -p %PORT%\'
-  """
   
   run: (argv) ->
     argv = require('optimist').parse argv
+
+    if 'help' in argv._
+      @katon.help()
 
     if 'link' in argv._
       @katon.link process.cwd
