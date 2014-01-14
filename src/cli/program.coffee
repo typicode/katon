@@ -11,14 +11,14 @@ module.exports =
       @katon.help()
 
     if 'link' in argv._
-      @katon.link process.cwd
+      @katon.link process.cwd()
       if argv.exec then @katon.exec(argv.exec)
     
     if 'unlink' in argv._
       if argv.name
         @katon.unlink argv.name
       else
-        @katon.unlink process.cwd
+        @katon.unlink process.cwd()
 
     if 'list' in argv._
       @katon.list()
