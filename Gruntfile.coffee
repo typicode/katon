@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
 
   grunt.initConfig
-    clean: 'lib'
+    clean: ['lib']
 
     coffee:
       compile:
@@ -22,4 +22,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib'
   grunt.loadNpmTasks 'grunt-coffeelint'
 
-  grunt.registerTask 'default', ['coffee']
+  grunt.registerTask 'default', ['clean', 'coffee']
