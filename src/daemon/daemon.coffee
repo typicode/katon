@@ -1,7 +1,6 @@
 require 'shelljs/global'
 fs = require 'fs'
 httpProxy = require 'http-proxy'
-forever = require 'forever-monitor'
 runner = require './runner'
 
 apps = {}
