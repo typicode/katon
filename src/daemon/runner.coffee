@@ -6,54 +6,96 @@ forever = require 'forever-monitor'
 module.exports =
 
   forever: forever
+  # .katon
+  #   command file options
+  #   command options
+  #   command 
 
-  nodemonPath: 'node_modules/.bin/nodemon'
+  # package
+  #   main: file
+  #   start: command file options
 
-  staticPath: 'node_modules/.bin/static'
+  # no package
+  #   static options
 
-  start: (path, port) ->
-    console.log "Starting #{path} port: #{port}"
-    console.log @getCommand(path), @getForeverOptions(path, port)
-    @forever.start '', @getForeverOptions(path, port)
 
-  getForeverOptions: (path, port) ->
-    command: @getCommand(path)
-    options: @getOptions(path, port)
-    sourceDir: path
-    max: 1
-    silent: false
-    outFile: "#{path}/katon.logs"
-    env:
-      PORT: port
+  nodemon: 'node_modules/.bin/nodemon'
 
-  getCommand: (path) ->
-    if test '-e', "#{path}/.katon"
-      cat "#{path}/.katon"
-    else if test '-e', "#{path}/package.json"
-      pkg = JSON.parse(fs.readFileSync "#{path}/package.json")
-      start = pkg.scripts?.start
-      main = pkg.main
-      if main?
-        @nodemonPath
-        # start.replace 'node', @nodemonPath
+  static: 'node_modules/.bin/static'
+
+  containsKaton: (path) ->
+    test '-e', "#{path}/.katon"
+
+  containsPackage: (path) ->
+    test '-e', "#{path}/package.json"
+
+  readPackage: (path) ->
+    JSON.parse(fs.readFileSync "#{path}/package.json")
+
+  readKaton: (path) ->
+    cat "#{path}/.katon"
+
+  getCommandLine: (path) ->
+    if containsKaton path
+      readKaton path
+    else if containsPackage path
+      pkg = readPackage path
+      if pkg.main?
+        nodemon
       else
-        start.split(' ')[0]
-    else 
-      @staticPath
+        pkg.scripts?.start
+    else
+      "#{@static} --port $PORT"
 
-  getOptions: (path, port) ->
-    if test '-e', "#{path}/.katon"
-      cat "#{path}/.katon"
-    else if test '-e', "#{path}/package.json"
-      pkg = JSON.parse(fs.readFileSync "#{path}/package.json")
-      start = pkg.scripts?.start
-      main = pkg.main
-      if main?
-        []
-      else
-        [start.split(' ')[1]]
-    else 
-      "#{path} --port #{port}".split(' ')
+  commandLineToObject: (commandLine) ->
+    [command, options...] = commandLine.split(' ')
+    command: command
+    options: options
+
+
+  # start: (path, port) ->
+  #   console.log "Starting #{path} port: #{port}"
+  #   console.log @getCommand(path), @getForeverOptions(path, port)
+  #   @forever.start '', @getForeverOptions(path, port)
+
+  # getForeverOptions: (path, port) ->
+  #   command: @getCommand(path)
+  #   options: @getOptions(path, port)
+  #   sourceDir: path
+  #   max: 1
+  #   silent: false
+  #   outFile: "#{path}/katon.logs"
+  #   env:
+  #     PORT: port
+
+  # getCommand: (path) ->
+  #   if test '-e', "#{path}/.katon"
+  #     cat "#{path}/.katon"
+  #   else if test '-e', "#{path}/package.json"
+  #     pkg = JSON.parse(fs.readFileSync "#{path}/package.json")
+  #     start = pkg.scripts?.start
+  #     main = pkg.main
+  #     if main?
+  #       @nodemonPath
+  #       # start.replace 'node', @nodemonPath
+  #     else
+  #       start.split(' ')[0]
+  #   else 
+  #     @staticPath
+
+  # getOptions: (path, port) ->
+  #   if test '-e', "#{path}/.katon"
+  #     cat "#{path}/.katon"
+  #   else if test '-e', "#{path}/package.json"
+  #     pkg = JSON.parse(fs.readFileSync "#{path}/package.json")
+  #     start = pkg.scripts?.start
+  #     main = pkg.main
+  #     if main?
+  #       []
+  #     else
+  #       [start.split(' ')[1]]
+  #   else 
+  #     "#{path} --port #{port}".split(' ')
 
 #   forever: forever
 
