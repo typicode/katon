@@ -19,9 +19,9 @@ module.exports =
   #   static options
 
 
-  nodemon: 'node_modules/.bin/nodemon'
+  nodemon: "#{__dirname}/../../node_modules/.bin/nodemon"
 
-  static: 'node_modules/.bin/static'
+  static: "#{__dirname}/../../node_modules/.bin/static"
 
   containsKaton: (path) ->
     test '-e', "#{path}/.katon"
@@ -36,12 +36,12 @@ module.exports =
     cat "#{path}/.katon"
 
   getCommandLine: (path) ->
-    if containsKaton path
-      readKaton path
-    else if containsPackage path
-      pkg = readPackage path
+    if @containsKaton path
+      @readKaton path
+    else if @containsPackage path
+      pkg = @readPackage path
       if pkg.main?
-        nodemon
+        @nodemon
       else
         pkg.scripts?.start
     else
@@ -51,6 +51,24 @@ module.exports =
     [command, options...] = commandLine.split(' ')
     command: command
     options: options
+
+  start: (path, port) ->
+    console.log __dirname
+    commandLine = @getCommandLine path
+    console.log commandLine
+    commandLineObject = @commandLineToObject commandLine
+    console.log commandLineObject
+    foreverOptions = 
+      command: commandLineObject.command
+      options: commandLineObject.options
+      sourceDir: path
+      max: 1
+      silent: false
+      outFile: "#{path}/katon.logs"
+      env:
+        PORT: port
+    console.log foreverOptions
+    @forever.start '', foreverOptions
 
 
   # start: (path, port) ->
