@@ -15,8 +15,9 @@ module.exports =
       if argv.exec then @katon.exec(argv.exec)
     
     if 'unlink' in argv._
-      if argv.name
-        @katon.unlink argv.name
+      if argv._.length >= 4
+        appName = argv._[3]
+        @katon.unlink appName
       else
         @katon.unlink process.cwd()
 
