@@ -1,0 +1,30 @@
+
+  Usage: katon <command> [options]
+
+  Commands:
+
+    link             Link current directory
+    link <cmd>       Use custom cmd to start server
+    unlink           Unlink current directory
+    unlink <app>     Unlink app
+    list             List linked apps
+    start            Start Katon daemon
+    stop             Stop Katon daemon
+    restart          Restart Katon daemon
+    status           Katon status information
+    install-pow      Install Pow
+    uninstall-pow    Uninstall Pow
+
+  Options:
+
+    -V --verbose     Makes output more verbose
+
+  Examples:
+
+    katon link
+    katon link grunt server watch
+    katon link python -m SimpleHTTPServer $PORT
+
+  Issues:
+
+    https://github.com/typicode/katon/issues

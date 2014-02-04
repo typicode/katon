@@ -1,11 +1,21 @@
 {
   "name": "katon",
-  "version": "0.0.1",
-  "description": "Katon",
+  "version": "0.1.0",
+  "description": "Automatically start your Node based projects and serve them locally on .dev domains",
   "keywords": [
-    "katon"
+    "node",
+    "pow",
+    "nodemon",
+    "development",
+    ".dev",
+    "local",
+    "automatic",
+    "server",
+    "start",
+    "restart",
+    "reload"
   ],
-  "author": "Typicode",
+  "author": "Typicode <typicode@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git://github.com/typicode/katon.git"
@@ -17,29 +27,31 @@
     "katon": "./bin/cli.js"
   },
   "scripts": {
-    "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script ./test/**/*.coffee",
-    "prepublish": "grunt coffee"
+    "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
+    "prepublish": "grunt build"
   },
   "devDependencies": {
     "coffee-script": "*",
     "mocha": "1.8.x",
-    "chai": "1.7.x",
     "sinon": "1.7.x",
-    "grunt": "~0.4.1",
-    "grunt-contrib": "0.4.0",
-    "grunt-coffeelint": "0.0.7"
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-coffee": "~0.9.0",
+    "grunt-coffeelint": "0.0.8",
+    "grunt-mocha-test": "~0.8.2",
+    "underscore": "~1.5.2"
   },
   "dependencies": {
-    "commander": "2.0.0",
-    "logan": "*",
-    "shelljs": "*",
-    "shoutjs": "*",
-    "forever-monitor": "1.2.2",
-    "http-proxy": "0.10.x",
-    "eco": "*",
     "optimist": "~0.6.0",
+    "shelljs": "*",
+    "eco": "*",
+    "http-proxy": "0.10.x",
     "nodemon": "~1.0.8",
-    "node-static": "~0.7.3"
+    "node-static": "~0.7.3",
+    "chalk": "~0.4.0",
+    "update-notifier": "~0.1.7",
+    "underscore": "~1.5.2"
   },
   "license": "MIT"
 }
