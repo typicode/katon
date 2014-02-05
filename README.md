@@ -158,8 +158,10 @@ Katon is a recent project, even though it was successfully tested on my MacBook 
 
 # Uninstall
 
+Just run this script and everything will be cleaned.
+
 ```
-katon stop && rm -rf ~/.katon && npm remove katon
+katon stop && rm -rf ~/.katon && npm rm -g katon
 ```
 
 # Credits
