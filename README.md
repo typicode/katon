@@ -4,7 +4,9 @@ Better development workflow for Node and Front-End projects.
 
 There's something we do every day: open Terminal, start project server... and then start coding. Wouldn't it be nice if  we could start coding immediately?
 
-Katon will start your projects in the background and serve them locally on .dev domains.
+Katon will start your projects in the background and serve them locally on .dev domains. 
+
+It will do that automatically for you when you log onto your Mac, so that you can focus on your tasks and forget about manually starting your servers each time.
 
 Katon runs on MacOS and works with all your usual tools and frameworks (Express, Grunt, Gulp, ...).
 
