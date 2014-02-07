@@ -1,6 +1,6 @@
 # Katon
 
-Better development workflow for Node and Front-End projects.
+Better development workflow for __Node__ and __Front-End projects__.
 
 There's something we do every day: open Terminal, start project server... and then start coding. Wouldn't it be nice if  we could start coding immediately?
 
