@@ -39,8 +39,7 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-coffee": "~0.9.0",
     "grunt-coffeelint": "0.0.8",
-    "grunt-mocha-test": "~0.8.2",
-    "underscore": "~1.5.2"
+    "grunt-mocha-test": "~0.9.0"
   },
   "dependencies": {
     "optimist": "~0.6.0",
@@ -51,7 +50,7 @@
     "node-static": "~0.7.3",
     "chalk": "~0.4.0",
     "update-notifier": "~0.1.7",
-    "underscore": "~1.5.2"
+    "lodash": "~2.4.1"
   },
   "license": "MIT"
 }
