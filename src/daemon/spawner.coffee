@@ -4,7 +4,7 @@ chalk = require 'chalk'
 log = require './log'
 commander = require './commander'
 
-module.exports.spawn = (appPath, command) ->  
+module.exports.spawn = (appPath, command) ->
   # Change directory
   cd appPath
   

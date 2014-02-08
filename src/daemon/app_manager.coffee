@@ -29,7 +29,7 @@ module.exports =
     command = @commander.getCommand path, port
     process = @spawner.spawn path, command
 
-    app = 
+    app =
       name: name
       host: "#{name}.dev"
       port: port
