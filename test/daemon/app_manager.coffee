@@ -3,7 +3,7 @@ sinon = require 'sinon'
 _ = require 'lodash'
 manager = require '../../src/daemon/app_manager'
 
-describe.only 'appManager', ->
+describe 'appManager', ->
 
   describe 'getPort()', ->
 
@@ -43,9 +43,15 @@ describe.only 'appManager', ->
     beforeEach ->
       manager.apps = []
       manager.katonPath = '/tmp/.katonPath'
-      manager.commander.getCommand = sinon.stub().returns 'command'
-      manager.spawner.spawn = sinon.stub().returns 'process'
+
+      sinon.stub(manager.commander, 'getCommand').returns 'command'
+      sinon.stub(manager.spawner, 'spawn').returns 'process'
+      
       @app = manager.create 'foo'
+
+    afterEach ->
+      manager.commander.getCommand.restore()
+      manager.spawner.spawn.restore()
 
     it 'creates a new app in app list', ->
       assert.equal manager.apps.length, 1
