@@ -33,10 +33,9 @@ describe 'appManager', ->
       ]
 
     it 'returns a proxy table', ->
-      assert.deepEqual manager.getProxyTable(), [
-        {'foo.dev': '127.0.0.1:4001'},
-        {'bar.dev': '127.0.0.1:4002'}
-      ]
+      assert.deepEqual manager.getProxyTable(),
+        'foo.dev': '127.0.0.1:4001'
+        'bar.dev': '127.0.0.1:4002'
 
   describe 'create(name)', ->
 

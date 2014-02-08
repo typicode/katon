@@ -16,10 +16,10 @@ module.exports =
       _.max(@apps, 'port').port + 1
 
   getProxyTable: ->
-    _.map @apps, (app) ->
-      route = {}
+    route = {}
+    _.each @apps, (app) ->
       route[app.host] = "127.0.0.1:#{app.port}"
-      route
+    route
 
   create: (name) ->
     log "Start #{name}"

@@ -9,7 +9,8 @@ module.exports.spawn = (appPath, command) ->
   cd appPath
   
   # Log command to /var/log/system.log and <app_directory>/katon.log
-  log "#{appPath}\n  #{command}"
+  log "#{appPath}"
+  log "  #{command}"
   
   chalk.underline.bold.cyan(command).toEnd "#{appPath}/katon.log"
 
@@ -31,3 +32,5 @@ module.exports.spawn = (appPath, command) ->
   # Log process output to <app_directory>/katon.log
   child.stdout.on 'data', (data) -> data.toEnd "#{appPath}/katon.log"
   child.stderr.on 'data', (data) -> data.toEnd "#{appPath}/katon.log"
+
+  child

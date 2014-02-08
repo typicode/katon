@@ -8,14 +8,16 @@ appManager = require './app_manager'
 # so we're adding them right now
 env.PATH = env.PATH + ':/usr/local/bin:/usr/local/share/npm/bin'
 
+katonPath = appManager.katonPath
+
 watch = ->
-  fs.watch appManager.katonPath, (event, filename) ->
+  fs.watch katonPath, (event, filename) ->
     if test '-L', "#{katonPath}/#{filename}"
       appManager.create filename
     else
       appManager.remove filename
    
-    proxyTable = appManager.getProxyTable
+    proxyTable = appManager.getProxyTable()
     proxy.reload proxyTable
 
 start = ->
