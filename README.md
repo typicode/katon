@@ -10,6 +10,8 @@ It will do that automatically for you when you log onto your Mac, so that you ca
 
 Katon runs on MacOS and works with all your usual tools and frameworks (Express, Grunt, Gulp, ...).
 
+[![NPM version](https://badge.fury.io/js/katon.png)](http://badge.fury.io/js/katon)
+
 # Quick start
 
 Just create an Express app and link it.
