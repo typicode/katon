@@ -1,14 +1,12 @@
 # Katon
 
-Better development workflow for __Node__ and __Front-End projects__.
+__Katon is all about saving you time during development.__
 
-There's something we do every day: open Terminal, start project server... and then start coding. Wouldn't it be nice if  we could start coding immediately?
+There's something repetitive that we do: open a terminal, start development server, ... and then start coding.
 
-Katon will start your projects in the background and serve them locally on .dev domains. 
+Using Katon, you can totally forget about manually starting development servers each time. Instead, link them once to Katon and it will automatically start them for you and serve them locally on .dev domains.
 
-It will do that automatically for you when you log onto your Mac, so that you can focus on your tasks and forget about manually starting your servers each time.
-
-Katon runs on MacOS and works with __all__ your usual tools and frameworks (Express, Grunt, Gulp, ...).
+Katon runs on MacOs and works with __all__ your usual tools (Express, Grunt, Gulp, ...).
 
 [![NPM version](https://badge.fury.io/js/katon.png)](http://badge.fury.io/js/katon)
 
