@@ -12,7 +12,7 @@ Katon runs on MacOS and works with __all__ your usual tools and frameworks (Expr
 
 [![NPM version](https://badge.fury.io/js/katon.png)](http://badge.fury.io/js/katon)
 
-# Quick start
+# Example
 
 Just create an Express app and link it.
 
