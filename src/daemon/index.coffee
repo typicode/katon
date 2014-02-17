@@ -18,11 +18,14 @@ watch = ->
       appManager.remove filename
    
     proxyTable = appManager.getProxyTable()
-    proxy.reload proxyTable
+    proxy.load proxyTable
 
 start = ->
   for name in ls katonPath
     appManager.create name
+
+  proxyTable = appManager.getProxyTable()
+  proxy.load proxyTable
 
 start()
 watch()

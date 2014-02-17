@@ -1,6 +1,6 @@
 httpProxy = require 'http-proxy'
 
-module.exports.reload = (proxyTable) ->
+module.exports.load = (proxyTable) ->
   @server?.close()
 
   @server = httpProxy.createServer
