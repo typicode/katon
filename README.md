@@ -154,6 +154,8 @@ Your app may not be listening to requests check `katon.log`.
  
 If you get a 404, it's because your app directory is served using Katon embedded static server and it can't find an `index.html`.
 
+If you're using `nvm` and having problems, see discussion in [issue #3](https://github.com/typicode/katon/issues/3). Upcoming versions of Katon should make working with `nvm` easier.
+
 # Issues and feedback
 
 Katon is a recent project, even though it was successfully tested on my MacBook Air, you may find bugs, have issues or questions. Do not hesitate to fill an [issue](https://github.com/typicode/katon/issues) or contact me [@typicode](https://github.com/typicode). It really helps.
