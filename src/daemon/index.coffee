@@ -1,12 +1,14 @@
 require 'shelljs/global'
 fs = require 'fs'
+path = require 'path'
 log = require './log'
 proxy = require './proxy'
 appManager = require './app_manager'
 
 # If the daemon is run by launchd it will lack some paths
 # so we're adding them right now
-env.PATH = env.PATH + ':/usr/local/bin:/usr/local/share/npm/bin'
+processPath = path.dirname process.execPath
+env.PATH = "#{env.PATH}:/usr/local/bin:/usr/local/share/npm/bin:#{processPath}"
 
 katonPath = appManager.katonPath
 
