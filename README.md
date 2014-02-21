@@ -4,7 +4,7 @@ __Katon is all about saving you time during development.__
 
 There's something repetitive that we do: open a terminal, start development server, ... and then start coding.
 
-Using Katon, you can totally forget about manually starting development servers each time. Instead, link them once to Katon and it will automatically start them for you and serve them locally on .dev domains.
+Using Katon, you can totally forget about manually starting development servers each time. Instead, link them once and Katon will automatically start them for you and serve them locally on .dev domains.
 
 Katon runs on MacOs and works with __all__ your usual tools (Express, Grunt, Gulp, ...).
 
@@ -154,7 +154,9 @@ Your app may not be listening to requests check `katon.log`.
  
 If you get a 404, it's because your app directory is served using Katon embedded static server and it can't find an `index.html`.
 
-If you're using `nvm` and having problems, see discussion in [issue #3](https://github.com/typicode/katon/issues/3). Upcoming versions of Katon should make working with `nvm` easier.
+__About nvm__
+
+If you're using nvm and having problems, see discussion in [issue #3](https://github.com/typicode/katon/issues/3). Upcoming versions of Katon should make working with nvm easier.
 
 # Issues and feedback
 
