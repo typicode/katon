@@ -34,37 +34,6 @@ module.exports =
 
     'static --port $PORT'
 
-  getCommand: (commandLine) ->
-    commandLine.split(' ')[0]
-
-  getArgs: (commandLine) ->
-    args = commandLine.split ' '
-    args.shift()
-    args
-
-  replacePort: (str, port) ->
-    str.replace /\$PORT/g, port
-
-  getSpawnArgs: (path, port) ->
-    env = clone process.env
-    env.PORT = port
-
-    nodePath = @getNodePath path
-    env.PATH = "#{nodePath}:#{env.PATH}"
-
-    commandLine = @getCommandLine path
-    commandLine = @replacePort commandLine, port
-
-    command = @getCommand commandLine
-    command = command.replace 'static', config.staticPath
-    command = command.replace 'nodemon', config.nodemonPath
-
-    args = @getArgs commandLine
-    
-    cwd = path
-    
-    [command, args, cwd: path, env: env]
-
   getRespawnArgs: (path, port) ->
     env = clone process.env
     env.PORT = port
@@ -72,11 +41,11 @@ module.exports =
     nodePath = @getNodePath path
     env.PATH = "#{nodePath}:#{env.PATH}"
 
-    commandLine = @getCommandLine path
-    commandLine = @replacePort commandLine, port
-    commandLine = commandLine.replace 'static', config.staticPath
-    commandLine = commandLine.replace 'nodemon', config.nodemonPath
-    
+    commandLine = @getCommandLine(path)
+      .replace(/\$PORT/g, port)
+      .replace('nodemon', config.nodemonPath)
+      .replace('static', config.staticPath)
+
     cwd = path
     
     command: commandLine.split ' '
