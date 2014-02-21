@@ -1,12 +1,10 @@
 # Katon
 
-__Katon is all about saving you time during development.__
+There's something repetitive that we do everyday: open a terminal, start development server, ... and then start coding. 
 
-There's something repetitive that we do: open a terminal, start development server, ... and then start coding.
+Using Katon, you can totally forget about manually starting your development servers each time. It will automatically start them for you and serve them locally on .dev domains (a bit like Pow does with Ruby apps).
 
-Using Katon, you can totally forget about manually starting development servers each time. Instead, link them once and Katon will automatically start them for you and serve them locally on .dev domains.
-
-Katon runs on MacOs and works with __all__ your usual tools (Express, Grunt, Gulp, ...).
+Katon runs on Mac OS and works with __all__ your usual Node tools and frameworks (Express, Grunt, Gulp, ...).
 
 [![NPM version](https://badge.fury.io/js/katon.png)](http://badge.fury.io/js/katon)
 
@@ -29,7 +27,7 @@ Reboot and go to `http://app.dev`.
 
 # Install
 
-Katon requires [Pow](http://pow.cx/) to be installed. If it's not, run this.
+Katon requires [Pow](http://pow.cx/) to be installed. If it's not, run this:
 
 ```
 curl get.pow.cx | sh
