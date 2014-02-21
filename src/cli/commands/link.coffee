@@ -1,9 +1,10 @@
 emitter = require '../util/emitter'
 shell = require '../util/shell'
 config = require '../config'
+parameterize = require 'parameterize'
 
 module.exports = (path, execString) ->
-  name = path.split('/').pop()
+  name = parameterize(path.split('/').pop()).replace(/_/g,'-')
 
   unless test '-d', config.powPath
     emitter.emit 'error', """
@@ -21,5 +22,5 @@ module.exports = (path, execString) ->
     shell.to "#{path}/.katon", execString
     emitter.emit 'info', 'Created .katon'
 
-  shell.exec "ln -s #{path} #{config.katonPath}"
+  shell.exec "ln -s #{path} #{config.katonPath}/#{name}"
   emitter.emit 'info', "Application is now available at http://#{name}.dev"
