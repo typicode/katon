@@ -10,12 +10,17 @@ Katon runs on Mac OS and works with __all__ your usual Node tools and frameworks
 
 # Example
 
-Just create an Express app and link it.
+For instance, create an Express app.
 
 ```
 mkdir app
 cd app
 express && npm install
+```
+
+Link it.
+
+```
 katon link
 ```
 
