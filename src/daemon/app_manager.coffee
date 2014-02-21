@@ -27,7 +27,8 @@ module.exports =
     path = "#{@katonPath}/#{name}"
     port = @getPort()
     command = @commander.getCommand path, port
-    process = @spawner.spawn path, command
+    logPath = @commander.getLogPath path
+    process = @spawner.spawn path, command, logPath
 
     app =
       name: name

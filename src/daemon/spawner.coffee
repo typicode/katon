@@ -4,7 +4,7 @@ chalk = require 'chalk'
 log = require './log'
 commander = require './commander'
 
-module.exports.spawn = (appPath, command) ->
+module.exports.spawn = (appPath, command, logPath) ->
   # Change directory
   cd appPath
   
@@ -12,7 +12,7 @@ module.exports.spawn = (appPath, command) ->
   log "#{appPath}"
   log "  #{command}"
   
-  chalk.underline.bold.cyan(command).toEnd "#{appPath}/katon.log"
+  chalk.underline.bold.cyan(command).toEnd "#{logPath}/katon.log"
 
   # Spawn process
   child = exec command, async: true
@@ -25,12 +25,12 @@ module.exports.spawn = (appPath, command) ->
     
     # Log to /var/log/system.log and <app_directory>/katon.log
     log restartMessage
-    restartMessage.toEnd "#{appPath}/katon.log"
+    restartMessage.toEnd "#{logPath}/katon.log"
 
     setTimeout restart, 10000
 
   # Log process output to <app_directory>/katon.log
-  child.stdout.on 'data', (data) -> data.toEnd "#{appPath}/katon.log"
-  child.stderr.on 'data', (data) -> data.toEnd "#{appPath}/katon.log"
+  child.stdout.on 'data', (data) -> data.toEnd "#{logPath}/katon.log"
+  child.stderr.on 'data', (data) -> data.toEnd "#{logPath}/katon.log"
 
   child

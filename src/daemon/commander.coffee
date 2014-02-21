@@ -23,3 +23,10 @@ module.exports =
     command = "PORT=$PORT #{command}"
     command.replace /\$PORT/g, port
 
+  getLogPath: (path) ->
+    logPath = "#{path}/katon.log"
+    if test '-e', "#{path}/.katon_log"
+      logPath = cat "#{path}/.katon_log"
+      logPath = "#{path}/#{logPath}"
+
+    logPath
