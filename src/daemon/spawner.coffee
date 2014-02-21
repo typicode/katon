@@ -12,7 +12,7 @@ module.exports.spawn = (appPath, command, logPath) ->
   log "#{appPath}"
   log "  #{command}"
   
-  chalk.underline.bold.cyan(command).toEnd "#{logPath}/katon.log"
+  chalk.underline.bold.cyan(command).toEnd "#{logPath}"
 
   # Spawn process
   child = exec command, async: true
@@ -25,12 +25,12 @@ module.exports.spawn = (appPath, command, logPath) ->
     
     # Log to /var/log/system.log and <app_directory>/katon.log
     log restartMessage
-    restartMessage.toEnd "#{logPath}/katon.log"
+    restartMessage.toEnd "#{logPath}"
 
     setTimeout restart, 10000
 
   # Log process output to <app_directory>/katon.log
-  child.stdout.on 'data', (data) -> data.toEnd "#{logPath}/katon.log"
-  child.stderr.on 'data', (data) -> data.toEnd "#{logPath}/katon.log"
+  child.stdout.on 'data', (data) -> data.toEnd "#{logPath}"
+  child.stderr.on 'data', (data) -> data.toEnd "#{logPath}"
 
   child
