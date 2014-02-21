@@ -19,7 +19,7 @@ module.exports.spawn = (appPath, command, logPath) ->
 
   # Log on exit and restart process
   child.on 'exit', =>
-    restart = => @spawn appPath, command
+    restart = => @spawn appPath, command, logPath
     restartMessage =
       chalk.underline.bold.red "Restarting #{appPath} in 10 seconds"
     
