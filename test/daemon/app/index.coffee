@@ -17,7 +17,7 @@ describe 'app', ->
 
     beforeEach ->
       monitor = app.add path, 4001
-      
+
     it 'removes ', ->
       monitor = app.remove path
       assert.equal Object.keys(app.monitors).length, 0

@@ -8,7 +8,7 @@ config = require '../config'
 module.exports = ->
   template = cat "#{__dirname}/../../../plist/katon.plist.eco"
   plistContent = eco.render template,
-    nodePath: which 'node'
+    nodePath: process.execPath
     daemonPath: path.resolve "#{__dirname}/../../daemon/index"
 
   unless test '-d', config.launchAgentsPath

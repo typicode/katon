@@ -1,6 +1,10 @@
 fs = require 'fs'
+chalk = require 'chalk'
 
 module.exports =
+
+  log: (str) ->
+    console.log chalk.blue('proxy'), str
 
   getHost: (path) ->
     "#{path.split('/').pop()}.dev"
