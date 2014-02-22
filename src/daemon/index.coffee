@@ -1,4 +1,4 @@
-daemon = require 'daemon'
+daemon = require './daemon'
 
 daemon.init()
-daemon.wath()
+daemon.watch()

@@ -31,7 +31,8 @@ describe 'app/util', ->
     assertCommandLine = (path, expected) ->
       describe humanizePath(path), ->
         it "returns #{expected}", ->
-          assert.equal util.getCommandLine("#{__dirname}/fixtures/#{path}"), expected
+          actual = util.getCommandLine "#{__dirname}/fixtures/#{path}"
+          assert.equal actual, expected
 
     # Tests
     assertCommandLine 'package_main', 'nodemon'
@@ -43,21 +44,6 @@ describe 'app/util', ->
     assertCommandLine 'katon_foo-$PORT', 'foo $PORT'
 
     assertCommandLine 'static', 'static --port $PORT'
-
-  describe 'getCommand(commandLine)', ->
-
-    it 'returns command', ->
-      assert.equal util.getCommand('foo bar --baz qux'), 'foo'
-
-  describe 'getArgs(commandLine)', ->
-
-    it 'returns args', ->
-      assert.deepEqual util.getArgs('foo bar --baz qux'), ['bar', '--baz', 'qux']
-
-  describe 'replacePort(commandLine)', ->
-
-    it 'replaces all occurences of $PORT', ->
-      assert.equal util.replacePort('$PORT foo --port $PORT', 4000), '4000 foo --port 4000'
 
   describe 'getRespawnArgs(path, port)', ->
 

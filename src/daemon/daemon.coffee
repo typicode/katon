@@ -1,19 +1,20 @@
-proxy = require 'proxy'
-processes = require 'processes'
+fs = require 'fs'
+proxy = require './proxy'
+app = require './app'
 
 katonPath = "#{process.env.HOME}/.katon"
 
-module.exports = 
+module.exports =
   add: (path) ->
     port = proxy.add path
-    process.add path, port
+    app.add path, port
 
   remove: (path) ->
     proxy.remove path
-    process.remove path
+    app.remove path
 
   init: ->
-    for name in fs.readdir katonPath
+    for name in fs.readdirSync katonPath
       @add "#{katonPath}/#{name}"
 
   watch: ->

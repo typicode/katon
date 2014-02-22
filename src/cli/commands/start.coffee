@@ -1,4 +1,5 @@
 require 'shelljs/global'
+path = require 'path'
 eco = require 'eco'
 emitter = require '../util/emitter'
 shell = require '../util/shell'
@@ -8,7 +9,7 @@ module.exports = ->
   template = cat "#{__dirname}/../../../plist/katon.plist.eco"
   plistContent = eco.render template,
     nodePath: which 'node'
-    daemonPath: "#{__dirname}/../../daemon/"
+    daemonPath: path.resolve "#{__dirname}/../../daemon/index"
 
   unless test '-d', config.launchAgentsPath
     emitter.emit 'error', "#{config.launchAgentsPath} doesn't exist"

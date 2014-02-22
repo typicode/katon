@@ -1,7 +1,7 @@
 httpProxy = require 'http-proxy'
 util = require './util'
 
-module.exports = 
+module.exports =
   paths: []
 
   reload: (router) ->
