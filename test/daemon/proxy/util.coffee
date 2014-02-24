@@ -9,7 +9,7 @@ describe 'proxy/util', ->
       assert.equal util.getHost('/some/path/foo'), 'foo.dev'
 
   describe 'getRouter(paths)', ->
-    
+
     it 'returns router map', ->
       actual = util.getRouter [
         '/some/path/foo',

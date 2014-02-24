@@ -72,6 +72,8 @@ describe 'app/util', ->
           assert.equal actual.cwd, path
           assert.equal actual.env.PORT, 4001
           assert.equal actual.env.PATH.split(':')[0], expected.nodePath
+          assert.equal actual.maxRestarts, -1
+          assert.equal actual.sleep, 10*1000
 
     # Tests
     assertRespawnArgs 'package_scripts_start_node-index',

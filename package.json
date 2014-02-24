@@ -40,7 +40,7 @@
     "grunt-contrib-coffee": "~0.9.0",
     "grunt-coffeelint": "0.0.8",
     "grunt-mocha-test": "~0.9.0",
-    "respawn": "^0.1.8",
+    "respawn": "^0.2.0",
     "clone": "^0.1.11",
     "minimatch": "^0.2.14"
   },
@@ -52,8 +52,7 @@
     "nodemon": "~1.0.8",
     "node-static": "~0.7.3",
     "chalk": "~0.4.0",
-    "update-notifier": "~0.1.7",
-    "lodash": "~2.4.1"
+    "update-notifier": "~0.1.7"
   },
   "license": "MIT"
 }

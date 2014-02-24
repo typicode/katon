@@ -64,3 +64,5 @@ module.exports =
     command: commandLine.split ' '
     cwd: path
     env: env
+    maxRestarts: -1
+    sleep: 10*1000
