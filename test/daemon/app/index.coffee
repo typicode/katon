@@ -2,7 +2,7 @@ assert = require 'assert'
 sinon = require 'sinon'
 app = require '../../../src/daemon/app'
 
-path = "#{__dirname}/fixtures/package_main"
+path = "#{__dirname}/fixtures/node/package_main"
 
 describe 'app', ->
 

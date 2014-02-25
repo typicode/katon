@@ -1,5 +1,5 @@
 logme = require 'logme'
-respawn = require 'respawn'
+monitor = require './monitor'
 util = require './util'
 
 module.exports =
@@ -7,27 +7,24 @@ module.exports =
 
   add: (path, port) ->
     util.log "Start #{path} on port #{port}"
+    mon = monitor.create path, port
 
-    options = util.getRespawnArgs path, port
-
-    monitor = respawn options
-    @monitors[path] = monitor
-
-    monitor.on 'stdout', (data) ->
+    mon.on 'stdout', (data) ->
       util.append "#{path}/katon.log", data
 
-    monitor.on 'stderr', (data) ->
+    mon.on 'stderr', (data) ->
       util.error path, data.toString()
       util.append "#{path}/katon.log", data
 
-    monitor.start()
-    monitor
+    @monitors[path] = mon
+    mon.start()
+    mon
 
   remove: (path) ->
     util.log "Stop #{path}"
 
-    monitor = @monitors[path]
-    monitor.stop()
+    mon = @monitors[path]
+    mon.stop()
     delete @monitors[path]
-    monitor
+    mon
 
