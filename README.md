@@ -1,10 +1,12 @@
 # Katon
 
-There's something that we do every day: open a terminal, start development server, ... and then start coding. 
+__Katon is all about saving you time during development.__
 
-Using Katon, you can totally forget about manually starting your development servers each time. It will automatically start them for you and serve them locally on .dev domains (a bit like how Pow does with Ruby apps).
+There's something repetitive that we do: open a terminal, start development server, ... and then start coding.
 
-Katon runs on Mac OS and works with __all__ your usual Node tools and frameworks (Express, Grunt, Gulp, ...).
+Using Katon, you can totally forget about manually starting development servers each time. Instead, link them once to Katon and it will automatically start them for you and serve them locally on .dev domains.
+
+Katon runs on Mac OS and works with __all__ your usual tools (Express, Grunt, Gulp, ...).
 
 [![NPM version](https://badge.fury.io/js/katon.png)](http://badge.fury.io/js/katon)
 
