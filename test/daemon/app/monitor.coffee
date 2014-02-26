@@ -14,13 +14,9 @@ assertMonitor = (path) ->
     assert.equal mon.maxRestarts, -1
     assert.equal mon.sleep, 10*1000
 
-
 describe 'app/monitor', ->
 
   describe 'create(path, port)', ->
 
     assertMonitor "node/package_main",
     assertMonitor "node/katon_foo_$PORT"
-
-
-
