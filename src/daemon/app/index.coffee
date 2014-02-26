@@ -8,14 +8,6 @@ module.exports =
   add: (path, port) ->
     util.log "Start #{path} on port #{port}"
     mon = monitor.create path, port
-
-    mon.on 'stdout', (data) ->
-      util.append "#{path}/katon.log", data
-
-    mon.on 'stderr', (data) ->
-      util.error path, data.toString()
-      util.append "#{path}/katon.log", data
-
     @monitors[path] = mon
     mon.start()
     mon
