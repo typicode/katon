@@ -1,4 +1,3 @@
-logme = require 'logme'
 monitor = require './monitor'
 util = require './util'
 
