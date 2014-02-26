@@ -1,4 +1,3 @@
-logme = require 'logme'
 httpProxy = require 'http-proxy'
 util = require './util'
 
