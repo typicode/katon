@@ -50,7 +50,6 @@
     "nodemon": "~1.0.8",
     "node-static": "~0.7.3",
     "chalk": "~0.4.0",
-    "logme": "^0.3.9",
     "minimatch": "^0.2.14",
     "clone": "^0.1.11",
     "update-notifier": "~0.1.7"
