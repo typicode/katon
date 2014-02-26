@@ -18,7 +18,7 @@ module.exports =
       app.add path, port
     catch e
       console.error path, e
-      setTimeout @add, 10*1000 
+      setTimeout @add, 10*1000
 
   remove: (path) ->
     @log "Remove #{path}"
