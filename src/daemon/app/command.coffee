@@ -1,5 +1,4 @@
 fs = require 'fs'
-chalk = require 'chalk'
 config = require '../config'
 env = require './env'
 

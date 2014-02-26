@@ -7,7 +7,8 @@ config = require '../config'
 module.exports =
 
   readFile: (path) ->
-    fs.readFileSync(path).toString().trim()
+    if fs.existsSync path
+      fs.readFileSync(path).toString().trim()
 
   findDir: (path, pattern) ->
     if fs.existsSync path
@@ -20,15 +21,10 @@ module.exports =
       "#{config.nvmPath}/#{versionDir}/bin"
 
   getNodePath: (path) ->
-    nvmrcPath = "#{path}/.nvmrc"
-    defaultPath = "#{config.nvmPath}/alias/default"
-
-    if fs.existsSync nvmrcPath
-      version = @readFile nvmrcPath
+    if version = @readFile "#{path}/.nvmrc"
       return @findVersionDir version
 
-    if fs.existsSync defaultPath
-      version = @readFile defaultPath
+    if version = @readFile "#{config.nvmPath}/alias/default"
       return @findVersionDir version
 
     "/usr/local/bin:#{p.dirname(process.execPath)}"
