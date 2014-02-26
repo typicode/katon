@@ -8,7 +8,7 @@ module.exports =
   create: (path, port) ->
     respawn
       env: env.get path, port
-      command: command.get path
+      command: command.get path, port
       cwd: path
       maxRestarts: -1
       sleep: 10*1000
