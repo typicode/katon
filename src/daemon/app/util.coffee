@@ -3,11 +3,13 @@ chalk = require 'chalk'
 
 module.exports =
 
-  log: (str) ->
-    console.log chalk.cyan('app  '), str
+  append: (path, str) ->
+    fs.appendFileSync "#{path}/katon.log", "#{str}\n"
+
+  log: (path, str) ->
+    console.log chalk.cyan("app   #{path?.split('/').pop()}"), str
+    @append path, str
 
   error: (path, str) ->
-    console.log chalk.red("app   #{path?.split('/').pop()}"), str
-
-  append: (path, data) ->
-    fs.appendFileSync path, "#{data}\n"
+    console.error chalk.red("app   #{path?.split('/').pop()}"), str
+    @append path, chalk.red str

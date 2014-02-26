@@ -14,11 +14,10 @@ module.exports =
   add: (path) ->
     @log "Add #{path}"
     port = proxy.add path
-    try
-      app.add path, port
-    catch e
-      console.error path, e
-      setTimeout @add, 10*1000
+    app = app.add path, port
+    if not app?
+      console.error "Failed to add app"
+      proxy.remove path
 
   remove: (path) ->
     @log "Remove #{path}"

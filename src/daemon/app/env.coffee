@@ -2,39 +2,52 @@ fs = require 'fs'
 p = require 'path'
 minimatch = require 'minimatch'
 clone = require 'clone'
+util = require './util'
 config = require '../config'
 
 module.exports =
 
-  readFile: (path) ->
-    if fs.existsSync path
-      fs.readFileSync(path).toString().trim()
+  read: (path) ->
+    fs.readFileSync(path)
+      .toString()
+      .trim()
 
-  findDir: (path, pattern) ->
-    if fs.existsSync path
-      for v in fs.readdirSync(path).reverse()
-        return v if minimatch v, pattern
+  find: (path, version) ->
+    try
+      util.log path, "Looking for #{version}"
+      for dir in fs.readdirSync(config.nvmPath).reverse()
+        if minimatch dir, "v#{version}*"
+          PATH = "#{config.nvmPath}/#{dir}/bin"
+          util.log path, "Found #{PATH}"
+          return PATH
+    catch
 
-  findVersionDir: (version) ->
-    versionDir = @findDir config.nvmPath, "v#{version}*"
-    if versionDir
-      "#{config.nvmPath}/#{versionDir}/bin"
+  nvmrc: (path) ->
+    try
+      version = @read "#{path}/.nvmrc"
+      util.log path, "Detected .nvmrc"
+      @find path, version
+    catch
 
-  getNodePath: (path) ->
-    if version = @readFile "#{path}/.nvmrc"
-      return @findVersionDir version
+  nvmDefault: (path) ->
+    try
+      version = @read "#{config.nvmPath}/alias/default"
+      util.log path, "Detected .nvm/alias/default"
+      @find path, version
+    catch
 
-    if version = @readFile "#{config.nvmPath}/alias/default"
-      return @findVersionDir version
+  node: ->
+    nodePath = p.dirname(process.execPath)
+    "/usr/local/bin:#{nodePath}"
 
-    "/usr/local/bin:#{p.dirname(process.execPath)}"
+  getPATH: (path) ->
+    PATH = @nvmrc path
+    PATH or= @nvmDefault path
+    PATH or= @node()
+    PATH
 
   get: (path, port) ->
     processEnv = clone process.env
-
     processEnv.PORT = port
-
-    nodePath = @getNodePath path
-    processEnv.PATH = "#{nodePath}:#{processEnv.PATH}"
-
+    processEnv.PATH = "#{@getPATH(path)}:#{processEnv.PATH}"
     processEnv
