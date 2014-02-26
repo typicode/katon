@@ -39,7 +39,6 @@ module.exports =
     processEnv.PORT = port
 
     nodePath = @getNodePath path
-    console.log nodePath
     processEnv.PATH = "#{nodePath}:#{processEnv.PATH}"
 
     processEnv
