@@ -39,20 +39,20 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-coffee": "~0.9.0",
     "grunt-coffeelint": "0.0.8",
-    "grunt-mocha-test": "~0.9.0",
-    "respawn": "^0.2.0",
-    "clone": "^0.1.11",
+    "grunt-mocha-test": "~0.9.0"
   },
   "dependencies": {
     "optimist": "~0.6.0",
     "shelljs": "*",
     "eco": "*",
     "http-proxy": "0.10.x",
+    "respawn": "^0.2.0",
     "nodemon": "~1.0.8",
     "node-static": "~0.7.3",
     "chalk": "~0.4.0",
-    "minimatch": "^0.2.14",
     "logme": "^0.3.9",
+    "minimatch": "^0.2.14",
+    "clone": "^0.1.11",
     "update-notifier": "~0.1.7"
   },
   "license": "MIT"
