@@ -29,6 +29,8 @@ describe 'app/command', ->
     assertCommand 'node/katon_foo-$PORT',
       'foo 4001'
 
-    assertCommand 'static',
+    assertCommand 'node/package_syntax-error',
       "#{config.staticPath} --port 4001"
 
+    assertCommand 'static',
+      "#{config.staticPath} --port 4001"
