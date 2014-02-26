@@ -10,4 +10,4 @@ module.exports =
     console.log chalk.red("app   #{path?.split('/').pop()}"), str
 
   append: (path, data) ->
-    fs.appendFileSync path, data
+    fs.appendFileSync path, "#{data}\n"
