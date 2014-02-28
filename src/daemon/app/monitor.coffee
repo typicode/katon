@@ -2,6 +2,7 @@ respawn = require 'respawn'
 config = require '../config'
 command = require './command'
 env = require './env'
+util = require './util'
 
 module.exports =
 
