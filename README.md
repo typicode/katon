@@ -163,9 +163,9 @@ __About nvm__
 
 If you're using nvm and having problems, see discussion in [issue #3](https://github.com/typicode/katon/issues/3). Upcoming versions of Katon should make working with nvm easier.
 
-# Issues and feedback
+# Contribute
 
-Katon is a recent project, even though it was successfully tested on my MacBook Air, you may find bugs, have issues or questions. Do not hesitate to fill an [issue](https://github.com/typicode/katon/issues) or contact me [@typicode](https://github.com/typicode). It really helps.
+Katon is a recent project, you may find bugs, have issues or questions. Do not hesitate to fill an [issue](https://github.com/typicode/katon/issues) or contact me [@typicode](https://github.com/typicode).
 
 # Uninstall
 
