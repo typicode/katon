@@ -167,6 +167,8 @@ If you're using nvm and having problems, see discussion in [issue #3](https://gi
 
 Katon is a recent project, you may find bugs, have issues or questions. Do not hesitate to fill an [issue](https://github.com/typicode/katon/issues) or contact me [@typicode](https://github.com/typicode).
 
+If you want to add a new feature or suggest an improvement, you can create an issue to discuss it.
+
 # Uninstall
 
 Just run this script and everything will be cleaned.
