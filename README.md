@@ -139,9 +139,9 @@ But, if needed, you can also use `$PORT` in commands. It will be replaced at run
 katon link 'harp --port $PORT'
 ```
 
-# Working with multiple versions of Node
+# Multiple versions of Node
 
-Katon supports [nvm](https://github.com/creationix/nvm). It will look for `.nvmrc` in your app directory or `~/.nvm/alias/default` to determine which node version to use.
+If you've installed [nvm](https://github.com/creationix/nvm), Katon will use your app `.nvmrc` or `~/.nvm/alias/default` to determine which version to use.
 
 # Troubleshoot
 
