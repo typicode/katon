@@ -4,7 +4,7 @@ chalk = require 'chalk'
 module.exports =
 
   log: (str) ->
-    console.log chalk.yellow('proxy'), str
+    console.log chalk.yellow('[proxy]'), str
 
   getHost: (path) ->
     "#{path.split('/').pop()}.dev"
