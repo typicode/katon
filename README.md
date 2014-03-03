@@ -26,7 +26,7 @@ Link it.
 katon link
 ```
 
-Close your terminal and go to `http://app.dev`. 
+Close your terminal and go to `http://app.dev`.
 
 Open a text editor and try to make some changes to the code (Katon uses [nodemon](https://github.com/remy/nodemon) to monitor changes).
 
@@ -99,7 +99,7 @@ If you want to serve static files, just make sure that if a `package.json` is pr
 
 ```
 katon link
-``` 
+```
 
 # View app logs
 
@@ -139,35 +139,37 @@ But, if needed, you can also use `$PORT` in commands. It will be replaced at run
 katon link 'harp --port $PORT'
 ```
 
+# Working with multiple versions of Node
+
+Katon supports [nvm](https://github.com/creationix/nvm). It will look for `.nvmrc` in your app directory or `~/.nvm/alias/default` to determine which node version to use.
+
 # Troubleshoot
- 
+
 When opening your app in the browser, you may get errors:
- 
+
 `No server found`
- 
+
 Check that Pow daemon is running with `katon status`.
- 
+
 `Proxy error`
- 
+
 Check that Katon daemon is running with `katon status`.
- 
+
 `An error has occurred: {"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect"}`
- 
+
 Your app may not be listening to requests check `katon.log`.
- 
+
 `Not found`
- 
+
 If you get a 404, it's because your app directory is served using Katon embedded static server and it can't find an `index.html`.
 
-__About nvm__
-
-If you're using nvm and having problems, see discussion in [issue #3](https://github.com/typicode/katon/issues/3). Upcoming versions of Katon should make working with nvm easier.
+You may also want to check `katon.log` for more informations or run `katon` with `--verbose` option.
 
 # Contribute
 
-Katon is a recent project, you may find bugs, have issues or questions. Do not hesitate to fill an [issue](https://github.com/typicode/katon/issues) or contact me [@typicode](https://github.com/typicode).
+Katon is a recent project, you may find bugs, have issues, suggestions or questions. Do not hesitate to fill an [issue](https://github.com/typicode/katon/issues) or contact me [@typicode](https://github.com/typicode).
 
-If you want to add a new feature or suggest an improvement, you can create an issue to discuss it.
+If you want to add a new feature, it's recommended to create an issue to discuss it before starting to code it.
 
 # Uninstall
 
