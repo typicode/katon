@@ -21,6 +21,7 @@ module.exports =
           util.log path, "Using #{PATH}"
           return PATH
     catch
+      util.error path, "Can't find #{version} in #{config.nvmPath}"
 
   nvmrc: (path) ->
     try
