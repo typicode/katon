@@ -3,7 +3,6 @@ chalk = require 'chalk'
 
 module.exports =
 
-
   append: (path, str) ->
     fs.appendFileSync "#{path}/katon.log", "#{str}\n"
 
