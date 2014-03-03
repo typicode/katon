@@ -8,8 +8,8 @@ module.exports =
 
   log: (path, str) ->
     console.log chalk.cyan("[app]   #{path?.split('/').pop()}"), str
-    @append path, "#{chalk.cyan('[app]')} #{str}"
+    @append path, "#{chalk.cyan('[katon]')} #{str}"
 
   error: (path, str) ->
     console.error chalk.red("[app]   #{path?.split('/').pop()}"), str
-    @append path, chalk.red "[app] #{str}"
+    @append path, chalk.red "[katon] #{str}"

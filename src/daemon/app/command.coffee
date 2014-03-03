@@ -10,6 +10,7 @@ module.exports =
       command = fs.readFileSync("#{path}/.katon")
         .toString()
         .trim()
+      util.log path, 'Detected .katon'
       command if command isnt ''
     catch
 
@@ -31,9 +32,12 @@ module.exports =
     command or= @getPackageCommand path
     command or= @getStaticCommand()
 
-    command
+    command = command
       .replace('node ', 'nodemon ')
       .replace('nodemon', config.nodemonPath)
       .replace('static', config.staticPath)
       .replace(/\$PORT/g, port)
-      .split ' '
+
+    util.log path, "Starting `#{command}"
+
+    command.split ' '

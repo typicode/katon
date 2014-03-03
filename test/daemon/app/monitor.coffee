@@ -19,4 +19,4 @@ describe 'app/monitor', ->
   describe 'create(path, port)', ->
 
     assertMonitor "node/package_main",
-    assertMonitor "node/katon_foo_$PORT"
+    assertMonitor "node/katon_foo-$PORT"

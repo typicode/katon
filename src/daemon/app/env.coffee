@@ -18,7 +18,7 @@ module.exports =
       for dir in fs.readdirSync(config.nvmPath).reverse()
         if minimatch dir, "v#{version}*"
           PATH = "#{config.nvmPath}/#{dir}/bin"
-          util.log path, "Found #{PATH}"
+          util.log path, "Using #{PATH}"
           return PATH
     catch
 
