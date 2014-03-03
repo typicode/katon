@@ -32,7 +32,7 @@ module.exports =
   nvmDefault: (path) ->
     try
       version = @read "#{config.nvmPath}/alias/default"
-      util.log path, "Detected .nvm/alias/default"
+      util.log path, "Detected ~/.nvm/alias/default"
       @find path, version
     catch
 

@@ -9,6 +9,7 @@ module.exports =
     util.log path, "Start #{path} on port #{port}"
     mon = monitor.create path, port
     @monitors[path] = mon
+    util.log path, "Starting `#{mon.command.join ' '}`"
     mon.start()
     mon
 

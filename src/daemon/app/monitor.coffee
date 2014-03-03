@@ -15,6 +15,6 @@ module.exports =
       sleep: 10*1000
 
     mon.on 'stdout', (data) -> util.append path, data
-    mon.on 'stderr', (data) -> util.error path, data
+    mon.on 'stderr', (data) -> util.append path, data
 
     mon
