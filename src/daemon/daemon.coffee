@@ -14,8 +14,7 @@ module.exports =
   add: (path) ->
     @log "Add #{path}"
     port = proxy.add path
-    app = app.add path, port
-    if not app?
+    if not (app.add path, port)?
       console.error "Failed to add app"
       proxy.remove path
 
