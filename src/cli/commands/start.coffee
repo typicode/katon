@@ -15,5 +15,7 @@ module.exports = ->
     emitter.emit 'error', "#{config.launchAgentsPath} doesn't exist"
 
   shell.to "#{config.launchAgentsPath}/katon.plist", plistContent
+  # make sure the .plist file have correct permissions
+  chmod 644, "#{config.launchAgentsPath}/katon.plist"
   shell.exec "launchctl load -Fw #{config.launchAgentsPath}/katon.plist"
   emitter.emit 'info', 'Katon daemon was successfully started'
