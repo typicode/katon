@@ -15,6 +15,6 @@ describe 'start()', ->
 
   it 'should put a katon.plist in config.launchAgentsPath', ->
     assert test '-e', "#{config.launchAgentsPath}/katon.plist"
-  
+
   it 'should set the correct permissions on the katon.plist file'
     # pending test

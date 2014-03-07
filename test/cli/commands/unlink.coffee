@@ -4,30 +4,30 @@ unlink = require '../../../src/cli/commands/unlink'
 
 setUp = ->
   # Create proxy
-  ''.to "#{config.powPath}/app"
+  ''.to "#{config.powPath}/my-app"
   # Create symlink
-  exec "ln -s /tmp/app #{config.katonPath}/app"
+  exec "ln -s /tmp/my_app #{config.katonPath}/my-app"
 
 describe 'unlink(path)', ->
 
   beforeEach ->
     setUp()
-    unlink '/tmp/app'
+    unlink '/tmp/my_app'
 
   it 'should remove the proxy file in .pow', ->
-    assert !test '-f', "#{config.powPath}/app"
+    assert !test '-f', "#{config.powPath}/my-app"
 
   it 'should remove the symlink in .katon', ->
-    assert !test '-L', "#{config.katonPath}/app"
+    assert !test '-L', "#{config.katonPath}/my-app"
 
 describe 'unlink(appName)', ->
 
   beforeEach ->
     setUp()
-    unlink 'app'
+    unlink 'my_app'
 
   it 'should remove the proxy file in .pow', ->
-    assert !test '-f', "#{config.powPath}/app"
+    assert !test '-f', "#{config.powPath}/my-app"
 
   it 'should remove the symlink in .katon', ->
-    assert !test '-L', "#{config.katonPath}/app"
+    assert !test '-L', "#{config.katonPath}/my-app"
