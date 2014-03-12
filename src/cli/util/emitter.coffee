@@ -1,11 +1,3 @@
-events = require 'events'
-util = require 'util'
+EventEmitter = require('events').EventEmitter
 
-Emitter = ->
-  events.EventEmitter.call @
-
-util.inherits Emitter, events.EventEmitter
-
-emitter = new Emitter()
-
-module.exports = emitter
+module.exports = new EventEmitter()
