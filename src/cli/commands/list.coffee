@@ -13,6 +13,6 @@ module.exports = ->
     .trim()
 
     if test '-d', target
-      emitter.emit 'info', "#{link}: #{target} > http://#{link}.dev"
+      emitter.emit 'info', "#{link}: #{target} → http://#{link}.dev"
     else
       emitter.emit 'warn', "#{link}: #{target} doesn't exist"
