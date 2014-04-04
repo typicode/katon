@@ -16,7 +16,7 @@ module.exports.rm = (file) ->
   rm file
   emitter.emit 'debug', "rm #{file}"
 
-module.exports.exec = (command, options = siltent: true) ->
+module.exports.exec = (command, options = silent: true) ->
   res = exec command, options
   emitter.emit 'debug', command
   if res.code > 0
