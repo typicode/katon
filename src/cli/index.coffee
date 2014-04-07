@@ -79,6 +79,7 @@ module.exports =
       return @commands.status()
 
     if 'open' in argv._
-      return @commands.open()
+      path = process.cwd()
+      return @commands.open path
 
     return @commands.help()
