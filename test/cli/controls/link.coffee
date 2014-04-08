@@ -26,9 +26,9 @@ describe 'link', ->
         .returns true
       
       link.create '/some/app'
-      sinon.assert.calledWith fs.mkdirpSync, config.katonDir
+      sinon.assert.notCalled fs.mkdirpSync
       sinon.assert.notCalled fs.symlinkSync
-      sinon.assert.calledWith common.create, "#{config.powDir}/app", config.proxyPort
+      sinon.assert.notCalled common.create
 
   describe 'remove(path)', ->
 

@@ -2,7 +2,6 @@ daemon   = require './controls/daemon'
 link     = require './controls/link'
 exec     = require './controls/exec'
 help     = require './help'
-sh       = require './sh'
 
 module.exports =
 
