@@ -9,6 +9,7 @@ Using Katon, you can totally forget about manually starting development servers 
 Katon runs on Mac OS and works with __all__ your usual tools (Express, Grunt, Gulp, ...).
 
 [![NPM version](https://badge.fury.io/js/katon.png)](http://badge.fury.io/js/katon)
+[![Build Status](https://travis-ci.org/typicode/katon.png?branch=master)](https://travis-ci.org/typicode/katon)
 
 # Example
 
