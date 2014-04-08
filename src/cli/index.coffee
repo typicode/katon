@@ -15,8 +15,8 @@ module.exports =
     help.usage()
 
   link: (cmd) ->
-    link.create process.cwd()
     exec.create process.cwd(), cmd if cmd
+    link.create process.cwd()
 
   unlink: (path = process.cwd()) ->
     exec.remove path
