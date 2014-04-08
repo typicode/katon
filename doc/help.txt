@@ -12,6 +12,7 @@
     stop             Stop Katon daemon
     restart          Restart Katon daemon
     status           Katon status information
+    open             Open current app in browser
     install-pow      Install Pow
     uninstall-pow    Uninstall Pow
 

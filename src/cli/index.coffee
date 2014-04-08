@@ -27,6 +27,7 @@ module.exports =
     installPow: require './commands/install_pow'
     uninstallPow: require './commands/uninstall_pow'
     status: require './commands/status'
+    open: require './commands/open'
 
   run: (argv) ->
     argv = optimist.parse argv
@@ -76,5 +77,9 @@ module.exports =
 
     if 'status' in argv._
       return @commands.status()
+
+    if 'open' in argv._
+      path = process.cwd()
+      return @commands.open path
 
     return @commands.help()
