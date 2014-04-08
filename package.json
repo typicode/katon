@@ -1,6 +1,6 @@
 {
   "name": "katon",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Automatically start your Node based projects and serve them locally on .dev domains",
   "keywords": [
     "node",
@@ -24,7 +24,7 @@
     "url": "https://github.com/typicode/katon/issues"
   },
   "bin": {
-    "katon": "./bin/cli.js"
+    "katon": "./bin/index.js"
   },
   "scripts": {
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
@@ -32,26 +32,29 @@
   },
   "devDependencies": {
     "coffee-script": "*",
-    "mocha": "1.8.x",
-    "sinon": "1.7.x",
-    "grunt": "~0.4.2",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-coffee": "~0.9.0",
-    "grunt-coffeelint": "0.0.8",
-    "grunt-mocha-test": "~0.9.0"
+    "mocha": "^1.18.2",
+    "sinon": "^1.9.0",
+    "grunt": "^0.4.4",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-coffee": "^0.10.1",
+    "grunt-mocha-test": "^0.10.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-coffeelint": "0.0.8"
   },
   "dependencies": {
-    "optimist": "~0.6.0",
-    "shelljs": "*",
-    "eco": "*",
-    "http-proxy": "0.10.x",
-    "respawn": "^0.2.0",
-    "nodemon": "~1.0.8",
-    "node-static": "~0.7.3",
     "chalk": "~0.4.0",
-    "minimatch": "^0.2.14",
     "clone": "^0.1.11",
+    "eco": "*",
+    "fs.extra": "^1.2.1",
+    "http-proxy": "^1.0.2",
+    "lodash": "^2.4.1",
+    "minimatch": "^0.2.14",
+    "node-static": "~0.7.3",
+    "nodemon": "~1.0.8",
+    "optimist": "~0.6.0",
+    "pad": "0.0.4",
+    "respawn": "^0.2.0",
+    "shelljs": "^0.2.6",
     "update-notifier": "~0.1.7"
   },
   "license": "MIT"
