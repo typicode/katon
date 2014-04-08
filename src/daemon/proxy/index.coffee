@@ -1,16 +1,16 @@
 http      = require 'http'
 httpProxy = require 'http-proxy'
 chalk     = require 'chalk'
-util      = require './util'
 apps      = require '../apps/'
 config    = require '../../config'
 
 module.exports =
+
   log: (str) ->
     console.log chalk.yellow('[proxy]'), str
 
   getDomain: (host) ->
-    host.split('.').slice(-2).pop()
+    host.split('.').slice(-2, -1).pop()
 
   start: ->
     proxy = httpProxy.createProxyServer()
@@ -19,7 +19,7 @@ module.exports =
       host = req.headers.host
       @log "Received request for #{host}"
 
-      domain = util.getDomain host
+      domain = @getDomain host
       port   = apps.findByDomain(domain).port
       @log "Forwarding to http://127.0.0.1:#{port}"
 

@@ -1,3 +1,4 @@
+fs     = require 'fs'
 _      = require 'lodash'
 config = require '../../config'
 App    = require '../app/'
@@ -19,7 +20,7 @@ module.exports =
       app.monitor.start()
 
   remove: (path) ->
-    util.log path, "Stop #{path}"
+    console.log "Stop #{path}"
     app = @list[path]
     app.monitor.stop()
     delete @list[path]

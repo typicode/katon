@@ -25,7 +25,8 @@ module.exports =
 
   watch: ->
     fs.watch config.katonDir, (event, filename) ->
-      if fs.existsSync "#{config.katonDir}/#{filename}"
-        apps.add filename
+      path = "#{config.katonDir}/#{filename}"
+      if fs.existsSync path
+        apps.add path
       else
-        apps.remove filename
+        apps.remove path

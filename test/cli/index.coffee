@@ -6,7 +6,7 @@ m =
   daemon  : require '../../src/cli/controls/daemon'
   link    : require '../../src/cli/controls/link'
   exec    : require '../../src/cli/controls/exec'
-  help    : require '../../src/cli/help'
+  help    : require '../../src/cli/controls/help'
 
 describe 'cli', ->
 

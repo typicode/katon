@@ -7,11 +7,22 @@ config = require '../config'
 
 module.exports =
 
-  # output beautification
   tilde: (path) ->
     path.replace process.env.HOME, '~'
 
-  # file create and remove
+  render: (file) ->
+    tpl = fs.readFileSync "#{__dirname}/../../templates/#{file}", 'utf-8'
+    eco.render tpl, config
+
+  sh: (cmd) ->
+    console.log chalk.grey @tilde cmd
+    output = shell.exec(cmd, silent: true).output.trim()
+
+    unless output is ''
+      console.log chalk.grey output
+    
+    output
+
   create: (path, content, options) ->
     console.log chalk.grey "create #{@tilde path}"
 
@@ -26,23 +37,9 @@ module.exports =
       console.log chalk.grey "remove #{@tilde path}"
       fs.unlinkSync path 
 
-  # plist load and unload
-  sh: (cmd) ->
-    console.log chalk.grey @tilde cmd
-    output = shell.exec(cmd, silent: true).output.trim()
-
-    unless output is ''
-      console.log chalk.grey output
-    
-    output
-
   load: (path) ->
     @sh "launchctl load -Fw #{path}"
 
   unload: (path) ->
     @sh "launchctl unload #{path}"
 
-  # template rendering
-  render: (file) ->
-    tpl = fs.readFileSync "#{__dirname}/../../templates/#{file}", 'utf-8'
-    eco.render tpl, config

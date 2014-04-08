@@ -1,7 +1,7 @@
 daemon   = require './controls/daemon'
 link     = require './controls/link'
 exec     = require './controls/exec'
-help     = require './help'
+help     = require './controls/help'
 
 module.exports =
 

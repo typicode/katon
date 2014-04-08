@@ -1,6 +1,6 @@
 fs     = require 'fs'
 chalk  = require 'chalk'
-common = require './common'
+common = require '../common'
 
 module.exports =
 
