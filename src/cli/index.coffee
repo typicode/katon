@@ -1,7 +1,8 @@
-daemon   = require './controls/daemon'
-link     = require './controls/link'
-exec     = require './controls/exec'
-help     = require './controls/help'
+chalk  = require 'chalk'
+daemon = require './controls/daemon'
+link   = require './controls/link'
+exec   = require './controls/exec'
+help   = require './controls/help'
 
 module.exports =
 
@@ -29,10 +30,12 @@ module.exports =
     link.open path
 
   start: ->
+    console.log "Start #{chalk.cyan 'katon'} daemon"
     daemon.create()
     daemon.load()
 
   stop: ->
+    console.log "Stop #{chalk.cyan 'katon'} daemon"
     daemon.unload()
     daemon.remove()
 

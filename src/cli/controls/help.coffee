@@ -8,7 +8,7 @@ module.exports =
     path = "#{__dirname}/../../../doc/help.txt"
     str  = fs
       .readFileSync(path, 'utf8')
-      .replace(/katon/g, chalk.red 'katon')
+      .replace(/katon/g, chalk.cyan.bold 'katon')
 
     console.log str
 
