@@ -59,13 +59,18 @@ Commands:
 
   link               Link current dir
   link <cmd>         Link current dir and use cmd to start server
+  
   unlink             Unlink current dir
   unlink <app_name>  Unlink app
+
+  open               Open current dir in browser
+  open <app_name>    Open app in browser
+
   list               List linked apps
-  open               Open current app in browser
-  start              Start Katon daemon
-  stop               Stop Katon daemon
-  status             Katon status information
+  
+  start              Start daemon
+  stop               Stop daemon
+  status             Status information
 ```
 
 If you use `npm start` to start your app or if `package.json` has a `main` file property, just run this from you app directory.
@@ -142,19 +147,20 @@ If you've installed [nvm](https://github.com/creationix/nvm), Katon will use you
 
 # Troubleshoot
 
-`No server found`
+`No server found` or `Proxy error`
 
-Check that Pow daemon is running with `katon status`.
-
-`Proxy error`
-
-Check that Katon daemon is running with `katon status`.
+Check that Pow and Katon daemon are running using `katon status`.
 
 `Not found`
 
 If you get a 404, it's because your app directory is served using Katon embedded static server and it can't find an `index.html`.
 
-You may also want to check `katon.log` for more informations or run `katon` with `--verbose` option.
+`execvp()`
+
+Katon can't find bin in `/usr/local/bin` or in node dir (`which node`). To fix this, link your bin in `/usr/local/bin`.
+Future versions of Katon should make this easier.
+
+You may also want to check `katon.log` for more informations.
 
 # Contribute
 
