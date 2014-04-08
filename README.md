@@ -150,10 +150,6 @@ Check that Pow daemon is running with `katon status`.
 
 Check that Katon daemon is running with `katon status`.
 
-`An error has occurred: {"code":"ECONNREFUSED","errno":"ECONNREFUSED","syscall":"connect"}`
-
-Your app may not be listening to requests check `katon.log`.
-
 `Not found`
 
 If you get a 404, it's because your app directory is served using Katon embedded static server and it can't find an `index.html`.

@@ -1,7 +1,7 @@
 fs    = require 'fs.extra'
 chalk = require 'chalk'
 proxy = require './proxy/'
-apps  = require './apps/'
+app  = require './app/'
 
 config = require '../config'
 
@@ -21,12 +21,12 @@ module.exports =
     proxy.start()
 
     for name in fs.readdirSync config.katonDir
-      apps.add "#{config.katonDir}/#{name}"
+      app.add "#{config.katonDir}/#{name}"
 
   watch: ->
-    fs.watch config.katonDir, (event, filename) ->
-      path = "#{config.katonDir}/#{filename}"
+    fs.watch config.katonDir, (event, name) ->
+      path = "#{config.katonDir}/#{name}"
       if fs.existsSync path
-        apps.add path
+        app.add path
       else
-        apps.remove path
+        app.remove path

@@ -54,7 +54,7 @@
     "nodemon": "~1.0.8",
     "optimist": "~0.6.0",
     "pad": "0.0.4",
-    "respawn": "^0.2.0",
+    "respawn-group": "typicode/respawn-group",
     "shelljs": "^0.2.6",
     "update-notifier": "~0.1.7"
   },

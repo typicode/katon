@@ -33,9 +33,10 @@ module.exports =
     fs.writeFileSync path, content, options
 
   remove: (path) ->
-    if fs.existsSync path
+    try
+      fs.unlinkSync path
+      # cheating a little
       console.log chalk.grey "remove #{@tilde path}"
-      fs.unlinkSync path 
 
   load: (path) ->
     @sh "launchctl load -Fw #{path}"

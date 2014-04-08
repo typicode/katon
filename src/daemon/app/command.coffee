@@ -1,7 +1,7 @@
-fs = require 'fs'
+fs     = require 'fs'
 config = require '../../config'
-env = require './env'
-util = require './util'
+env    = require './env'
+log    = require './log'
 
 module.exports =
 
@@ -10,9 +10,8 @@ module.exports =
       command = fs.readFileSync("#{path}/.katon")
         .toString()
         .trim()
-      util.log path, 'Detected .katon'
+      log.global.log path, 'Detected .katon'
       command if command isnt ''
-    catch
 
   getPackageCommand: (path) ->
     try
@@ -22,13 +21,13 @@ module.exports =
       return pkg.scripts?.start
     catch e
       if e instanceof SyntaxError
-        util.error path, "package.json: #{e}"
+        log.global.error path, "package.json: #{e}"
 
   getStaticCommand: ->
     'static --port $PORT'
 
   get: (path, port) ->
-    command = @getKatonCommand path
+    command   = @getKatonCommand path
     command or= @getPackageCommand path
     command or= @getStaticCommand()
 

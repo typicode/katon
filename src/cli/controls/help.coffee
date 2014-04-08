@@ -5,7 +5,7 @@ common = require '../common'
 module.exports =
 
   usage: ->
-    path = "#{__dirname}/../../doc/help.txt"
+    path = "#{__dirname}/../../../doc/help.txt"
     str  = fs
       .readFileSync(path, 'utf8')
       .replace(/katon/g, chalk.red 'katon')

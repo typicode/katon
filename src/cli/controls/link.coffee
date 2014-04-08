@@ -62,7 +62,7 @@ module.exports =
         if fs.existsSync dest
           console.log "#{chalk.cyan pad url, 30}  →  #{common.tilde dest} "
         else
-          err = "#{dest} [doesn't exist]"
+          err = "#{common.tilde dest} [doesn't exist]"
           console.log "#{chalk.red pad url, 30}  →  #{chalk.gray err}"
 
   open: (path) ->
