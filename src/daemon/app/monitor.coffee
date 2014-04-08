@@ -13,3 +13,8 @@ module.exports =
       cwd: path
       maxRestarts: -1
       sleep: 10*1000
+
+    mon.on 'stdout', (data) -> util.append path, data
+    mon.on 'stderr', (data) -> util.append path, data
+
+    mon

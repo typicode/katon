@@ -10,12 +10,13 @@ module.exports =
   port: config.proxyPort
 
   add: (path) ->
-    @port += 1
-    util.log path, "Start #{path} on port #{@port}"
-    app = App.create path, @port
-    @list[path] = app
-    util.log path, "Starting `#{app.monitor.command.join ' '}`"
-    app.monitor.start()
+    if fs.existsSync fs.readlinkSync path
+      @port += 1
+      util.log path, "Start #{path} on port #{@port}"
+      app = App.create path, @port
+      @list[path] = app
+      util.log path, "Starting `#{app.monitor.command.join ' '}`"
+      app.monitor.start()
 
   remove: (path) ->
     util.log path, "Stop #{path}"
