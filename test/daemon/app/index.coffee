@@ -1,24 +1,22 @@
-assert = require 'assert'
-sinon = require 'sinon'
-app = require '../../../src/daemon/app'
-
-path = "#{__dirname}/fixtures/node/package_main"
+assert   = require 'assert'
+sinon    = require 'sinon'
+App      = require '../../../src/daemon/app/'
+monitor  = require '../../../src/daemon/app/monitor'
 
 describe 'app', ->
 
-  describe 'add(path)', ->
-
-    it 'adds', ->
-      monitor = app.add path, 4001
-      assert.equal Object.keys(app.monitors).length, 1
-      assert.equal monitor.status, 'running'
-
-  describe 'remove(path)', ->
+  describe 'create(path, port)', ->
 
     beforeEach ->
-      monitor = app.add path, 4001
+      sinon.spy monitor, 'create'
 
-    it 'removes ', ->
-      monitor = app.remove path
-      assert.equal Object.keys(app.monitors).length, 0
-      assert.equal monitor.status, 'stopping'
+    afterEach ->
+      monitor.create.restore()
+
+    it 'starts app and returns an object', ->
+      app = App.create '/some/app', 4001
+
+      assert app.path, '/some/app'
+      assert app.port, 4001
+      assert app.name, 'app'
+      assert monitor.create.calledWith '/some/app', 4001

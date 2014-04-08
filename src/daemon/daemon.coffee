@@ -1,36 +1,31 @@
-fs = require 'fs'
+fs    = require 'fs.extra'
 chalk = require 'chalk'
-proxy = require './proxy'
-app = require './app'
+proxy = require './proxy/'
+apps  = require './apps/'
 
-katonPath = "#{process.env.HOME}/.katon"
+config = require '../config'
 
 module.exports =
-  log: (str) ->
-    console.log ' '
-    console.log chalk.underline('katon', str)
-    console.log ' '
-
-  add: (path) ->
-    @log "Add #{path}"
-    port = proxy.add path
-    if not (app.add path, port)?
-      console.error "Failed to add app"
-      proxy.remove path
-
-  remove: (path) ->
-    @log "Remove #{path}"
-    proxy.remove path
-    app.remove path
 
   init: ->
-    @log 'Initialize daemon'
-    for name in fs.readdirSync katonPath
-      @add "#{katonPath}/#{name}"
+    console.log """
+
+      #{chalk.underline 'Katon Initialize daemon'}
+
+    """
+
+    # make sure ~/.katon exists
+    fs.mkdirp config.katonDir
+    
+    # start server
+    proxy.start()
+
+    for name in fs.readdirSync config.katonDir
+      apps.add "#{config.katonDir}/#{name}"
 
   watch: ->
-    fs.watch katonPath, (event, filename) ->
-      if fs.existsSync "#{katonPath}/#{filename}"
-        @add filename
+    fs.watch config.katonDir, (event, filename) ->
+      if fs.existsSync "#{config.katonDir}/#{filename}"
+        apps.add filename
       else
-        @remove filename
+        apps.remove filename

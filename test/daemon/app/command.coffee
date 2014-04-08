@@ -1,5 +1,5 @@
 assert = require 'assert'
-config = require '../../../src/daemon/config'
+config = require '../../../src/config'
 command = require '../../../src/daemon/app/command'
 
 assertCommand = (path, expected) ->

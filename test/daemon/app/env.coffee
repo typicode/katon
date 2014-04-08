@@ -1,5 +1,5 @@
 assert = require 'assert'
-config = require '../../../src/daemon/config'
+config = require '../../../src/config'
 env = require '../../../src/daemon/app/env'
 
 assertEnv = (path, expectedPATH) ->
@@ -19,19 +19,19 @@ describe 'app/env', ->
 
     describe 'nvm', ->
 
-      beforeEach -> config.nvmPath = "#{__dirname}/fixtures/nvm/.nvm"
+      beforeEach -> config.nvmDir = "#{__dirname}/fixtures/nvm/.nvm"
 
       assertEnv 'nvm/nvmrc', "#{__dirname}/fixtures/nvm/.nvm/v0.10.26/bin"
       assertEnv 'nvm/default', "#{__dirname}/fixtures/nvm/.nvm/v0.11.11/bin"
 
     describe 'node', ->
 
-      beforeEach -> config.nvmPath = "#{__dirname}/fixtures/node/.nvm"
+      beforeEach -> config.nvmDir = "#{__dirname}/fixtures/node/.nvm"
 
       assertEnv 'node/package_main', "/usr/local/bin"
 
     describe 'static', ->
 
-      beforeEach -> config.nvmPath = "#{__dirname}/fixtures/static/.nvm"
+      beforeEach -> config.nvmDir = "#{__dirname}/fixtures/static/.nvm"
 
       assertEnv 'static', "/usr/local/bin"

@@ -1,29 +1,29 @@
+http      = require 'http'
 httpProxy = require 'http-proxy'
-util = require './util'
+chalk     = require 'chalk'
+util      = require './util'
+apps      = require '../apps/'
+config    = require '../../config'
 
 module.exports =
-  paths: []
+  log: (str) ->
+    console.log chalk.yellow('[proxy]'), str
 
-  reload: (router) ->
-    util.log "Reload with #{JSON.stringify(router, null, 2)}"
-    @server?.close()
+  getDomain: (host) ->
+    host.split('.').slice(-2).pop()
 
-    @server = httpProxy.createServer
-      hostnameOnly: true
-      router: router
+  start: ->
+    proxy = httpProxy.createProxyServer()
 
-    @server.listen 4000
+    server = http.createServer (req, res) =>
+      host = req.headers.host
+      @log "Received request for #{host}"
 
-  add: (path) ->
-    util.log "Add #{path}"
-    @paths.push path
-    router = util.getRouter @paths
-    @reload router
-    util.getPorts(@paths)[path]
+      domain = util.getDomain host
+      port   = apps.findByDomain(domain).port
+      @log "Forwarding to http://127.0.0.1:#{port}"
 
-  remove: (path) ->
-    util.log "Remove #{path}"
-    index = @paths.indexOf path
-    @paths[index] = null
-    router = util.getRouter @paths
-    @reload router
+      proxy.web req, res, target: "http://127.0.0.1:#{port}"
+
+    server.listen config.proxyPort, =>
+      @log "Listening on port #{config.proxyPort}"

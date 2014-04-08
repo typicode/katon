@@ -1,5 +1,5 @@
 respawn = require 'respawn'
-config = require '../config'
+config = require '../../config'
 command = require './command'
 env = require './env'
 util = require './util'

@@ -1,5 +1,5 @@
 fs = require 'fs'
-config = require '../config'
+config = require '../../config'
 env = require './env'
 util = require './util'
 

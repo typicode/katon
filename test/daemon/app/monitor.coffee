@@ -1,6 +1,6 @@
-assert = require 'assert'
+assert  = require 'assert'
+env     = require '../../../src/daemon/app/env'
 command = require '../../../src/daemon/app/command'
-env = require '../../../src/daemon/app/env'
 monitor = require '../../../src/daemon/app/monitor'
 
 assertMonitor = (path) ->

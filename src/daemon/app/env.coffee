@@ -3,7 +3,7 @@ p = require 'path'
 minimatch = require 'minimatch'
 clone = require 'clone'
 util = require './util'
-config = require '../config'
+config = require '../../config'
 
 module.exports =
 
@@ -15,13 +15,13 @@ module.exports =
   find: (path, version) ->
     try
       util.log path, "Looking for #{version}"
-      for dir in fs.readdirSync(config.nvmPath).reverse()
+      for dir in fs.readdirSync(config.nvmDir).reverse()
         if minimatch dir, "v#{version}*"
-          PATH = "#{config.nvmPath}/#{dir}/bin"
+          PATH = "#{config.nvmDir}/#{dir}/bin"
           util.log path, "Using #{PATH}"
           return PATH
     catch
-      util.error path, "Can't find #{version} in #{config.nvmPath}"
+      util.error path, "Can't find #{version} in #{config.nvmDir}"
 
   nvmrc: (path) ->
     try
@@ -32,7 +32,7 @@ module.exports =
 
   nvmDefault: (path) ->
     try
-      version = @read "#{config.nvmPath}/alias/default"
+      version = @read "#{config.nvmDir}/alias/default"
       util.log path, "Detected ~/.nvm/alias/default"
       @find path, version
     catch

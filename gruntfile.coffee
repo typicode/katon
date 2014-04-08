@@ -14,7 +14,7 @@ module.exports = (grunt) ->
     watch:
       coffee:
         files: '{src,test}/**/*.coffee'
-        tasks: ['coffeelint', 'mochaTest', 'clean', 'coffee']
+        tasks: ['mochaTest', 'coffee']
         options:
           atBegin: true
 
@@ -25,6 +25,8 @@ module.exports = (grunt) ->
       test:
         options:
           reporter: 'spec'
+          require: 'coffee-script/register'
+          bail: true
         src: ['test/**/*.coffee']
 
   grunt.loadNpmTasks 'grunt-contrib-clean'

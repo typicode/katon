@@ -1,123 +1,73 @@
-assert = require 'assert'
 sinon = require 'sinon'
-emitter = require '../../src/cli/util/emitter'
-cli = require '../../src/cli'
+cli   = require '../../src/cli'
 
-emitter.emit = sinon.spy()
+# modules that will be spied on
+m =
+  daemon  : require '../../src/cli/controls/daemon'
+  link    : require '../../src/cli/controls/link'
+  exec    : require '../../src/cli/controls/exec'
+  help    : require '../../src/cli/help'
 
-# Helpers
-runCmd = (commands = '') ->
-  # Spy on all cli.commands
-  for method of cli.commands
-    cli.commands[method] = sinon.spy()
-  # Run commands
-  cli.run "node katon #{commands}".trim().split ' '
-
-assertCalled = (command) ->
-  assert cli.commands[command].called, "#{command} wasn't called"
-
-assertCalledWith = (command, args...) ->
-  assert cli.commands[command].calledWith(args...),
-    "#{command} called with #{cli.commands[command].args} instead of #{args}"
-
-# Tests
 describe 'cli', ->
 
-  describe 'link', ->
+  beforeEach ->
+    for mod of m
+      for func of m[mod]
+        if typeof m[mod][func] is 'function'
+          sinon.stub m[mod], func
 
-    before -> runCmd 'link'
+  afterEach ->
+    for mod of m
+      for func of m[mod]
+        if typeof m[mod][func] is 'function'
+          m[mod][func].restore()
 
-    it 'should call commands.link', ->
-      assertCalledWith 'link', process.cwd()
+  it '<no args>', ->
+    cli.run []
+    sinon.assert.called m.help.usage
 
-  describe 'link foo', ->
+  it '<unknown>', ->
+    cli.run ['unknown']
+    sinon.assert.called m.help.usage
 
-    before -> runCmd 'link foo'
+  it 'link', ->
+    cli.run ['link']
+    sinon.assert.calledWith m.link.create, process.cwd()
+    sinon.assert.notCalled m.exec.create
 
-    it 'should call commands.link', ->
-      assertCalledWith 'link', process.cwd(), 'foo'
+  it 'link <exec>', ->
+    cli.run ['link', 'python']
+    sinon.assert.calledWith m.link.create, process.cwd()
+    sinon.assert.calledWith m.exec.create, process.cwd(), 'python'
 
-  describe 'link foo bar', ->
+  it 'unlink', ->
+    cli.run ['unlink']
+    sinon.assert.calledWith m.link.remove, process.cwd()
+    sinon.assert.calledWith m.exec.remove, process.cwd()
 
-    before -> runCmd 'link foo bar'
+  it 'unlink <path>', ->
+    cli.run ['unlink', '/some/path']
+    sinon.assert.calledWith m.link.remove, '/some/path'
+    sinon.assert.calledWith m.exec.remove, '/some/path'
 
-    it 'should call commands.link', ->
-      assertCalledWith 'link', process.cwd(), 'foo bar'
+  it 'list', ->
+    cli.run ['list']
+    sinon.assert.called m.link.list
 
-  describe 'unlink', ->
+  it 'open', ->
+    cli.run ['open']
+    sinon.assert.called m.link.open, process.cwd()
 
-    before -> runCmd 'unlink'
+  it 'start', ->
+    cli.run ['start']
+    sinon.assert.called m.daemon.create
+    sinon.assert.called m.daemon.load
 
-    it 'should call commands.unlink', ->
-      assertCalledWith 'unlink', process.cwd()
+  it 'stop', ->
+    cli.run ['stop']
+    sinon.assert.called m.daemon.unload
+    sinon.assert.called m.daemon.remove
 
-  describe 'unlink <app>', ->
-
-    before -> runCmd 'unlink foo'
-
-    it 'should call commands.unlink with <app> name', ->
-      assertCalledWith 'unlink', 'foo'
-
-  describe 'list', ->
-
-    before -> runCmd 'list'
-
-    it 'should call commands.list', ->
-      assertCalled 'list'
-
-  describe 'start', ->
-
-    before -> runCmd 'start'
-
-    it 'should call commands.start', ->
-      assertCalled 'start'
-
-  describe 'stop', ->
-
-    before -> runCmd 'stop'
-
-    it 'should call commands.stop', ->
-      assertCalled 'stop'
-
-  describe 'restart', ->
-
-    before -> runCmd 'restart'
-
-    it 'should call commands.stop then commands.start', ->
-      assertCalled 'stop'
-      assertCalled 'start'
-
-  describe 'install-pow', ->
-
-    before -> runCmd 'install-pow'
-
-    it 'should call commands.installPow', ->
-      assertCalled 'installPow'
-
-  describe 'uninstall-pow', ->
-
-    before -> runCmd 'uninstall-pow'
-
-    it 'should call commands.uninstallPow', ->
-      assertCalled 'uninstallPow'
-
-  describe 'help', ->
-
-    before -> runCmd 'help'
-
-    it 'should call commands.help', ->
-      assertCalled 'help'
-
-  describe '--version', ->
-
-    before -> runCmd '--version'
-
-    it 'should call commands.version', ->
-      assertCalled 'version'
-
-  describe 'no args', ->
-
-    before -> runCmd()
-
-    it 'should call commands.help', ->
-      assertCalled 'help'
+  it 'status', ->
+    cli.run ['status']
+    sinon.assert.called m.help.status

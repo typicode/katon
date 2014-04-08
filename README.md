@@ -30,7 +30,7 @@ Close your terminal and go to `http://app.dev`.
 
 Open a text editor and try to make some changes to the code (Katon uses [nodemon](https://github.com/remy/nodemon) to monitor changes).
 
-Reboot and go to `http://app.dev`.
+Reboot and go to `http://app.dev/`.
 
 # Install
 
@@ -56,19 +56,15 @@ Usage: katon <command> [options]
 
 Commands:
 
-  link             Link current directory
-  link <cmd>       Use custom cmd to start server
-  unlink           Unlink current directory
-  unlink <app>     Unlink app
-  list             List linked apps
-  start            Start Katon daemon
-  stop             Stop Katon daemon
-  restart          Restart Katon daemon
-  status           Katon status information
-
-Options:
-
-  -V --verbose     Makes output more verbose
+  link               Link current dir
+  link <cmd>         Link current dir and use cmd to start server
+  unlink             Unlink current dir
+  unlink <app_name>  Unlink app
+  list               List linked apps
+  open               Open current app in browser
+  start              Start Katon daemon
+  stop               Stop Katon daemon
+  status             Katon status information
 ```
 
 If you use `npm start` to start your app or if `package.json` has a `main` file property, just run this from you app directory.
@@ -144,8 +140,6 @@ katon link 'harp --port $PORT'
 If you've installed [nvm](https://github.com/creationix/nvm), Katon will use your app `.nvmrc` or `~/.nvm/alias/default` to determine which version to use.
 
 # Troubleshoot
-
-When opening your app in the browser, you may get errors:
 
 `No server found`
 

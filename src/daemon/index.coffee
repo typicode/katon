@@ -1,4 +1,4 @@
-chalk = require 'chalk'
+chalk  = require 'chalk'
 daemon = require './daemon'
 
 # Enable colors in logs
