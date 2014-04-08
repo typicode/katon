@@ -7,7 +7,7 @@ util = require './util'
 module.exports =
 
   create: (path, port) ->
-    respawn
+    mon = respawn
       env: env.get path, port
       command: command.get path, port
       cwd: path
