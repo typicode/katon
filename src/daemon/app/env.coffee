@@ -14,26 +14,26 @@ module.exports =
 
   find: (path, version) ->
     try
-      log.log path, "Looking for #{version}"
+      log.app.log path, "Looking for #{version}"
       for dir in fs.readdirSync(config.nvmDir).reverse()
         if minimatch dir, "v#{version}*"
           PATH = "#{config.nvmDir}/#{dir}/bin"
-          log.global.log path, "Using #{PATH}"
+          log.app.log path, "Using #{PATH}"
           return PATH
     catch
-      log.error path, "Can't find #{version} in #{config.nvmDir}"
+      log.app.error path, "Can't find #{version} in #{config.nvmDir}"
 
   nvmrc: (path) ->
     try
       version = @read "#{path}/.nvmrc"
-      log.global.log path, "Detected .nvmrc"
+      log.app.log path, "Detected .nvmrc"
       @find path, version
     catch
 
   nvmDefault: (path) ->
     try
       version = @read "#{config.nvmDir}/alias/default"
-      common.log path, "Detected ~/.nvm/alias/default"
+      log.app.log path, "Detected ~/.nvm/alias/default"
       @find path, version
     catch
 
@@ -42,7 +42,7 @@ module.exports =
     "/usr/local/bin:#{nodePath}"
 
   getPATH: (path) ->
-    PATH = @nvmrc path
+    PATH   = @nvmrc path
     PATH or= @nvmDefault path
     PATH or= @node()
     PATH
