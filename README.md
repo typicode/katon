@@ -147,20 +147,20 @@ If you've installed [nvm](https://github.com/creationix/nvm), Katon will use you
 
 # Troubleshoot
 
-`No server found` or `Proxy error`
+__No server found__ or __Proxy error__
 
 Check that Pow and Katon daemon are running using `katon status`.
 
-`Not found`
+__Not found__
 
 If you get a 404, it's because your app directory is served using Katon embedded static server and it can't find an `index.html`.
 
-`execvp()`
+__execvp()__
 
-Katon can't find bin in `/usr/local/bin` or in node dir (`which node`). To fix this, link your bin in `/usr/local/bin`.
+This usually means that is not in Katon PATH. To fix this, link your bin in `/usr/local/bin`.
 Future versions of Katon should make this easier.
 
-You may also want to check `katon.log` for more informations.
+Feel free also to create an issue.
 
 # Contribute
 
