@@ -157,7 +157,7 @@ If you get a 404, it's because your app directory is served using Katon embedded
 
 __execvp()__
 
-This usually means that is not in Katon PATH. To fix this, link your bin in `/usr/local/bin`.
+This usually means that bin is not in Katon PATH. To fix this, link your bin in `/usr/local/bin`.
 Future versions of Katon should make this easier.
 
 Feel free also to create an issue.
