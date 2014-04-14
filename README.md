@@ -115,7 +115,7 @@ tail -f katon.log
 
 Katon will try to start app using (in this order):
 
-1. `.katon` file content, which is created when you pass a custom cmd to link
+1. `.katon` file content, which is created when you pass a custom cmd to `katon link`
 2. `package.json` > `main`
 3. `package.json` > `scripts` > `start`
 
