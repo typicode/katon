@@ -28,14 +28,12 @@ module.exports =
       version = @read "#{path}/.nvmrc"
       log.app.log path, "Detected .nvmrc"
       @find path, version
-    catch
 
   nvmDefault: (path) ->
     try
       version = @read "#{config.nvmDir}/alias/default"
       log.app.log path, "Detected ~/.nvm/alias/default"
       @find path, version
-    catch
 
   node: ->
     nodePath = p.dirname(process.execPath)
