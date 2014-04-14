@@ -20,10 +20,10 @@ loggers =
 
   daemon:
     log: (path, msg) ->
-      console.log "#{chalk.cyan '[app]'}   #{p.basename path} #{msg}"
+      console.log "#{chalk.cyan '[app]'}   [#{p.basename path}] #{msg}"
 
     error: (path, msg) ->
-      console.log "#{chalk.red '[app]'}   #{p.basename path} #{msg}"
+      console.log "#{chalk.red '[app]'}   [#{p.basename path}] #{msg}"
 
   global:
     log: (path, msg) =>

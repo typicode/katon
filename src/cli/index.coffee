@@ -30,12 +30,12 @@ module.exports =
     link.open path
 
   start: ->
-    console.log "Starting #{chalk.cyan 'katon'} daemon"
+    console.log chalk.green 'Starting katon daemon'
     daemon.create()
     daemon.load()
 
   stop: ->
-    console.log "Stopping #{chalk.cyan 'katon'} daemon"
+    console.log chalk.red 'Stopping katon daemon'
     daemon.unload()
     daemon.remove()
 

@@ -2,6 +2,7 @@ http      = require 'http'
 httpProxy = require 'http-proxy'
 chalk     = require 'chalk'
 app       = require '../app/'
+render    = require '../../render'
 config    = require '../../config'
 
 log = (str) ->
@@ -19,21 +20,7 @@ module.exports =
       if err.code is 'ECONNREFUSED'
         host = req.headers.host
         mon  = app.findByName getDomain host
-        res.end """
-          Can't connect to app.
-          
-          Check katon.log:
-          $ tail -n 200 -f #{mon.cwd}/katon.log
-
-          Check link:
-          $ katon list
-
-          Check that app is listening on the right port:
-          http://localhost:#{mon.env.PORT}/
-
-          For more information, see:
-          https://github.com/typicode/katon
-        """
+        res.end render 'econnrefused.html.eco', mon: mon
       else
         res.end "Unknown error: #{err.code}"
 
@@ -48,15 +35,7 @@ module.exports =
         log "Forwarding to http://127.0.0.1:#{port}"
         proxy.web req, res, target: "http://127.0.0.1:#{port}"
       else
-        res.end """
-          Can't find app #{name}.
-
-          Try linking it again using katon CLI.
-
-          From your app directory:
-          $ katon unlink
-          $ katon link
-        """
+        res.end render 'app_not_found.html.eco'
 
     server.listen config.proxyPort, ->
       log "Listening on port #{config.proxyPort}"

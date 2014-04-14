@@ -10,10 +10,6 @@ module.exports =
   tilde: (path) ->
     path.replace process.env.HOME, '~'
 
-  render: (file) ->
-    tpl = fs.readFileSync "#{__dirname}/../../templates/#{file}", 'utf-8'
-    eco.render tpl, config
-
   sh: (cmd) ->
     console.log chalk.grey @tilde cmd
     output = shell.exec(cmd, silent: true).output.trim()

@@ -1,12 +1,13 @@
 common = require '../common'
 config = require '../../config'
+render = require '../../render'
 
 module.exports =
 
   path: config.daemonPlist
 
   create: ->
-    content = common.render 'katon.plist.eco'
+    content = render 'katon.plist.eco', config
     common.create @path, content, mode: 33188
 
   remove: ->

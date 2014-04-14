@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Katon: app not found</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      width: 960px;
+      margin: 0 auto;
+    }
+    a {
+      color: rgb(210, 17, 97);
+      text-decoration: none;
+    }
+    pre {
+      background: #EEE;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Error: can't find app</h1>
+  
+  <p>
+    Try to relink. From your app directory:
+  </p>
+
+  <pre><code>$ katon unlink && katon link</code></pre>
+
+  <p>
+    For more information, see:<br>
+    <a href="https://github.com/typicode/katon">
+      https://github.com/typicode/katon
+    </a>
+  </p>
+</body>
+</html>

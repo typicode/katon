@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Katon: ECONNREFUSED</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      width: 960px;
+      margin: 0 auto;
+    }
+    a {
+      color: rgb(210, 17, 97);
+      text-decoration: none;
+    }
+    pre {
+      background: #EEE;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Error: can't connect to app</h1>
+
+  <p>
+    Check app logs:
+    <pre><code>$ tail -n 200 -f <%= @mon.cwd %>/katon.log</code></pre>
+  </p>
+
+  <p>
+    Check that app is correctly linked:
+    <pre><code>$ katon list</code></pre>
+  </p>
+
+  <p>
+    Check that app is listening on the right port:<br>
+    <a href="http://localhost:<%= @mon.env.PORT %>/">
+      http://localhost:<%= @mon.env.PORT %>/
+    </a>
+  </p>
+
+  <p>
+    For more information, see:<br>
+    <a href="https://github.com/typicode/katon">
+      https://github.com/typicode/katon
+    </a>
+  </p>
+</body>
+</html>
+
