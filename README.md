@@ -59,7 +59,7 @@ Commands:
 
   link               Link current dir
   link <cmd>         Link current dir and use cmd to start server
-  
+
   unlink             Unlink current dir
   unlink <app_name>  Unlink app
 
@@ -67,7 +67,7 @@ Commands:
   open <app_name>    Open app in browser
 
   list               List linked apps
-  
+
   start              Start daemon
   stop               Stop daemon
   status             Status information
@@ -127,7 +127,7 @@ If `start` script uses `node`, Katon will replace it with `nodemon` at runtime. 
 
 # How ports are set
 
-Internally, Katon manages ports (starting at 4001) for linked apps. 
+Internally, Katon manages ports (starting at 4001) for linked apps.
 
 Whenever it starts an app, it sets the corresponding port in a PORT environment variable. In your code, you'll usually write something like this to get PORT or use a default port:
 
@@ -138,7 +138,7 @@ var port = 3000 || process.env.PORT;
 But, if needed, you can also use `$PORT` in commands. It will be replaced at runtime by Katon.
 
 ```
-katon link 'harp --port $PORT'
+katon link 'harp server --port $PORT'
 ```
 
 # Multiple versions of Node
