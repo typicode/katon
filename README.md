@@ -88,7 +88,7 @@ katon link 'grunt server watch'
 If you need to supply a port to listen on, use `$PORT`.
 
 ```
-katon link 'harp --port $PORT'
+katon link 'harp server --port $PORT'
 ```
 
 It works also with non node servers.
