@@ -28,7 +28,8 @@
   },
   "scripts": {
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
-    "prepublish": "grunt build"
+    "prepublish": "grunt build",
+    "preuninstall": "katon stop"
   },
   "devDependencies": {
     "coffee-script": "*",
@@ -47,7 +48,6 @@
     "clone": "^0.1.11",
     "eco": "*",
     "fs.extra": "^1.2.1",
-    "http-proxy": "^1.0.2",
     "minimatch": "^0.2.14",
     "node-static": "~0.7.3",
     "nodemon": "~1.0.8",
@@ -55,7 +55,8 @@
     "pad": "0.0.4",
     "respawn-group": "^0.5.0",
     "shelljs": "^0.2.6",
-    "update-notifier": "~0.1.7"
+    "update-notifier": "~0.1.7",
+    "http-proxy-router": "typicode/http-proxy-router"
   },
   "license": "MIT"
 }
