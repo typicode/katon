@@ -13,8 +13,8 @@ module.exports =
     console.log str
 
   version: ->
-    pkg = require '../../package.json'
-    console.info pkg.version
+    pkg = require '../../../package.json'
+    console.log pkg.version
 
   status: ->
     output = common.sh 'launchctl list | grep \'katon\\|pow\''
