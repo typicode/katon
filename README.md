@@ -168,14 +168,6 @@ Katon is a recent project, you may find bugs, have issues, suggestions or questi
 
 If you want to add a new feature, it's recommended to create an issue to discuss it before starting to code it.
 
-# Uninstall
-
-Just run this script and everything will be cleaned.
-
-```
-katon stop && rm -rf ~/.katon && npm rm -g katon
-```
-
 # Credits
 
 * [Pow](http://pow.cx/) for inspiration and proxying requests.
