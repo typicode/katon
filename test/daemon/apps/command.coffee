@@ -1,6 +1,6 @@
-assert = require 'assert'
-config = require '../../../src/config'
-command = require '../../../src/daemon/app/command'
+assert  = require 'assert'
+config  = require '../../../src/config'
+command = require '../../../src/daemon/apps/command'
 
 assertCommand = (path, expected) ->
   it "#{path} returns #{expected}", ->

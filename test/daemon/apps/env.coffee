@@ -1,6 +1,6 @@
 assert = require 'assert'
 config = require '../../../src/config'
-env = require '../../../src/daemon/app/env'
+env    = require '../../../src/daemon/apps/env'
 
 assertEnv = (path, expectedPATH) ->
   it "#{path} returns process env", ->

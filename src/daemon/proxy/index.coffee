@@ -1,37 +1,38 @@
-chalk           = require 'chalk'
-httpProxyRouter = require 'http-proxy-router'
-app             = require '../app/'
-render          = require '../../render'
-config          = require '../../config'
+http      = require 'http'
+url       = require 'url'
+httpProxy = require 'http-proxy'
+chalk     = require 'chalk'
+apps      = require '../apps/'
+render    = require '../../render'
+config    = require '../../config'
 
 log = (str) ->
   console.log chalk.yellow('[proxy]'), str
 
-getDomain = (host) ->
-  host.split('.').slice(-2, -1).pop()
+getName = (req) ->
+  req.headers.host.split('.').slice(-2, -1).pop()
 
 module.exports =
 
   start: ->
-    router = httpProxyRouter.createServer()
+    http  = http.createServer()
+    proxy = httpProxy.createProxyServer()
 
-    router.resolve = (host) ->
-      log "Received request for #{host}"
-      mon = app.findByName getDomain host
-      port = mon?.env?.PORT
+    http.on 'request', (req, res) ->
+      name = getName req
+      app  = apps.findByName name
+      if app
+        proxy.web req, res, target: "http://localhost:#{app.env.PORT}"
+      else
+        res.end render 'app_not_found.html.eco'
 
-    router.on 'forward', (host, target) ->
-      log "Forwarding to #{target}"
-
-    router.proxy.on 'error', (err, req, res) ->
+    proxy.on 'error', (err, req, res) ->
       if err.code is 'ECONNREFUSED'
-        mon  = app.findByName getDomain host
-        res.end render 'econnrefused.html.eco', mon: mon
+        name = getName req
+        app  = apps.findByName name
+        res.end render 'econnrefused.html.eco', app: app
       else
         res.end "Unknown error: #{err.code}"
 
-    router.on 'unknown', (host, res) ->
-      res.end render 'app_not_found.html.eco'
-
-    router.listen config.proxyPort, ->
+    http.listen config.proxyPort, ->
       log "Listening on port #{config.proxyPort}"

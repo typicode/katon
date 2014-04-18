@@ -23,7 +23,7 @@
 
   <p>
     Check app logs:
-    <pre><code>$ tail -n 200 -f <%= @mon.cwd %>/katon.log</code></pre>
+    <pre><code>$ tail -n 200 -f <%= @app.cwd %>/katon.log</code></pre>
   </p>
 
   <p>
@@ -33,8 +33,8 @@
 
   <p>
     Check that app is listening on the right port:<br>
-    <a href="http://localhost:<%= @mon.env.PORT %>/">
-      http://localhost:<%= @mon.env.PORT %>/
+    <a href="http://localhost:<%= @app.env.PORT %>/">
+      http://localhost:<%= @app.env.PORT %>/
     </a>
   </p>
 
