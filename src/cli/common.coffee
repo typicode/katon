@@ -30,7 +30,7 @@ module.exports =
     try
       fs.unlinkSync path
       # cheating a little
-      console.log chalk.grey "remove #{@tilde path}"
+      console.log chalk.grey "remove #{tildify path}"
 
   load: (path) ->
     @sh "launchctl load -Fw #{path}"
