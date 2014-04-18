@@ -20,10 +20,8 @@ module.exports =
       mon = app.findByName getDomain host
       port = mon?.env?.PORT
 
-      if port
-        log "Forwarding to http://127.0.0.1:#{port}"
-
-      port
+    router.on 'forward', (host, target) ->
+      log "Forwarding to #{target}"
 
     router.proxy.on 'error', (err, req, res) ->
       if err.code is 'ECONNREFUSED'
