@@ -1,17 +1,15 @@
-p      = require 'path'
-fs     = require 'fs.extra'
-shell  = require 'shelljs'
-chalk  = require 'chalk'
-eco    = require 'eco'
-config = require '../config'
+p       = require 'path'
+fs      = require 'fs.extra'
+shell   = require 'shelljs'
+chalk   = require 'chalk'
+tildify = require 'tildify'
+eco     = require 'eco'
+config  = require '../config'
 
 module.exports =
 
-  tilde: (path) ->
-    path.replace process.env.HOME, '~'
-
   sh: (cmd) ->
-    console.log chalk.grey @tilde cmd
+    console.log chalk.grey tildify cmd
     output = shell.exec(cmd, silent: true).output.trim()
 
     unless output is ''
@@ -20,7 +18,7 @@ module.exports =
     output
 
   create: (path, content, options) ->
-    console.log chalk.grey "create #{@tilde path}"
+    console.log chalk.grey "create #{tildify path}"
 
     # create path if it doesn't exist
     fs.mkdirp p.dirname path

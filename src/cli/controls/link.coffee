@@ -1,9 +1,10 @@
-p      = require 'path'
-fs     = require 'fs.extra'
-pad    = require 'pad'
-chalk  = require 'chalk'
-common = require '../common'
-config = require '../../config'
+p       = require 'path'
+fs      = require 'fs.extra'
+pad     = require 'pad'
+chalk   = require 'chalk'
+tildify = require 'tildify'
+common  = require '../common'
+config  = require '../../config'
 
 getName = (path) ->
   # replace _ with - for valid domain name
@@ -33,7 +34,7 @@ module.exports =
     else
       common.create powProxy, config.proxyPort
 
-      console.log chalk.grey "create #{common.tilde link}"
+      console.log chalk.grey "create #{tildify link}"
       fs.mkdirpSync config.katonDir
       fs.symlinkSync path, link
       
@@ -53,16 +54,16 @@ module.exports =
     links = fs.readdirSync config.katonDir
 
     if links.length is 0
-      console.log chalk.grey "No apps linked in #{common.tilde config.katonDir}"
+      console.log chalk.grey "No apps linked in #{tildify config.katonDir}"
     else
       for link in links
         url  = "http://#{link}.dev"
         dest = fs.readlinkSync "#{config.katonDir}/#{link}"
 
         if fs.existsSync dest
-          console.log "#{chalk.cyan pad url, 30}  →  #{common.tilde dest} "
+          console.log "#{chalk.cyan pad url, 30}  →  #{tildify dest} "
         else
-          err = "#{common.tilde dest} [doesn't exist]"
+          err = "#{tildify dest} [doesn't exist]"
           console.log "#{chalk.red pad url, 30}  →  #{chalk.gray err}"
 
   open: (path) ->
