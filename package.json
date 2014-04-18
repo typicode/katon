@@ -29,7 +29,7 @@
   "scripts": {
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
     "prepublish": "grunt build",
-    "preuninstall": "katon stop"
+    "preuninstall": "sh ./scripts/uninstall.sh"
   },
   "devDependencies": {
     "coffee-script": "*",
