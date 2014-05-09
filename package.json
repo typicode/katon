@@ -29,7 +29,8 @@
   "scripts": {
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
     "prepublish": "grunt build",
-    "preuninstall": "sh ./scripts/uninstall.sh"
+    "postinstall": "sh ./scripts/postinstall.sh",
+    "preuninstall": "sh ./scripts/preuninstall.sh"
   },
   "devDependencies": {
     "coffee-script": "*",
