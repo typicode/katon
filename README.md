@@ -45,10 +45,9 @@ You can then proceed installing Katon.
 
 ```
 npm install -g katon
-katon start
 ```
 
-This will install Katon CLI and start Katon daemon. You just have to do this once.
+This will install Katon CLI and start Katon daemon.
 
 # CLI usage
 
