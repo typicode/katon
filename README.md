@@ -131,7 +131,7 @@ Internally, Katon manages ports (starting at 4001) for linked apps.
 Whenever it starts an app, it sets the corresponding port in a PORT environment variable. In your code, you'll usually write something like this to get PORT or use a default port:
 
 ```javascript
-var port = 3000 || process.env.PORT;
+var port = process.env.PORT || 3000;
 ```
 
 But, if needed, you can also use `$PORT` in commands. It will be replaced at runtime by Katon.
