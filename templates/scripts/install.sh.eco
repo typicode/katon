@@ -1,0 +1,4 @@
+# must use sudo to write some files
+sudo @nodePath @binPath __install
+# start katon as regular user
+katon start

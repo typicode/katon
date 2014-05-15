@@ -1,8 +1,10 @@
-chalk  = require 'chalk'
-daemon = require './controls/daemon'
-link   = require './controls/link'
-exec   = require './controls/exec'
-help   = require './controls/help'
+chalk    = require 'chalk'
+daemon   = require './controls/daemon'
+resolver = require './controls/resolver'
+firewall = require './controls/firewall'
+link     = require './controls/link'
+exec     = require './controls/exec'
+help     = require './controls/help'
 
 module.exports =
 
@@ -41,6 +43,23 @@ module.exports =
 
   status: ->
     help.status()
+
+  install: ->
+    sh common.render 'scripts/install.sh', config
+
+  uninstall: ->
+    sh common.render 'scripts/uninstall.sh', config
+
+  __install: ->
+    resolver.create()
+    firewall.create()
+    firewall.load()
+
+  __uninstall: ->
+    resolver.remove()
+    firewall.unload()
+    firewall.remove()
+    firewall.deleteRule()
 
   run: ([action, option]) ->
     if @[action]

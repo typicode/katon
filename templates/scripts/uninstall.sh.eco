@@ -1,0 +1,2 @@
+# must use sudo to remove files
+sudo @nodePath @binPath __uninstall
