@@ -9,7 +9,7 @@ module.exports =
   dnsPort       : 3333
   proxyPort     : 4000
 
-  resolverPath  : '/etc/resolver'
+  resolverPath  : '/etc/resolver/ka'
 
   ruleNumber    : 999
   firewallPlist : "/Library/LaunchAgents/katon.firewall.plist"
