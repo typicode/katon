@@ -19,4 +19,4 @@ module.exports =
     common.unload @path
 
   deleteRule: ->
-    common.sh "ipfw del #{config.ruleNumber}"
+    common.execSync "ipfw del #{config.ruleNumber}"

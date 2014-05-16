@@ -48,10 +48,10 @@ module.exports =
     help.status()
 
   install: ->
-    common.sh render 'shell/install.sh.eco', config
+    common.exec render 'shell/install.sh.eco', config
 
   uninstall: ->
-    common.sh render 'shell/uninstall.sh.eco', config
+    common.exec render 'shell/uninstall.sh.eco', config
 
   # Called only by (un)install.sh scripts using sudo
   __install: ->

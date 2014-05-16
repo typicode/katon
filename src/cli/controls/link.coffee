@@ -67,5 +67,5 @@ module.exports =
           console.log "#{chalk.red pad url, 30}  →  #{chalk.gray err}"
 
   open: (path) ->
-    common.sh "open #{getUrl path}"
+    common.execSync "open #{getUrl path}"
 

@@ -17,7 +17,7 @@ module.exports =
     console.log pkg.version
 
   status: ->
-    output = common.sh 'launchctl list | grep \'katon\\|pow\''
+    output = common.execSync 'launchctl list | grep \'katon\\|pow\''
 
     katonLoaded = output.indexOf('katon') isnt -1
     powLoaded   = output.indexOf('pow') isnt -1
