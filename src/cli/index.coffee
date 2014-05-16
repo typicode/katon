@@ -48,7 +48,7 @@ module.exports =
     help.status()
 
   install: ->
-    common.sh render('shell/install.sh.eco', config)
+    common.sh render 'shell/install.sh.eco', config
 
   uninstall: ->
     common.sh render 'shell/uninstall.sh.eco', config
