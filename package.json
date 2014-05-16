@@ -26,11 +26,12 @@
   "bin": {
     "katon": "./bin/index.js"
   },
+  "preferGlobal": true,
   "scripts": {
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
     "prepublish": "grunt build",
-    "postinstall": "sh ./scripts/postinstall.sh",
-    "preuninstall": "sh ./scripts/preuninstall.sh"
+    "postinstall": "katon install",
+    "preuninstall": "katon uninstall"
   },
   "devDependencies": {
     "coffee-script": "*",

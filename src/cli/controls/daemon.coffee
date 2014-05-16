@@ -7,7 +7,7 @@ module.exports =
   path: config.daemonPlist
 
   create: ->
-    content = render 'katon.plist.eco', config
+    content = render 'plist/katon.plist.eco', config
     common.create @path, content, mode: 33188
 
   remove: ->

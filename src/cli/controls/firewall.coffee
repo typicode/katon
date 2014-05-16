@@ -6,7 +6,7 @@ module.exports =
   path: config.firewallPlist
 
   create: ->
-    content = common.render 'katon.firewall.plist.eco'
+    content = common.render 'plist/katon.firewall.plist.eco'
     common.create @path, content
 
   remove: ->

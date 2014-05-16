@@ -45,11 +45,12 @@ module.exports =
     help.status()
 
   install: ->
-    sh common.render 'scripts/install.sh', config
+    common.sh common.render 'shell/install.sh', config
 
   uninstall: ->
-    sh common.render 'scripts/uninstall.sh', config
+    common.sh common.render 'shell/uninstall.sh', config
 
+  # Called only by (un)install.sh scripts using sudo
   __install: ->
     resolver.create()
     firewall.create()
