@@ -1,4 +1,4 @@
-childExtra = require 'child_process'
+childProcess = require 'child_process'
 p          = require 'path'
 fs         = require 'fs.extra'
 shell      = require 'shelljs'
@@ -9,6 +9,13 @@ config     = require '../config'
 
 module.exports =
 
+  exec: (cmd) ->
+    childProcess.exec cmd, (err, stdout, stderr) ->
+      console.log stdout
+      console.error stderr
+      if err
+        console.error err
+
   execSync: (cmd) ->
     console.log chalk.grey tildify cmd
     output = shell.exec(cmd, silent: true).output.trim()
@@ -17,13 +24,6 @@ module.exports =
       console.log chalk.grey output
     
     output
-
-  exec: (cmd) ->
-    childExtra.exec cmd, (err, stdout, stderr) ->
-      console.info stdout
-      console.error stderr
-      if err
-        console.error err
 
   create: (path, content, options) ->
     console.log chalk.grey "create #{tildify path}"
@@ -41,8 +41,8 @@ module.exports =
       console.log chalk.grey "remove #{tildify path}"
 
   load: (path) ->
-    @sh "launchctl load -Fw #{path}"
+    @execSync "launchctl load -Fw #{path}"
 
   unload: (path) ->
-    @sh "launchctl unload #{path}"
+    @execSync "launchctl unload #{path}"
 

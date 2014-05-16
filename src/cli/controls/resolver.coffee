@@ -1,4 +1,5 @@
 common = require '../common'
+render = require '../../render'
 config = require '../../config'
 
 module.exports =
@@ -6,7 +7,7 @@ module.exports =
   path: config.resolverPath
 
   create: ->
-    content = common.render 'resolver.eco'
+    content = render 'resolver.eco'
     common.create @path, content
 
   remove: ->

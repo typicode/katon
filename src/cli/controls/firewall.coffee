@@ -1,4 +1,5 @@
 common = require '../common'
+render = require '../../render'
 config = require '../../config'
 
 module.exports =
@@ -6,7 +7,7 @@ module.exports =
   path: config.firewallPlist
 
   create: ->
-    content = common.render 'plist/katon.firewall.plist.eco'
+    content = render 'plist/katon.firewall.plist.eco'
     common.create @path, content
 
   remove: ->

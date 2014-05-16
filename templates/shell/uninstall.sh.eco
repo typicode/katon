@@ -1,3 +1,5 @@
+echo 'Uninstalling Katon'
+
 # must use sudo to remove files
 sudo <%= @nodePath %> <%= @binPath %> __uninstall
 
@@ -6,3 +8,5 @@ katon stop
 
 # remove .katon directory
 rm -rf ~/.katon
+
+echo 'Done!'

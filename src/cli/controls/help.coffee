@@ -17,16 +17,11 @@ module.exports =
     console.log pkg.version
 
   status: ->
-    output = common.execSync 'launchctl list | grep \'katon\\|pow\''
+    output = common.execSync 'launchctl list | grep \'katon\''
 
     katonLoaded = output.indexOf('katon') isnt -1
-    powLoaded   = output.indexOf('pow') isnt -1
-
-    if not katonLoaded or not powLoaded
-      console.log()
 
     if not katonLoaded 
+      console.log()
       console.log "#{chalk.red 'katon'} is not loaded, use `katon start`"
-    
-    if not powLoaded
-      console.log "#{chalk.red 'pow'}   is not loaded/installed?"
+  
