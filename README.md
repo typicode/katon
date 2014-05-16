@@ -4,7 +4,7 @@ __Katon is all about saving you time during development.__
 
 There's something repetitive that we do: open a terminal, start development server, ... and then start coding.
 
-Using Katon, you can totally forget about manually starting development servers each time. Instead, link them once to Katon and it will automatically start them for you and serve them locally on .dev domains.
+Using Katon, you can totally forget about manually starting development servers each time. Instead, link them once to Katon and it will automatically start them for you and serve them locally on .ka domains.
 
 Katon runs on Mac OS and works with __all__ your usual tools (Express, Grunt, Gulp, ...).
 
@@ -27,21 +27,13 @@ Link it.
 katon link
 ```
 
-Close your terminal and go to `http://app.dev`.
+Close your terminal and go to `http://app.ka`.
 
 Open a text editor and try to make some changes to the code (Katon uses [nodemon](https://github.com/remy/nodemon) to monitor changes).
 
-Reboot and go to `http://app.dev/`.
+Reboot and go to `http://app.ka/`.
 
 # Install
-
-Katon requires [Pow](http://pow.cx/) to be installed. If it's not, run this:
-
-```
-curl get.pow.cx | sh
-```
-
-You can then proceed installing Katon.
 
 ```
 npm install -g katon
@@ -169,7 +161,7 @@ If you want to add a new feature, it's recommended to create an issue to discuss
 
 # Credits
 
-* [Pow](http://pow.cx/) for inspiration and proxying requests.
+* [Pow](http://pow.cx/) for inspiration.
 * [nodemon](https://github.com/remy/nodemon) for restarting Node apps on code change.
 * [Powder](https://github.com/rodreegez/powder) for CLI inspiration.
 

@@ -17,7 +17,7 @@ getPowProxy = (path) ->
   "#{config.powDir}/#{getName path}"
 
 getUrl = (path) ->
-  "http://#{getName path}.dev/"
+  "http://#{getName path}.ka/"
 
 module.exports =
 
@@ -57,7 +57,7 @@ module.exports =
       console.log chalk.grey "No apps linked in #{tildify config.katonDir}"
     else
       for link in links
-        url  = "http://#{link}.dev"
+        url  = "http://#{link}.ka"
         dest = fs.readlinkSync "#{config.katonDir}/#{link}"
 
         if fs.existsSync dest
