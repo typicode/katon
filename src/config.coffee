@@ -4,6 +4,7 @@ HOME = process.env.HOME
 
 module.exports =
   nodePath      : process.execPath
+  binPath       : "#{__dirname}/../bin/index"
 
   httpPort      : 80
   dnsPort       : 3333

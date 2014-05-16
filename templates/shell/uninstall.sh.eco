@@ -1,5 +1,5 @@
 # must use sudo to remove files
-sudo @nodePath @binPath __uninstall
+sudo <%= @nodePath %> <%= @binPath %> __uninstall
 
 # stop katon as regular user
 katon stop

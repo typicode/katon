@@ -5,6 +5,9 @@ firewall = require './controls/firewall'
 link     = require './controls/link'
 exec     = require './controls/exec'
 help     = require './controls/help'
+common   = require './common'
+config   = require '../config'
+render   = require '../render'
 
 module.exports =
 
@@ -45,10 +48,10 @@ module.exports =
     help.status()
 
   install: ->
-    common.sh common.render 'shell/install.sh', config
+    common.sh render('shell/install.sh.eco', config)
 
   uninstall: ->
-    common.sh common.render 'shell/uninstall.sh', config
+    common.sh render 'shell/uninstall.sh.eco', config
 
   # Called only by (un)install.sh scripts using sudo
   __install: ->
