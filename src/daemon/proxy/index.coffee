@@ -24,13 +24,13 @@ module.exports =
       if app
         proxy.web req, res, target: "http://localhost:#{app.env.PORT}"
       else
-        res.end render 'app_not_found.html.eco'
+        res.end render 'html/app_not_found.html.eco'
 
     proxy.on 'error', (err, req, res) ->
       if err.code is 'ECONNREFUSED'
         name = getName req
         app  = apps.findByName name
-        res.end render 'econnrefused.html.eco', app: app
+        res.end render 'html/econnrefused.html.eco', app: app
       else
         res.end "Unknown error: #{err.code}"
 
