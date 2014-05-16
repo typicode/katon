@@ -31,7 +31,8 @@
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
     "prepublish": "grunt build",
     "postinstall": "katon install",
-    "preuninstall": "katon uninstall"
+    "preuninstall": "katon uninstall",
+    "postupdate": "sh ./scripts/update.sh"
   },
   "devDependencies": {
     "coffee-script": "*",
