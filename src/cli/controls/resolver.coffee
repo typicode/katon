@@ -7,7 +7,7 @@ module.exports =
   path: config.resolverPath
 
   create: ->
-    content = render 'resolver.eco'
+    content = render 'resolver.eco', config
     common.create @path, content
 
   remove: ->

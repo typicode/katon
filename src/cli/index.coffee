@@ -9,6 +9,8 @@ common   = require './common'
 config   = require '../config'
 render   = require '../render'
 
+chalk.enabled = true
+
 module.exports =
 
   '-v': ->

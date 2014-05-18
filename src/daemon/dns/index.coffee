@@ -2,10 +2,10 @@ dns    = require 'native-dns'
 chalk  = require 'chalk'
 config = require '../../config'
 
-log: (str) ->
+log = (str) ->
   console.log chalk.magenta('[dns]  '), str
 
-error: (str) ->
+error = (str) ->
   console.log chalk.red('[dns]  '), str
 
 module.exports =
@@ -16,7 +16,7 @@ module.exports =
     server.on 'request', (req, res) ->
       name = req.question[0].name
 
-      util.log "Received request for #{name}"
+      log "Received request for #{name}"
 
       res.answer.push dns.A
         name: name
@@ -26,7 +26,7 @@ module.exports =
       res.send()
 
     server.on 'error', (err) ->
-      util.error err.stack
+      error err.stack
 
     server.serve config.dnsPort, ->
-      util.log "Listening on port #{config.dnsPort}"
+      log "Listening on port #{config.dnsPort}"

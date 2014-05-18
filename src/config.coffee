@@ -12,7 +12,7 @@ module.exports =
 
   resolverPath  : '/etc/resolver/ka'
 
-  ruleNumber    : 999
+  ruleNumber    : 90
   firewallPlist : "/Library/LaunchAgents/katon.firewall.plist"
 
   daemonPlist   : "#{HOME}/Library/LaunchAgents/katon.plist"
