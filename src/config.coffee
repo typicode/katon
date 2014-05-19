@@ -9,6 +9,7 @@ module.exports =
   httpPort      : 80
   dnsPort       : 3333
   proxyPort     : 4000
+  powPort       : 20559
 
   resolverPath  : '/etc/resolver/ka'
 
@@ -17,7 +18,6 @@ module.exports =
 
   daemonPlist   : "#{HOME}/Library/LaunchAgents/katon.plist"
 
-  powDir        : "#{HOME}/.pow"
   nvmDir        : "#{HOME}/.nvm"
   katonDir      : "#{HOME}/.katon"
 
