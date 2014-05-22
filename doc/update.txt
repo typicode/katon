@@ -1,0 +1,16 @@
+Updating from 0.3.x to 0.4.x
+=============================
+
+Katon doesn't use Pow anymore to proxy requests.
+
+This means that you can uninstall Pow if you want:
+$ curl get.pow.cx/uninstall.sh | sh
+
+Also, since .dev will become a real domain name soon, katon will now serve your app on .ka domain.
+
+Katon needs now to install files. If you want to run it later, just use:
+$ katon install
+
+For any problem:
+https://github.com/typicode/katon/issues
+

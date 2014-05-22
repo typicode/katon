@@ -50,18 +50,22 @@ module.exports =
     help.status()
 
   install: ->
+    console.log chalk.green 'Installing katon'
     common.exec render 'shell/install.sh.eco', config
 
   uninstall: ->
+    console.log chalk.red 'Uninstalling katon'
     common.exec render 'shell/uninstall.sh.eco', config
 
   # Called only by (un)install.sh scripts using sudo
   __install: ->
+    console.log chalk.green 'System'
     resolver.create()
     firewall.create()
     firewall.load()
 
   __uninstall: ->
+    console.log chalk.red 'System'
     resolver.remove()
     firewall.unload()
     firewall.remove()

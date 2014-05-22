@@ -11,8 +11,8 @@ module.exports =
 
   exec: (cmd) ->
     childProcess.exec cmd, (err, stdout, stderr) ->
-      console.log stdout
-      console.error stderr
+      console.log stdout if stdout isnt ''
+      console.error stderr if stderr isnt ''
       if err
         console.error err
 
