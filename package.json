@@ -30,9 +30,8 @@
   "scripts": {
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
     "prepublish": "grunt build",
-    "postinstall": "./bin/index.js install",
-    "preuninstall": "./bin/index.js uninstall",
-    "postupdate": "katon stop && cat ./doc/update.txt && ./bin/index.js install"
+    "postinstall": "cat ./doc/update.txt && ./bin/index.js install",
+    "preuninstall": "./bin/index.js uninstall"
   },
   "devDependencies": {
     "coffee-script": "*",
