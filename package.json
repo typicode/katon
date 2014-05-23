@@ -35,7 +35,7 @@
     "preuninstall": "./bin/index.js uninstall"
   },
   "devDependencies": {
-    "coffee-script": "*",
+    "coffee-script": "^1.7.1",
     "grunt": "^0.4.4",
     "grunt-cli": "^0.1.13",
     "grunt-coffeelint": "0.0.8",
