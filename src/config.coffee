@@ -7,7 +7,7 @@ module.exports =
   binPath       : "#{__dirname}/../bin/index"
 
   httpPort      : 80
-  dnsPort       : 13379
+  dnsPort       : 13375
   proxyPort     : 4000
   powPort       : 20559
 

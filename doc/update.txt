@@ -1,19 +1,22 @@
 Updating from 0.3.x to 0.4.x
 =============================
 
-First, thanks for using Katon.
+First, thank you for using katon!
 
-Katon 0.4 is a special release:
+katon 0.4 is a special release:
 
 1. It doesn't use Pow anymore to proxy requests. This means that you can uninstall Pow if you want:
-$ curl get.pow.cx/uninstall.sh | sh
+   $ curl get.pow.cx/uninstall.sh | sh
 
 2. It will now serve your app on .ka domain since .dev will become a real domain soon.
 
-3. Katon now needs root access to install some files.
+3. katon now needs root access to install some files.
 
 For any problem:
 https://github.com/typicode/katon/issues
 
-Now katon will install itself, if you want to run the installation later use:
+=============================
+
+katon will now install itself. If you want to run the installation later use:
 $ katon install
+
