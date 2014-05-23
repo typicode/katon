@@ -1,6 +1,6 @@
 {
   "name": "katon",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "Automatically start your Node based projects and serve them locally on .dev domains",
   "keywords": [
     "node",
@@ -26,11 +26,12 @@
   "bin": {
     "katon": "./bin/index.js"
   },
+  "preferGlobal": true,
   "scripts": {
     "test": "mocha --reporter spec --globals i --compilers coffee:coffee-script/register ./test/**/*",
     "prepublish": "grunt build",
-    "postinstall": "sh ./scripts/postinstall.sh",
-    "preuninstall": "sh ./scripts/preuninstall.sh"
+    "postinstall": "cat ./doc/update.txt && ./bin/index.js install",
+    "preuninstall": "./bin/index.js uninstall"
   },
   "devDependencies": {
     "coffee-script": "*",
@@ -58,7 +59,8 @@
     "respawn-group": "^0.5.0",
     "shelljs": "^0.2.6",
     "tildify": "^0.2.0",
-    "update-notifier": "~0.1.7"
+    "update-notifier": "~0.1.7",
+    "native-dns": "^0.6.1"
   },
   "license": "MIT"
 }

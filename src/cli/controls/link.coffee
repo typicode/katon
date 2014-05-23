@@ -13,11 +13,8 @@ getName = (path) ->
 getLink = (path) ->
   "#{config.katonDir}/#{getName path}"
 
-getPowProxy = (path) ->
-  "#{config.powDir}/#{getName path}"
-
 getUrl = (path) ->
-  "http://#{getName path}.dev/"
+  "http://#{getName path}.ka/"
 
 module.exports =
 
@@ -25,15 +22,12 @@ module.exports =
     name     = getName path
     url      = getUrl path
     link     = getLink path
-    powProxy = getPowProxy path
 
     if fs.existsSync link
       err = "Already an application named #{chalk.red name} in #{chalk.red '~/.katon'}"
       console.log err
 
     else
-      common.create powProxy, config.proxyPort
-
       console.log chalk.grey "create #{tildify link}"
       fs.mkdirpSync config.katonDir
       fs.symlinkSync path, link
@@ -43,9 +37,7 @@ module.exports =
   remove: (path) ->
     name     = getName path
     link     = getLink path
-    powProxy = getPowProxy path
 
-    common.remove powProxy
     common.remove link
     console.log "Successfully removed #{chalk.cyan name}"
 
@@ -57,7 +49,7 @@ module.exports =
       console.log chalk.grey "No apps linked in #{tildify config.katonDir}"
     else
       for link in links
-        url  = "http://#{link}.dev"
+        url  = "http://#{link}.ka"
         dest = fs.readlinkSync "#{config.katonDir}/#{link}"
 
         if fs.existsSync dest
@@ -67,5 +59,5 @@ module.exports =
           console.log "#{chalk.red pad url, 30}  →  #{chalk.gray err}"
 
   open: (path) ->
-    common.sh "open #{getUrl path}"
+    common.execSync "open #{getUrl path}"
 

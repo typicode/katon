@@ -12,6 +12,9 @@ log = (str) ->
 getName = (req) ->
   req.headers.host.split('.').slice(-2, -1).pop()
 
+getDomain = (req) ->
+  req.headers.host.split('.').pop()
+
 module.exports =
 
   start: ->
@@ -19,18 +22,24 @@ module.exports =
     proxy = httpProxy.createProxyServer()
 
     http.on 'request', (req, res) ->
-      name = getName req
-      app  = apps.findByName name
-      if app
-        proxy.web req, res, target: "http://localhost:#{app.env.PORT}"
+      name   = getName req
+      domain = getDomain req
+      app    = apps.findByName name
+
+      if domain is 'ka'
+        if app
+          proxy.web req, res, target: "http://localhost:#{app.env.PORT}"
+        else
+          res.end render 'html/app_not_found.html.eco'
+
       else
-        res.end render 'app_not_found.html.eco'
+        proxy.web req, res, target: "http://localhost:#{config.powPort}"
 
     proxy.on 'error', (err, req, res) ->
       if err.code is 'ECONNREFUSED'
         name = getName req
         app  = apps.findByName name
-        res.end render 'econnrefused.html.eco', app: app
+        res.end render 'html/econnrefused.html.eco', app: app
       else
         res.end "Unknown error: #{err.code}"
 

@@ -17,7 +17,6 @@ describe 'link', ->
       link.create '/some/app'
       sinon.assert.calledWith fs.mkdirpSync, config.katonDir
       sinon.assert.calledWith fs.symlinkSync, '/some/app', "#{config.katonDir}/app"
-      sinon.assert.calledWith common.create, "#{config.powDir}/app", config.proxyPort
 
     it 'should not overwrite a link', ->
       fs.existsSync = sinon

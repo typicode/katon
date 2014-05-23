@@ -1,5 +1,6 @@
 fs    = require 'fs.extra'
 chalk = require 'chalk'
+dns   = require './dns/'
 proxy = require './proxy/'
 apps  = require './apps/'
 
@@ -17,7 +18,8 @@ module.exports =
     # make sure ~/.katon exists
     fs.mkdirp config.katonDir
     
-    # start server
+    # start servers
+    dns.start()
     proxy.start()
 
     for name in fs.readdirSync config.katonDir

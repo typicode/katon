@@ -1,14 +1,22 @@
-p       = require 'path'
-fs      = require 'fs.extra'
-shell   = require 'shelljs'
-chalk   = require 'chalk'
-tildify = require 'tildify'
-eco     = require 'eco'
-config  = require '../config'
+childProcess = require 'child_process'
+p          = require 'path'
+fs         = require 'fs.extra'
+shell      = require 'shelljs'
+chalk      = require 'chalk'
+tildify    = require 'tildify'
+eco        = require 'eco'
+config     = require '../config'
 
 module.exports =
 
-  sh: (cmd) ->
+  exec: (cmd) ->
+    childProcess.exec cmd, (err, stdout, stderr) ->
+      console.log stdout if stdout isnt ''
+      console.error stderr if stderr isnt ''
+      if err
+        console.error err
+
+  execSync: (cmd) ->
     console.log chalk.grey tildify cmd
     output = shell.exec(cmd, silent: true).output.trim()
 
@@ -33,8 +41,8 @@ module.exports =
       console.log chalk.grey "remove #{tildify path}"
 
   load: (path) ->
-    @sh "launchctl load -Fw #{path}"
+    @execSync "launchctl load -Fw #{path}"
 
   unload: (path) ->
-    @sh "launchctl unload #{path}"
+    @execSync "launchctl unload #{path}"
 
