@@ -3,4 +3,4 @@ node_js:
   - "0.11"
   - "0.10"
 before_install:
-  npm install -g grunt-cli && grunt build
+  npm install -g coffee-script && coffee -c -o lib src
