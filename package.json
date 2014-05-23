@@ -1,6 +1,6 @@
 {
   "name": "katon",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Automatically start your Node based projects and serve them locally on .ka domains",
   "keywords": [
     "node",
