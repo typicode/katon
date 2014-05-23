@@ -150,7 +150,7 @@ __execvp()__
 
 This usually means that you're trying to run a command that is not in katon PATH. To fix this, link your bin in `/usr/local/bin`.
 
-__.dev stopped working__
+__.dev not working__
 
 katon apps now are served on .ka domains. If you're using Pow alongside katon, make sure that Pow DNS port is 20559.
 
