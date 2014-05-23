@@ -32,7 +32,7 @@
     "prepublish": "grunt build",
     "postinstall": "./bin/index.js install",
     "preuninstall": "./bin/index.js uninstall",
-    "postupdate": "cat ./doc/update.txt && ./bin/index.js install"
+    "postupdate": "katon stop && cat ./doc/update.txt && ./bin/index.js install"
   },
   "devDependencies": {
     "coffee-script": "*",
