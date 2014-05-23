@@ -19,9 +19,9 @@ module.exports =
   status: ->
     output = common.execSync 'launchctl list | grep \'katon\''
 
-    katonLoaded = output.indexOf('katon') isnt -1
+    katonLoaded = output.indexOf('katon\n') isnt -1
 
     if not katonLoaded 
       console.log()
-      console.log "#{chalk.red 'katon'} is not loaded, use `katon start`"
+      console.log "#{chalk.red 'katon'} daemon is not loaded, use `katon start`"
   
