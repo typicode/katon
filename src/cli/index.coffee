@@ -50,11 +50,11 @@ module.exports =
     help.status()
 
   install: ->
-    console.log chalk.green 'Installing katon system'
+    console.log chalk.green 'Installing katon'
     common.exec render 'shell/install.sh.eco', config
 
   uninstall: ->
-    console.log chalk.red 'Uninstalling katon system'
+    console.log chalk.red 'Uninstalling katon'
     common.exec render 'shell/uninstall.sh.eco', config
 
   # Called only by (un)install.sh scripts using sudo
