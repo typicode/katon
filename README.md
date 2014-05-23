@@ -1,12 +1,12 @@
-# Katon
+# katon
 
 __Katon is all about saving you time during development.__
 
 There's something repetitive that we do: open a terminal, start development server, ... and then start coding.
 
-Using Katon, you can totally forget about manually starting development servers each time. Instead, link them once to Katon and it will automatically start them for you and serve them locally on .ka domains.
+Using katon, you can totally forget about manually starting development servers each time. Instead, link them once to katon and it will automatically start them for you and serve them locally on .ka domains.
 
-Katon runs on Mac OS and works with __all__ your usual tools (Express, Grunt, Gulp, ...).
+katon runs on Mac OS and works with __all__ your usual tools (Express, Grunt, Gulp, ...).
 
 [![NPM version](https://badge.fury.io/js/katon.png)](http://badge.fury.io/js/katon)
 [![Build Status](https://travis-ci.org/typicode/katon.png?branch=master)](https://travis-ci.org/typicode/katon)
@@ -29,7 +29,7 @@ katon link
 
 Close your terminal and go to `http://app.ka`.
 
-Open a text editor and try to make some changes to the code (Katon uses [nodemon](https://github.com/remy/nodemon) to monitor changes).
+Open a text editor and try to make some changes to the code (katon uses [nodemon](https://github.com/remy/nodemon) to monitor changes).
 
 Reboot and go to `http://app.ka/`.
 
@@ -39,7 +39,7 @@ Reboot and go to `http://app.ka/`.
 npm install -g katon
 ```
 
-This will install Katon CLI and start Katon daemon.
+This will install katon CLI and start Katon daemon.
 
 # CLI usage
 
@@ -138,9 +138,9 @@ If you've installed [nvm](https://github.com/creationix/nvm), Katon will use you
 
 # Troubleshoot
 
-__No server found__ or __Proxy error__
+__No server found__
 
-Check that Pow and Katon daemon are running using `katon status`.
+Check that katon daemon is running using `katon status`.
 
 __Not found__
 
@@ -148,10 +148,13 @@ If you get a 404, it's because your app directory is served using Katon embedded
 
 __execvp()__
 
-This usually means that bin is not in Katon PATH. To fix this, link your bin in `/usr/local/bin`.
-Future versions of Katon should make this easier.
+This usually means that you're trying to run a command that is not in katon PATH. To fix this, link your bin in `/usr/local/bin`.
 
-Feel free also to create an issue.
+__.dev stopped working__
+
+katon apps now are served on .ka domains. If you're using Pow alongside katon, make sure that Pow DNS port is 20559.
+
+Feel free also to create an issue if you're stuck.
 
 # Contribute
 
