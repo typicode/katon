@@ -55,7 +55,6 @@
     "minimatch": "^0.2.14",
     "node-static": "~0.7.3",
     "nodemon": "~1.0.8",
-    "optimist": "~0.6.0",
     "pad": "0.0.4",
     "respawn-group": "^0.5.0",
     "shelljs": "^0.2.6",
