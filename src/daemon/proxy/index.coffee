@@ -26,7 +26,10 @@ module.exports =
       domain = getDomain req
       app    = apps.findByName name
 
-      if domain is 'ka'
+      if domain is "localhost:#{config.proxyPort}"
+        res.end render 'html/hello.html.eco'
+
+      else if domain is 'ka'
         if app
           proxy.web req, res, target: "http://localhost:#{app.env.PORT}"
         else
