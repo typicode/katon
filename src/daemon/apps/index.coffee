@@ -1,11 +1,12 @@
-fs      = require 'fs'
-p       = require 'path'
-regroup = require 'respawn-group'
-chalk   = require 'chalk'
-log     = require './log'
-env     = require './env'
-command = require './command'
-config  = require '../../config'
+fs         = require 'fs'
+p          = require 'path'
+regroup    = require 'respawn-group'
+chalk      = require 'chalk'
+portfinder = require 'portfinder'
+log        = require './log'
+env        = require './env'
+command    = require './command'
+config     = require '../../config'
 
 port = config.proxyPort
 
@@ -26,7 +27,12 @@ group.on 'stderr', (mon, data) -> log.app.plain mon.cwd, data
 module.exports =
 
   add: (path) ->
-    port += 1
+    portfinder.basePort port
+    portfinder.getPort (err, openPort)->
+      if err
+        new Error("Problem finding a port: #{err}")
+      else
+        port = openPort
 
     group.add path,
       env         : env.get path, port
