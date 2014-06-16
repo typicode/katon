@@ -26,7 +26,9 @@ group.on 'stderr', (mon, data) -> log.app.plain mon.cwd, data
 module.exports =
 
   add: (path) ->
-    port += 1
+    # Basic Meteor support
+    # See https://github.com/typicode/katon/issues/17
+    port += 2
 
     group.add path,
       env         : env.get path, port
