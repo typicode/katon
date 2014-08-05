@@ -1,4 +1,4 @@
-# katon [![](https://badge.fury.io/js/katon.svg)](http://badge.fury.io/js/katon)[![](https://travis-ci.org/typicode/katon.svg?branch=master)](https://travis-ci.org/typicode/katon)
+# katon [![](https://badge.fury.io/js/katon.svg)](http://badge.fury.io/js/katon) [![](https://travis-ci.org/typicode/katon.svg?branch=master)](https://travis-ci.org/typicode/katon)
 
 > Autostarts your development servers so that you can be more productive
 
