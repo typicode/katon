@@ -3,7 +3,7 @@ var launchctl = require('../utils/launchctl')
 var config    = require('../../config.js')
 
 module.exports = function() {
-  console.log(chalk.red('Stopping katon daemon'))
+  console.log(chalk.red('Stopping katon daemon, please wait'))
   launchctl.remove(config.daemonPlistPath)
   console.log(chalk.red('Done'))
 }
