@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+var isRoot         = require('is-root')
 var updateNotifier = require('update-notifier')
-var cli = require('../lib/cli/')
+var pkg            = require('../package.json')
+var cli            = require('../src/cli')
 
-notifier = updateNotifier({packagePath: '../package'})
-
-if (notifier.update) notifier.notify()
+if (!isRoot()) {
+  updateNotifier({packageName: pkg.name, packageVersion: pkg.version}).notify()
+}
 
 cli.run(process.argv.slice(2))
-console.log()

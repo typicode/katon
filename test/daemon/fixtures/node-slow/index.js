@@ -1,0 +1,13 @@
+var http = require('http')
+
+setTimeout(function() {
+
+  http.createServer(function (req, res) {
+    console.log('Received a request')
+    res.writeHead(200, {'Content-Type': 'text/plain'})
+    res.end('OK');
+  }).listen(process.env.PORT, function() {
+    console.log('listening on port', process.env.PORT)
+  })
+
+}, 5000)

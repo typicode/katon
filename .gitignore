@@ -1,4 +1,4 @@
-.DS_Store
+**/*.log
 node_modules
-lib
-katon.log
+tmp
+.DS_Store
