@@ -2,9 +2,9 @@
 
 > Autostarts your development servers so that you can be more productive
 
-![](http://i.imgur.com/hxhEb0m.png)
+With katon, you don't have to open a Terminal each time you want to develop. Instead, add your development servers once to katon and they'll be autostarted and accessible on local .ka domains.
 
-_With katon, you don't have to open a Terminal each time you want to develop. Instead, add your development servers once to katon and they'll be autostarted and accessible on local .ka domains._
+![](http://i.imgur.com/hxhEb0m.png)
 
 katon runs on Mac OS (even Yosemite) and __supports any server (Node, Ruby, Python, Go, Java, ...)__ that can be started with a command-line .
 
