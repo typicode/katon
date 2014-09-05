@@ -2,7 +2,7 @@
 
 > Autostarts your development servers so that you can be more productive
 
-With katon, there's no need anymore to open a Terminal and manually start your developement servers each time you want to develop.
+With katon, there's no need anymore to open a Terminal and manually start developement servers each time you want to develop.
 
 Instead, add your development servers once to katon and they'll be autostarted and always accessible on local .ka domains.
 
