@@ -6,7 +6,7 @@ With katon, you don't have to open a Terminal each time you want to develop. Ins
 
 ![](http://i.imgur.com/hxhEb0m.png)
 
-katon runs on Mac OS (even Yosemite) and __supports any server (Node, Ruby, Python, Go, Java, ...)__ that can be started with a command-line .
+__katon supports any server (Node, Ruby, Python, Go, Java, ...)__ that can be started with a command-line and runs on Mac OS (even Yosemite).
 
 ## Install
 
