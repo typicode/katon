@@ -8,7 +8,7 @@ Instead, add your development servers once to katon and they'll be autostarted a
 
 ![](http://i.imgur.com/7oPMSbm.png)
 
-####__katon supports any server (Node, Ruby, Python, Go, Java, ...)__ that can be started with a command-line and runs on Mac OS (even Yosemite).
+__katon supports any server (Node, Ruby, Python, Go, Java, ...)__ that can be started with a command-line and runs on Mac OS (even Yosemite).
 
 ## Install
 
