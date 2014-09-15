@@ -14,6 +14,8 @@ __katon supports any server (Node, Ruby, Python, Go, Java, ...)__ that can be st
 
 ## Install
 
+Make sure [Node](http://nodejs.org/download/) is installed first (if you have [Homebrew](http://brew.sh/), you can simply run `brew install node`), then:
+
 ```bash
 $ npm install -g katon
 $ sudo katon install && katon start
