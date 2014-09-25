@@ -7,10 +7,11 @@ With katon, there's no need anymore to open a Terminal and manually start develo
 Instead, add your development servers once to katon and they'll be autostarted and always accessible on local .ka domains.
 
 <p align="center">
-  <img src="http://i.imgur.com/ovO1g86.png">
+  <img src="http://i.imgur.com/ovO1g86.png"><br>
+  <a href="http://i.imgur.com/7oPMSbm.png">Click here to view a screenshot of katon + Express + Rails</a>
 </p>
 
-__katon supports any server (Node, Ruby, Python, Go, Java, PHP, ...)__ that can be started with a command-line and runs on Mac OS (even Yosemite).
+__katon supports any server: Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on Mac OS (Yosemite included).
 
 ## Install
 
@@ -20,8 +21,6 @@ Make sure [Node](http://nodejs.org/download/) is installed first, then:
 $ npm install -g katon
 $ sudo katon install && katon start
 ```
-
-_Note: If you were already using katon, run `katon migrate` after installing katon 0.5 to keep your servers._
 
 ## Add servers
 
@@ -33,13 +32,24 @@ $ katon add 'rails server --port $PORT'
 $ katon add 'python -m SimpleHTTPServer $PORT'
 ```
 
-Port is dynamically set by katon using `PORT` environment variable.
+To add a server with a different name than its directory.
 
-Here's how to retrieve it in Node servers if you can't pass it as a parameter:
+```bash
+$ katon add 'grunt server' my-custom-name
+Application is now available at http://my-custom-name.ka
+```
+
+__Note__: it's important to use `'` and not `"` to avoid `$PORT` to be evaluated.
+
+Port is dynamically set by katon using `PORT` environment variable but can be passed as a parameter using `$PORT`.
+
+In case your server doesn't accept a port parameter, you can retrieve the `PORT` environment variable in your code. For example, for a Node server you would write something like:
 
 ```javascript
 var port = process.env.PORT || 3000;
 ```
+
+The same technique can be applied with other languages too.
 
 ## Version managers
 
@@ -55,6 +65,14 @@ For Node users, to keep access to katon CLI accross Node versions, add an alias 
 ```
 echo "alias katon=`which katon`" >> ~/.profile
 ```
+
+## Subdomains
+
+When adding a server, you can access it by its URL `http://app.ka`. But you can also use subdomains (e.g. `http://foo.app.ka`, `http://bar.app.ka`, ...).
+
+## xip.io
+
+katon is also fully compatible with [xip.io](http://xip.io/) service.
 
 ## Logs
 
