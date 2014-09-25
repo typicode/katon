@@ -4,24 +4,25 @@ var chalk      = require('chalk')
 var pathToHost = require('../utils/path-to-host')
 var config     = require('../../config')
 
-module.exports = function(command, dir) {
+// add <cmd> [name]
+module.exports = function(args) {
   mkdirp.sync(config.hostsDir)
 
-  command = command ? command.trim() : ''
+  var command = args[0] ? args[0].trim() : ''
 
   if (command === '') {
     return console.log(
         'Please specify a command\n'
       + 'katon add <command>'
     )
-  }
+  } 
 
-  var host = pathToHost(dir ? dir : process.cwd())
+  var host = args[1] ? args[1] : pathToHost(pathToHost(process.cwd()))
 
   fs.writeFileSync(config.hostsDir + '/' + host + '.json', JSON.stringify(
     {
       command : command,
-      cwd     : dir ? dir : process.cwd(),
+      cwd     : process.cwd(),
       env     : {
         PATH: process.env.PATH
       }

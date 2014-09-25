@@ -58,8 +58,10 @@ describe('katon command-line interface', function() {
   it('list/add/list/rm', function() {
     cli.run(['list'])
     cli.run(['add', 'echo'])
+    cli.run(['add', 'echo', 'foo'])
     cli.run(['list'])
     cli.run(['rm'])
+    cli.run(['rm', 'foo'])
     cli.run(['list'])
   })
 

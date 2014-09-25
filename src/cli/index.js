@@ -17,11 +17,12 @@ module.exports = {
 
   migrate     : require('./commands/migrate'),
 
-  run: function(array) {
-    var command = array[0]
-    var option  = array[1]
+  run: function(args) {
+    var command = args[0]
+    var options = args.slice(1)
+
     if (this[command]) {
-      this[command](option);
+      this[command](options)
     } else {
       this.help()
     }

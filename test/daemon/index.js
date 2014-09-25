@@ -16,7 +16,7 @@ describe('Katon', function() {
   })
 
   it('Doesn\'t add node > GET http://node.ka', function(done) {
-    helper.add('node')
+    helper.add('node') // no command provided
 
     helper.GET('node.ka', {
       status: 404

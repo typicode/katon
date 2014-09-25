@@ -2,9 +2,10 @@ var path       = require('path')
 var open       = require('opn')
 var pathToHost = require('../utils/path-to-host')
 
-module.exports = function(dir) {
-  dir = dir || process.cwd()
-  var url = 'http://' + pathToHost(dir) + '.ka/'
+// open [name]
+module.exports = function(args) {
+  var host = args[0] || pathToHost(process.cwd())
+  var url  = 'http://' + host + '.ka/'
   
   console.log('Opening ' + url)
   open(url)

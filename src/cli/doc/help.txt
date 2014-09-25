@@ -2,17 +2,15 @@
 katon
 
 Usage: 
-    katon add <cmd>          Add current dir and use cmd to start server
-    katon rm                 Remove current dir
-    katon rm <app_name>      Remove app
-    katon open               Open current dir in browser
-    katon open <app_name>    Open app in browser
-    katon list               List apps
-    katon start|stop         Daemon control
-    katon install|uninstall  Must be run to setup katon (sudo)
-    katon status             Give status informations
+    katon add <cmd> [app_name]  Add server and use current dir name or app_name
+    katon rm [app_name]         Remove server by current dir name or app_name
+    katon open [app_name]       Open current dir or app_name in browser
+    katon list                  List apps
+    katon start|stop            Daemon control
+    katon install|uninstall     Must be run to setup katon (sudo)
+    katon status                Give status informations
 
-Example:
+Examples:
     katon add 'nodemon app.js'
     katon add 'grunt server watch'
     katon add 'python -m SimpleHTTPServer $PORT'

@@ -27,16 +27,16 @@ module.exports = {
   },
 
   add: function(host, command) {
-    log('CLI add ' + host)
+    log('CLI add host:' + host + ' command:' + command)
     process.cwd = function() {
       return __dirname + '/fixtures/' + host
     }
-    cli.add(command)
+    command ? cli.add([command]) : cli.add([])
   },
 
   remove: function(host) {
-    log('CLI remove ' + host)
-    cli.rm(host)
+    log('CLI remove host:' + host)
+    cli.rm([host])
   }
   
 }
