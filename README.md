@@ -13,7 +13,7 @@ Instead, add your development servers once to katon and they'll be autostarted a
 
 __katon supports any server: Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on Mac OS (Yosemite included).
 
-__09/25__ if you like the project and want to support, please vote for it on [HN](https://news.ycombinator.com/item?id=8367635).
+__09/25__ if you :heart: the project and want to support, please vote for it on [Hacker News](https://news.ycombinator.com/item?id=8367635).
 
 ## Install
 
