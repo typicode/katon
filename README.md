@@ -7,10 +7,10 @@ With katon, there's no need anymore to open a Terminal and manually start develo
 Instead, add your development servers once to katon and they'll be autostarted and always accessible on local .ka domains.
 
 <p align="center">
-  <img src="http://i.imgur.com/7oPMSbm.png">
+  <img src="http://i.imgur.com/ovO1g86.png">
 </p>
 
-__katon supports any server (Node, Ruby, Python, Go, Java, ...)__ that can be started with a command-line and runs on Mac OS (even Yosemite).
+__katon supports any server (Node, Ruby, Python, Go, Java, PHP, ...)__ that can be started with a command-line and runs on Mac OS (even Yosemite).
 
 ## Install
 
