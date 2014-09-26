@@ -40,6 +40,23 @@ describe('Katon', function() {
     }, done)
   })
 
+  it('Add node > GET http://subdomain.node.ka', function(done) {
+    helper.add('subdomain.node', 'node index.js')
+
+    helper.GET('subdomain.node.ka', {
+      status: 200,
+      body: 'OK'
+    }, done)
+  })
+
+  it('Add node > GET http://subdomain.node.ka', function(done) {
+    helper.add('node', 'node index.js')
+
+    helper.GET('notsubdomain.node.ka', {
+      status: 404
+    }, done)
+  })
+
   it('Add node-slow > GET http://node-slow.ka', function(done) {
     helper.add('node-slow', 'node index.js')
 

@@ -11,7 +11,7 @@ function log(id, msg) {
 }
 
 function getId(host) {
-  return host.split('.').slice(-2, -1).pop()
+  return host.split('.').slice(0, -1).join('.')
 }
 
 module.exports.createServer = function() {
@@ -40,7 +40,7 @@ module.exports.createServer = function() {
         catch(e) { log(id, e) }
 
         var delay = 2000
-        
+
         log(id, 'Forwarding to ' + port)
         proxy.web(req, res, target, function() {
           log(id, 'Failed to forward, retry in ' + delay + ' ms')
@@ -54,7 +54,7 @@ module.exports.createServer = function() {
           }, delay)
         })
 
-        timer(proc.id, function() { 
+        timer(proc.id, function() {
           log(id, 'No requests for 1 hour')
           proc.stop()
         })
@@ -65,7 +65,7 @@ module.exports.createServer = function() {
 
         res.statusCode = 404
         res.end(render('404.html'))
-      
+
       }
 
     } else {
@@ -85,7 +85,7 @@ module.exports.createServer = function() {
     }
 
     var id = getId(req.headers.host)
-    
+
     log(id, 'Can\'t connect: ' + err)
     res.statusCode = 502
     res.end(render('502.html'))
