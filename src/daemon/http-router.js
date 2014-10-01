@@ -10,7 +10,13 @@ function log(id, msg) {
   util.log(chalk.green('[router] ') + msg + ' ' + chalk.grey(id))
 }
 
-function getId(host) {
+// For http://www.app.ka will return app
+function getDomainId(host) {
+  return host.split('.').slice(-2, -1).pop()
+}
+
+// For http://www.app.ka will return www.app
+function getSubdomainId(host) {
   return host.split('.').slice(0, -1).join('.')
 }
 
@@ -26,8 +32,16 @@ module.exports.createServer = function() {
 
     if (/.ka$/.test(host)) {
 
-      var id   = getId(host)
-      var proc = procs.list[id]
+      var domainId = getDomainId(host)
+      var subdomainId = getSubdomainId(host)
+
+      if (procs.list[subdomainId]) {
+        var id = subdomainId
+        var proc = procs.list[subdomainId]
+      } else {
+        var id = domainId
+        var proc = procs.list[domainId]
+      }
 
       if (proc) {
 
@@ -84,7 +98,7 @@ module.exports.createServer = function() {
       return log('', err.code + ' check that port is not in use')
     }
 
-    var id = getId(req.headers.host)
+    var id = req.headers.host
 
     log(id, 'Can\'t connect: ' + err)
     res.statusCode = 502

@@ -32,6 +32,24 @@ describe('Katon', function() {
     }, done)
   })
 
+  it('Add node > GET http://foo.node.ka', function(done) {
+    helper.add('node', 'node index.js')
+
+    helper.GET('foo.node.ka', {
+      status: 200,
+      body: 'OK'
+    }, done)
+  })
+
+  it('Add node as subdomain > GET http://subdomain.node.ka', function(done) {
+    helper.add('subdomain.node', 'node index.js')
+
+    helper.GET('subdomain.node.ka', {
+      status: 200,
+      body: 'SUB'
+    }, done)
+  })
+
   it('Remove node > GET http://node.ka', function(done) {
     helper.remove('node')
 
@@ -40,19 +58,10 @@ describe('Katon', function() {
     }, done)
   })
 
-  it('Add node > GET http://subdomain.node.ka', function(done) {
-    helper.add('subdomain.node', 'node index.js')
+  it('Remove node subdomain > GET http://subdomain.node.ka', function(done) {
+    helper.remove('subdomain.node')
 
     helper.GET('subdomain.node.ka', {
-      status: 200,
-      body: 'OK'
-    }, done)
-  })
-
-  it('Add node > GET http://subdomain.node.ka', function(done) {
-    helper.add('node', 'node index.js')
-
-    helper.GET('notsubdomain.node.ka', {
       status: 404
     }, done)
   })
