@@ -72,6 +72,8 @@ _If you have missing gems errors, see [issue#32](https://github.com/typicode/kat
 
 When adding a server, you can access it by its URL `http://app.ka`. But you can also use subdomains (e.g. `http://foo.app.ka`, `http://bar.app.ka`, ...).
 
+If you want to map a server to a subdomain, let's say `api.app.ka`, simply use `katon add <cmd> api.app`.
+
 ## xip.io
 
 katon is also fully compatible with [xip.io](http://xip.io/) service.
