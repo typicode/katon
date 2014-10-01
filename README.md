@@ -66,6 +66,8 @@ For Node users, to keep access to katon CLI accross Node versions, add an alias 
 echo "alias katon=`which katon`" >> ~/.profile
 ```
 
+_If you have missing gems errors, see [issue#32](https://github.com/typicode/katon/issues/32). Future releases of katon should make it easier to add._
+
 ## Subdomains
 
 When adding a server, you can access it by its URL `http://app.ka`. But you can also use subdomains (e.g. `http://foo.app.ka`, `http://bar.app.ka`, ...).
