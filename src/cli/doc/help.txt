@@ -1,7 +1,7 @@
 
 katon
 
-Usage: 
+Usage:
     katon add <cmd> [app_name]  Add server and use current dir name or app_name
     katon rm [app_name]         Remove server by current dir name or app_name
     katon open [app_name]       Open current dir or app_name in browser
@@ -16,4 +16,4 @@ Examples:
     katon add 'python -m SimpleHTTPServer $PORT'
 
 To setup katon:
-    sudo katon install && katon start 
+    sudo katon install && katon start
