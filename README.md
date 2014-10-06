@@ -53,23 +53,6 @@ var port = process.env.PORT || 3000;
 
 The same technique can be applied with other languages too.
 
-## Version managers
-
-katon works with any version manager, simply set the desired version before adding your server and katon will remember it.
-
-```bash
-$ nvm use 0.11 && katon add 'npm start'
-$ rbenv local 2.0.0-p481 && katon add 'rails server --port $PORT'
-```
-
-For Node users, to keep access to katon CLI accross Node versions, add an alias to your .profile and reopen the Terminal.
-
-```
-echo "alias katon=`which katon`" >> ~/.profile
-```
-
-_If you have missing gems errors, see [issue#32](https://github.com/typicode/katon/issues/32). Future releases of katon should make it easier to add._
-
 ## Subdomains
 
 When adding a server, you can access it by its URL `http://app.ka`. But you can also use subdomains (e.g. `http://foo.app.ka`, `http://bar.app.ka`, ...).
@@ -86,6 +69,28 @@ Server logs are stored in `<server_dir>/katon.log`, to view them run:
 
 ```bash
 $ tail -f katon.log
+```
+
+## Version managers
+
+katon works with any version manager, simply set the desired version before adding your server and katon will remember it.
+
+```bash
+$ nvm use 0.11 && katon add 'npm start'
+$ rbenv local 2.0.0-p481 && katon add 'rails server --port $PORT'
+```
+
+Depending on your version manager, you may need to add environment variables. Here's an example.
+
+```bash
+$ rvm use ruby-2.0.0-p576 && katon add 'bundle exec unicorn' --env GEM_PATH
+# Will use GEM_PATH previously set by rvm
+```
+
+For Node users, to keep access to katon CLI accross Node versions, add an alias to your .profile and reopen the Terminal.
+
+```bash
+echo "alias katon=`which katon`" >> ~/.profile
 ```
 
 ## Troubleshoot
