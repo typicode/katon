@@ -1,6 +1,6 @@
 {
   "name": "katon",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Automatically starts your development servers so that you can be more productive. Servers are accessible on local .ka domains.",
   "keywords": [
     "node",
@@ -45,7 +45,7 @@
     "jsonfile": "^1.2.0",
     "minimist": "^1.1.0",
     "mkdirp": "^0.5.0",
-    "native-dns": "^0.6.1",
+    "native-dns": "^0.7.0",
     "opn": "^0.1.2",
     "request": "^2.39.0",
     "respawn": "^0.4.2",
