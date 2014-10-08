@@ -22,7 +22,7 @@ module.exports = {
     procs.load()
 
     log('Starting DNS server on port ' + config.dnsPort)
-    this.dns.serve(config.dnsPort, function() {
+    this.dns.listen(config.dnsPort, function() {
       log('DNS server started')
     })
 

@@ -39,6 +39,7 @@
   "dependencies": {
     "block": "^0.2.1",
     "chalk": "^0.5.0",
+    "dnsjack": "^0.3.0",
     "got": "^0.3.0",
     "http-proxy": "^1.1.4",
     "is-root": "^0.1.0",
