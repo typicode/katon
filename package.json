@@ -53,11 +53,12 @@
     "shell-quote": "^1.4.2",
     "shelljs": "^0.3.0",
     "tildify": "^0.2.0",
+    "touch": "0.0.3",
     "update-notifier": "^0.2.0",
     "xtend": "^3.0.0"
   },
   "devDependencies": {
-    "mocha": "^1.21.1",
+    "mocha": "^1.21.4",
     "supertest": "^0.13.0"
   },
   "license": "MIT"
