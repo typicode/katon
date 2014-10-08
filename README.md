@@ -80,7 +80,7 @@ $ nvm use 0.11 && katon add 'npm start'
 $ rbenv local 2.0.0-p481 && katon add 'rails server --port $PORT'
 ```
 
-Depending on your version manager, you may need to add environment variables. Here's an example.
+Depending on your version manager, you may need to add environment variables.
 
 ```bash
 $ rvm use ruby-2.0.0-p576 && katon add 'bundle exec unicorn' --env GEM_PATH
