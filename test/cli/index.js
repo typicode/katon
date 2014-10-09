@@ -70,6 +70,14 @@ describe('katon command-line interface', function() {
     cli.run(['list'])
   })
 
+  it('touch', function() {
+    cli.run(['add', 'echo'])
+    cli.run(['add', 'echo', 'foo'])
+    cli.run(['touch'])
+    cli.run(['touch', 'foo'])
+    cli.run(['touch', 'bar'])
+  })
+
   it('version', function() {
     cli.run(['--version'])
     cli.run(['-v'])

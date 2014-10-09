@@ -14,7 +14,7 @@ module.exports = function() {
 
   // Remove domain resolver
   rmrf.sync(config.resolverPath)
-  
+
   // Remove firewall
   var result = sh.exec('pfctl -a com.apple/250.KatonFirewall -F nat', { silent: true })
   if (result.code !== 0) {
@@ -22,6 +22,6 @@ module.exports = function() {
   }
 
   launchctl.remove(config.firewallPlistPath)
-  
+
   console.log(chalk.red('Done'))
 }

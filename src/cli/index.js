@@ -7,6 +7,7 @@ module.exports = {
 
   add         : require('./commands/add'),
   rm          : require('./commands/rm'),
+  touch       : require('./commands/touch'),
   list        : require('./commands/list'),
   open        : require('./commands/open'),
   status      : require('./commands/status'),

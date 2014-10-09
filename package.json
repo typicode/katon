@@ -1,6 +1,6 @@
 {
   "name": "katon",
-  "version": "0.6.3",
+  "version": "0.6.5",
   "description": "Automatically starts your development servers so that you can be more productive. Servers are accessible on local .ka domains.",
   "keywords": [
     "node",
@@ -39,6 +39,7 @@
   "dependencies": {
     "block": "^0.2.1",
     "chalk": "^0.5.0",
+    "dnsjack": "^0.3.0",
     "got": "^0.3.0",
     "http-proxy": "^1.1.4",
     "is-root": "^0.1.0",
@@ -53,11 +54,12 @@
     "shell-quote": "^1.4.2",
     "shelljs": "^0.3.0",
     "tildify": "^0.2.0",
+    "touch": "0.0.3",
     "update-notifier": "^0.2.0",
     "xtend": "^3.0.0"
   },
   "devDependencies": {
-    "mocha": "^1.21.1",
+    "mocha": "^1.21.4",
     "supertest": "^0.13.0"
   },
   "license": "MIT"
