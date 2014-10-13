@@ -1,13 +1,11 @@
-var fs      = require('fs')
-var mkdirp  = require('mkdirp')
-var chalk   = require('chalk')
-var tildify = require('tildify')
-var config  = require('../../config.js')
+var fs         = require('fs')
+var chalk      = require('chalk')
+var tildify    = require('tildify')
+var listHosts  = require('../utils/list-hosts')
+var config     = require('../../config.js')
 
 module.exports = function() {
-  mkdirp.sync(config.hostsDir)
-
-  fs.readdirSync(config.hostsDir).forEach(function(name) {
+  listHosts().forEach(function(name) {
     var filename = config.hostsDir + '/' + name
     var host = JSON.parse(fs.readFileSync(filename))
 

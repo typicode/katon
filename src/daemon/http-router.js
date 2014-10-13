@@ -1,10 +1,11 @@
-var http       = require('http')
-var httpProxy  = require('http-proxy')
-var chalk      = require('chalk')
-var procs      = require('./procs')
-var render     = require('./utils/render')
-var timer      = require('./utils/timer')
-var util       = require('util')
+var http        = require('http')
+var httpProxy   = require('http-proxy')
+var chalk       = require('chalk')
+var procs       = require('./procs')
+var render      = require('./utils/render')
+var renderIndex = require('./utils/render-index')
+var timer       = require('./utils/timer')
+var util        = require('util')
 
 function log(id, msg) {
   util.log(chalk.green('[router] ') + msg + ' ' + chalk.grey(id))
@@ -29,6 +30,12 @@ module.exports.createServer = function() {
     var host = req.headers.host
 
     log(host, 'Received request')
+
+    if(/^index.ka$/.test(host) ||
+       /^katon.ka$/.test(host)) {
+      res.end(renderIndex())
+      return
+    }
 
     if (/.ka$/.test(host)) {
 
@@ -87,7 +94,7 @@ module.exports.createServer = function() {
       log('', 'No host')
 
       res.statusCode = 200
-      res.end(render('200.html'))
+      res.end(renderIndex())
 
     }
 
