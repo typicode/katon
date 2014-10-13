@@ -21,8 +21,6 @@ module.exports = {
   add: function(id, options) {
     log(id, 'Add')
 
-    var self = this
-
     var env = extend(process.env, options.env)
 
     env.PATH = options.env.PATH
@@ -36,29 +34,27 @@ module.exports = {
       sleep       : 10*1000
     })
 
-    mon.on('start', function() { 
-      log(id, 'Start')
-      out.write(
-          '[katon] Starting ' + id + ' on port: '+ mon.env.PORT
-        + ' using command: ' + mon.command.join(' ') + '\n'
-      )
-    })
+    this.list[id] = mon
 
-    mon.on('exit', function() { log(id, 'Stop') })
+    mkdirp.sync(config.logsDir)
+    var out = fs.createWriteStream(config.logsDir + '/' + id + '.log')
+      .on('error', function(err) {
+        log(id, err)
+      })
+      .on('open', function() {
+        mon.stdio = ['ignore', out, out]
+      })
 
-    mon.on('warn', function(err) { log(id, err) })
+    mon.on('start', function() {
+        log(id, 'Start')
+        out.write(
+            '[katon] Starting ' + id + ' on port: '+ mon.env.PORT
+          + ' using command: ' + mon.command.join(' ') + '\n'
+        )
+      })
+      .on('exit', function() { log(id, 'Stop') })
+      .on('warn', function(err) { log(id, err) })
 
-    self.list[id] = mon
-
-    var out = fs.createWriteStream(options.cwd + '/katon.log', { flags: 'a' })
-    
-    out.on('error', function(err) {
-      log(id, err)
-    })
-
-    out.on('open', function() {
-      mon.stdio = ['ignore', out, out]
-    })
   },
 
   remove: function(id) {

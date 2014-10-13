@@ -12,6 +12,7 @@ module.exports = {
   firewallPlistPath : '/Library/LaunchDaemons/katon.firewall.plist',
   daemonPlistPath   : HOME + '/Library/LaunchAgents/katon.plist',
   hostsDir          : HOME + '/.katon/hosts',
+  logsDir           : HOME + '/.katon/logs',
   daemonPath        : path.resolve(__dirname + '/daemon/index'),
   daemonLogPath     : HOME + '/.katon/daemon.log'
 }
