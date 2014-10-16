@@ -11,22 +11,26 @@ var config  = require('../../src/config')
 
 var PORT = config.katonPort
 
-function log(id, msg) {
-  util.log(chalk.cyan('[procs ] ') + msg + ' ' + chalk.gray(id))
+function createLogger(id) {
+  return function(str) {
+    util.log(chalk.cyan('[procs ] ') + str + ' ' + chalk.gray(id))
+  }
 }
 
 module.exports = {
   list: {},
 
   add: function(id, options) {
-    log(id, 'Add')
-
+    var log = createLogger(id)
     var env = extend(process.env, options.env)
 
-    env.PATH = options.env.PATH
+    log('Add')
+
+    // Set PORT
     env.PORT = PORT += 2
 
-    var mon = respawn({
+    // Create proc and add it to the procs list
+    var proc = this.list[id] = respawn({
       command     : parse(options.command, { PORT: env.PORT }),
       cwd         : options.cwd,
       env         : env,
@@ -34,31 +38,39 @@ module.exports = {
       sleep       : 10*1000
     })
 
-    this.list[id] = mon
-
+    // Ensure logs directory exist
     mkdirp.sync(config.logsDir)
-    var out = fs.createWriteStream(config.logsDir + '/' + id + '.log')
-      .on('error', function(err) {
-        log(id, err)
-      })
+
+    // Create log stream
+    var logFile = config.logsDir + '/' + id + '.log'
+
+    var out = fs.createWriteStream(logFile)
+      .on('error', log)
       .on('open', function() {
-        mon.stdio = ['ignore', out, out]
+        proc.stdio = ['ignore', out, out]
       })
 
-    mon.on('start', function() {
-        log(id, 'Start')
+    // Listen to proc events
+    proc.on('start', function() {
+        log('Start')
         out.write(
-            '[katon] Starting ' + id + ' on port: '+ mon.env.PORT
-          + ' using command: ' + mon.command.join(' ') + '\n'
+            '[katon] Starting ' + id + ' on port: '+ proc.env.PORT
+          + ' using command: ' + mon.command.join(' ')
+          + '\n'
         )
       })
-      .on('exit', function() { log(id, 'Stop') })
-      .on('warn', function(err) { log(id, err) })
+      .on('exit', function() {
+        log('Stop')
+        // Empty log file on exit
+        fs.writeFile(logFile, '', function() {})
+      })
+      .on('warn', log)
 
   },
 
   remove: function(id) {
-    log(id, 'Remove')
+    var log = createLogger(id)
+    log('Remove')
     this.list[id].stop()
     delete this.list[id]
   },
@@ -68,10 +80,12 @@ module.exports = {
     var self = this
 
     fs.readdirSync(config.hostsDir).forEach(function(name) {
-      var id      = name.replace('.json', '')
-      var options = JSON.parse(fs.readFileSync(config.hostsDir + '/' + name))
+      if (/.json$/.test(name)) {
+        var id      = name.replace('.json', '')
+        var options = JSON.parse(fs.readFileSync(config.hostsDir + '/' + name))
 
-      self.add(id, options)
+        self.add(id, options)
+      }
     })
 
     fs.watch(config.hostsDir, function(event, name) {

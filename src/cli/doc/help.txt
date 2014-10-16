@@ -1,6 +1,4 @@
 
-katon
-
 Usage:
     katon add <cmd> [app_name]  Add server and use current dir name or app_name
     katon rm [app_name]         Remove server by current dir name or app_name
@@ -8,7 +6,7 @@ Usage:
     katon touch [app_name]      Reload server by current dir or app_name
     katon list                  List apps
     katon start|stop            Daemon control
-    katon install|uninstall     Must be run to setup katon (sudo)
+    katon install|uninstall     Must be run to setup katon (use sudo)
     katon status                Give status informations
 
 Examples:

@@ -63,10 +63,10 @@ katon is also fully compatible with [xip.io](http://xip.io/) service.
 
 ## Logs
 
-Server logs are stored in `<server_dir>/katon.log`, to view them run:
+Server logs are stored in `~/.katon/logs/<app_name>.log`, to view them run:
 
 ```bash
-$ tail -f katon.log
+$ tail -f ~/.katon/logs/<app_name>.log
 ```
 
 ## Version managers
