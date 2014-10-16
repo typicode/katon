@@ -1,6 +1,6 @@
 {
   "name": "katon",
-  "version": "0.6.5",
+  "version": "0.7.0",
   "description": "Automatically starts your development servers so that you can be more productive. Servers are accessible on local .ka domains.",
   "keywords": [
     "node",
