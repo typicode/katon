@@ -79,6 +79,10 @@ module.exports = {
   load: function() {
     var self = this
 
+    // Ensure hosts directory exists
+    mkdirp.sync(config.hostsDir)
+
+    // Read and add config files
     fs.readdirSync(config.hostsDir).forEach(function(name) {
       if (/.json$/.test(name)) {
         var id      = name.replace('.json', '')
@@ -88,6 +92,7 @@ module.exports = {
       }
     })
 
+    // Watch for changes
     fs.watch(config.hostsDir, function(event, name) {
       var id   = name.replace('.json', '')
       var file = config.hostsDir + '/' + name

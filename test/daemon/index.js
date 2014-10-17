@@ -1,5 +1,6 @@
-var setup  = require('../setup')()
-var helper = require('./helper')
+var request = require('request')
+var setup   = require('../setup')()
+var helper  = require('./helper')
 
 describe('Katon', function() {
   this.timeout(10000);
@@ -116,6 +117,21 @@ describe('Katon', function() {
     helper.GET('127.0.0.1', {
       status: 200
     }, done)
+  })
+
+  it('GET https://127.0.0.1 (HTTPS test)', function(done) {
+    request({
+      url: 'https://127.0.0.1',
+      strictSSL: false,
+      rejectUnhauthorized: false
+    }, function(err, response, body) {
+      if (!err && response.statusCode === 200) {
+        done()
+      } else {
+        done(new Error('Failed to connect to HTTPS'))
+      }
+    })
+
   })
 
 })

@@ -5,6 +5,7 @@ module.exports = {
   nodePath          : process.execPath,
 
   dnsPort           : 13375,
+  httpsProxyPort         : 30900,
   katonPort         : 31000,
 
   resolverPath      : '/etc/resolver/ka',
