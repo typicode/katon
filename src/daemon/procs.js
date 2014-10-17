@@ -55,7 +55,7 @@ module.exports = {
         log('Start')
         out.write(
             '[katon] Starting ' + id + ' on port: '+ proc.env.PORT
-          + ' using command: ' + mon.command.join(' ')
+          + ' using command: ' + proc.command.join(' ')
           + '\n'
         )
       })

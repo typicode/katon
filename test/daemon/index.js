@@ -1,6 +1,7 @@
 var request = require('request')
 var setup   = require('../setup')()
 var helper  = require('./helper')
+var config  = require('../../src/config')
 
 describe('Katon', function() {
   this.timeout(10000);
@@ -121,14 +122,14 @@ describe('Katon', function() {
 
   it('GET https://127.0.0.1 (HTTPS test)', function(done) {
     request({
-      url: 'https://127.0.0.1',
+      url: 'https://127.0.0.1:' + config.httpsProxyPort,
       strictSSL: false,
       rejectUnhauthorized: false
     }, function(err, response, body) {
       if (!err && response.statusCode === 200) {
         done()
       } else {
-        done(new Error('Failed to connect to HTTPS'))
+        done(err)
       }
     })
 
