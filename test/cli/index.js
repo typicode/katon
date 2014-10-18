@@ -73,9 +73,9 @@ describe('katon command-line interface', function() {
   it('touch', function() {
     cli.run(['add', 'echo'])
     cli.run(['add', 'echo', 'foo'])
-    cli.run(['touch'])
-    cli.run(['touch', 'foo'])
-    cli.run(['touch', 'bar'])
+    cli.run(['reload'])
+    cli.run(['reload', 'foo'])
+    cli.run(['reload', 'bar'])
   })
 
   it('version', function() {
