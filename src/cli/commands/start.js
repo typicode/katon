@@ -6,7 +6,7 @@ var config    = require('../../config.js')
 
 module.exports = function() {
   console.log(chalk.green('Starting katon daemon'))
-  mkdirp.sync(path.dirname(config.hostsPath))
+  mkdirp.sync(path.dirname(config.hostsDir))
   launchctl.create('katon.plist', config.daemonPlistPath)
   console.log(chalk.green('Done'))
 }
