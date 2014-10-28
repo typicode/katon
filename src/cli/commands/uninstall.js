@@ -16,7 +16,7 @@ module.exports = function() {
   rmrf.sync(config.resolverPath)
 
   // Remove firewall
-  var result = sh.exec('pfctl -a com.apple/250.KatonFirewall -F nat', { silent: true })
+  var result = sh.exec('pfctl -a com.apple/250.KatonFirewall -F all', { silent: true })
   if (result.code !== 0) {
     console.log(result.output)
   }
