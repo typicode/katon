@@ -1,7 +1,7 @@
-var chalk   = require('chalk')
-var request = require('request')
-var sh      = require('shelljs')
-var config  = require('../../config.js')
+var chalk  = require('chalk')
+var got    = require('got')
+var sh     = require('shelljs')
+var config = require('../../config.js')
 
 module.exports = function() {
   console.log('Checking that katon daemon is loaded...')
@@ -17,10 +17,7 @@ module.exports = function() {
 
   console.log('Checking .ka domain...')
   
-  request({
-    url: 'http://katon-status-test.ka',
-    timeout: 1000 
-  }, function(err) {
+  got('http://index.ka', function(err, data, res) {
     if (err) {
       console.log(chalk.red('KO try `sudo katon install`'))
     } else {
