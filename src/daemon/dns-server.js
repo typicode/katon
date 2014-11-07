@@ -1,5 +1,5 @@
 var util  = require('util')
-var dns   = require('dnsjack')
+var dns   = require('native-dns')
 var chalk = require('chalk')
 
 function log(str) {
@@ -10,12 +10,21 @@ module.exports.createServer = function() {
 
   var server = dns.createServer()
 
-  server.route('*', function(domain, cb) {
-    cb(null, '127.0.0.1')
+  server.on('request', function(request, response) {
+    var name = request.question[0].name
+  	
+    response.answer.push(dns.A({
+      name: name,
+      address: '127.0.0.1',
+      ttl: 600
+    }))
+
+    response.send()
+    log('Resolved ' + name)
   })
 
-  server.on('resolve', function(domain) {
-    log("Resolving " + domain)
+  server.on('error', function (err, buff, req, res) {
+    console.log(err.stack)
   })
 
   return server

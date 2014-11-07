@@ -24,7 +24,7 @@ module.exports = {
     procs.load()
 
     log('Starting DNS server on port ' + config.dnsPort)
-    this.dns.listen(config.dnsPort, function() {
+    this.dns.serve(config.dnsPort, function() {
       log('DNS server started')
     })
 
@@ -33,7 +33,7 @@ module.exports = {
       log('HTTPS server started')
     })
 
-    log('Starting katon server on port ' + config.httpPort)
+    log('Starting HTTP server on port ' + config.httpPort)
     this.katon.listen(config.httpPort, function() {
       log('Katon server started')
     })
