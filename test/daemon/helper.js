@@ -1,7 +1,7 @@
 var rmrf    = require('rimraf')
 var chalk   = require('chalk')
 var config  = require('../../src/config')
-var request = require('supertest')('http://localhost:' + config.katonPort)
+var request = require('supertest')('http://localhost:' + config.httpPort)
 var cli     = require('../../src/cli')
 
 function log(str) {

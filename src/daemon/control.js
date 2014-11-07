@@ -33,8 +33,8 @@ module.exports = {
       log('HTTPS server started')
     })
 
-    log('Starting katon server on port ' + config.katonPort)
-    this.katon.listen(config.katonPort, function() {
+    log('Starting katon server on port ' + config.httpPort)
+    this.katon.listen(config.httpPort, function() {
       log('Katon server started')
     })
   },

@@ -11,7 +11,7 @@ config.resolverPath      = tmp + config.resolverPath
 config.firewallPlistPath = tmp + config.firewallPlist
 
 config.dnsPort   = 50100
-config.katonPort = 50200
+config.httpPort = 50200
 
 // Setup paths so that everything is written to tmp
 module.exports = function() {

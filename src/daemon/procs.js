@@ -9,7 +9,7 @@ var tildify = require('tildify')
 var parse   = require('shell-quote').parse
 var config  = require('../../src/config')
 
-var PORT = config.katonPort
+var PORT = config.httpPort
 
 function createLogger(id) {
   return function(str) {

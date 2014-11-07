@@ -6,7 +6,7 @@ module.exports = {
 
   dnsPort           : 13375,
   httpsProxyPort    : 30900,
-  katonPort         : 31000,
+  httpPort         : 31000,
 
   resolverPath      : '/etc/resolver/ka',
 

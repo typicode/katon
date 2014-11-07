@@ -6,7 +6,7 @@ module.exports.createServer = function() {
   return httpProxy.createServer({
     target: {
       host: 'localhost',
-      port: config.katonPort
+      port: config.httpPort
     },
     ssl: {
       key: fs.readFileSync(__dirname + '/certs/server.key', 'utf8'),
