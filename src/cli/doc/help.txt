@@ -5,6 +5,7 @@ Usage:
     katon open [app_name]       Open current dir or app_name in browser
     katon reload [app_name]     Reload server by current dir or app_name
     katon list                  List apps
+    katon tail                  Tail server log
     katon start|stop            Daemon control
     katon install|uninstall     Must be run to setup katon (use sudo)
     katon status                Give status informations
