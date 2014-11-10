@@ -13,6 +13,7 @@ module.exports = {
   status      : require('./commands/status'),
   start       : require('./commands/start'),
   stop        : require('./commands/stop'),
+  tail        : require('./commands/tail'),
   install     : require('./commands/install'),
   uninstall   : require('./commands/uninstall'),
 
