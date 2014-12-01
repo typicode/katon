@@ -18,6 +18,11 @@ module.exports.createServer = function() {
       address: '127.0.0.1',
       ttl: 600
     }))
+    response.answer.push(dns.AAAA({
+      name: name,
+      address: '::1',
+      ttl: 600
+    }))
 
     response.send()
     log('Resolved ' + name)
