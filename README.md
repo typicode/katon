@@ -19,8 +19,9 @@ Make sure [Node](http://nodejs.org/download/) is installed first, then:
 
 ```bash
 $ npm install -g katon
-$ sudo katon install && katon start
 ```
+
+To manually install katon, you can run `sudo katon install && katon start`.
 
 ## Add servers
 
