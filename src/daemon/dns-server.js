@@ -11,25 +11,33 @@ module.exports.createServer = function() {
   var server = dns.createServer()
 
   server.on('request', function(request, response) {
-    var name = request.question[0].name
-  	
-    response.answer.push(dns.A({
+    var question  = request.question[0]
+    var name      = question.name
+
+    var a = dns.A({
       name: name,
       address: '127.0.0.1',
       ttl: 600
-    }))
-    response.answer.push(dns.AAAA({
+    })
+    var aaaa = dns.AAAA({
       name: name,
       address: '::1',
       ttl: 600
-    }))
+    })
+
+    // Answer A question with A record, AAAA with AAAA
+    // record (and vice versa)
+    if (question.type === dns.consts.NAME_TO_QTYPE.A)
+      response.answer.push(a)
+    if (question.type === dns.consts.NAME_TO_QTYPE.AAAA)
+      response.answer.push(aaaa)
 
     response.send()
     log('Resolved ' + name)
   })
 
   server.on('error', function (err, buff, req, res) {
-    console.log(err.stack)
+    log(err.stack)
   })
 
   return server
