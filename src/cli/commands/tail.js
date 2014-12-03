@@ -107,7 +107,8 @@ function tailAllLogFiles()
     })
     .forEach(function(filename) {
       var basename = path.basename(filename, '.log')
-      tailFile(filename, '[' + basename  + ']  ')
+      var prefix   = chalk.blue('[' + basename + ']  ')
+      tailFile(filename, prefix)
     })
 }
 
