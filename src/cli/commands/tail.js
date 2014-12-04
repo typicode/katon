@@ -1,6 +1,7 @@
 var fs         = require('fs')
 var chalk      = require('chalk')
 var path       = require('path')
+var pathToHost = require('../utils/path-to-host')
 var config     = require('../../config.js')
 
 
@@ -114,12 +115,11 @@ function tailAllLogFiles()
 
 
 module.exports = function(args) {
-  var host     = args[0] || path.basename(process.cwd())
-  var logFile  = config.logsDir + '/' + host + '.log'
+  var host    = args[0] || pathToHost(process.cwd())
+  var logFile = config.logsDir + '/' + host + '.log'
 
   if (host == 'all')
     tailAllLogFiles()
   else
     tailFile(logFile, '')
 }
-
