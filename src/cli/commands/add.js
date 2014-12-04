@@ -27,7 +27,7 @@ module.exports = function(args) {
   }
 
   // Get host name
-  var host = args._[1] ? args._[1] : pathToHost(pathToHost(process.cwd()))
+  var host = args._[1] ? args._[1] : pathToHost(process.cwd())
 
   // Create env
   var env = {
