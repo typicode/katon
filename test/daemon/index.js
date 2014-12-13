@@ -25,6 +25,15 @@ describe('Katon', function() {
     }, done)
   })
 
+  it('Add node > GET http://node.10.0.0.1.xip.io', function(done) {
+    helper.add('node', 'node index.js')
+
+    helper.GET('node.10.0.0.1.xip.io', {
+      status: 200,
+      body: 'OK'
+    }, done)
+  })
+
   it('Add node > GET http://node.ka', function(done) {
     helper.add('node', 'node index.js')
 

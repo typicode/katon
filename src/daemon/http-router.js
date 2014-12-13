@@ -11,14 +11,24 @@ function log(id, msg) {
   util.log(chalk.green('[router] ') + msg + ' ' + chalk.grey(id))
 }
 
+// For http://www.app.ka will ['www', 'app']
+// For http://www.app.10.0.0.1.xip.io will return ['www', 'app']
+function removeTopLevelDomain(host) {
+  if (/.xip.io$/.test(host)) {
+    return host.split('.').slice(0, -6)
+  } else {
+    return host.split('.').slice(0, -1)
+  }
+}
+
 // For http://www.app.ka will return app
 function getDomainId(host) {
-  return host.split('.').slice(-2, -1).pop()
+  return removeTopLevelDomain(host).pop()
 }
 
 // For http://www.app.ka will return www.app
 function getSubdomainId(host) {
-  return host.split('.').slice(0, -1).join('.')
+  return removeTopLevelDomain(host).join('.')
 }
 
 module.exports.createServer = function() {
@@ -37,7 +47,7 @@ module.exports.createServer = function() {
       return
     }
 
-    if (/.ka$/.test(host)) {
+    if (/.ka$/.test(host) || /.xip.io$/.test(host)) {
 
       var domainId = getDomainId(host)
       var subdomainId = getSubdomainId(host)
