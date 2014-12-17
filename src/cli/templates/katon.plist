@@ -6,16 +6,16 @@
     <string>katon</string>
     <key>ProgramArguments</key>
     <array>
-        <string>{{nodePath}}</string>
-        <string>{{daemonPath}}</string>
+        <string><%= nodePath %></string>
+        <string><%= daemonPath %></string>
     </array>
     <key>KeepAlive</key>
     <true/>
     <key>RunAtLoad</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>{{daemonLogPath}}</string>
+    <string><%= daemonLogPath %></string>
     <key>StandardErrorPath</key>
-    <string>{{daemonLogPath}}</string>
+    <string><%= daemonLogPath %></string>
 </dict>
 </plist>

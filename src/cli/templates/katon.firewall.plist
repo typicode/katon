@@ -10,7 +10,7 @@
         <string>-c</string>
         <string>
             sysctl -w net.inet.ip.forwarding=1;
-            echo "rdr pass inet proto tcp from any to self port {80,{{httpPort}}} -> 127.0.0.1 port {{httpPort}}\nrdr pass inet proto tcp from any to self port {443,{{httpsProxyPort}}} -> 127.0.0.1 port {{httpsProxyPort}}" | pfctl -a "com.apple/250.KatonFirewall" -Ef -
+            echo "rdr pass inet proto tcp from any to self port {80,<%= httpPort %>} -> 127.0.0.1 port <%= httpPort %>\nrdr pass inet proto tcp from any to self port {443,<%= httpsProxyPort %>} -> 127.0.0.1 port <%= httpsProxyPort %>" | pfctl -a "com.apple/250.KatonFirewall" -Ef -
         </string>
     </array>
     <key>RunAtLoad</key>
