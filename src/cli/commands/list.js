@@ -14,5 +14,9 @@ module.exports = function() {
       host.command,
       chalk.grey(tildify(host.cwd))
     )
-  }) 
+  })
+
+  console.log(
+    chalk.grey('Go to http://index.ka to view app list from your browser')
+  )
 }
