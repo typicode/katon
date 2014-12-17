@@ -1,0 +1,11 @@
+<p>katon is successfully running.</p>
+<p>Current apps:</p>
+
+<ul>
+  <% Object.keys(procs).forEach(function(name) { %>
+    <li>
+      <a class="app" href="http://<%= name %>.ka/"><%= name %></a>
+      <small><%= procs[name].command.join(' ') %></small>
+    </li>
+  <% }) %>
+</ul>

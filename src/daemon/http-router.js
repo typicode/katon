@@ -1,11 +1,10 @@
-var http        = require('http')
-var httpProxy   = require('http-proxy')
-var chalk       = require('chalk')
-var procs       = require('./procs')
-var render      = require('./utils/render')
-var renderIndex = require('./utils/render-index')
-var timer       = require('./utils/timer')
-var util        = require('util')
+var http      = require('http')
+var httpProxy = require('http-proxy')
+var chalk     = require('chalk')
+var procs     = require('./procs')
+var render    = require('./utils/render')
+var timer     = require('./utils/timer')
+var util      = require('util')
 
 function log(id, msg) {
   util.log(chalk.green('[router] ') + msg + ' ' + chalk.grey(id))
@@ -43,7 +42,7 @@ module.exports.createServer = function() {
 
     if(/^index.ka$/.test(host) ||
        /^katon.ka$/.test(host)) {
-      res.end(renderIndex())
+      res.end(render('200.ejs', { procs: procs.list }))
       return
     }
 
@@ -104,7 +103,7 @@ module.exports.createServer = function() {
       log('', 'No host')
 
       res.statusCode = 200
-      res.end(renderIndex())
+      res.end(render('200.ejs', { procs: procs.list }))
 
     }
 
