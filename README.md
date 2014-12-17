@@ -31,6 +31,7 @@ $ katon add 'npm start'
 $ katon add 'grunt server'
 $ katon add 'rails server --port $PORT'
 $ katon add 'python -m SimpleHTTPServer $PORT'
+$ katon add 'php -S 127.0.0.1:$PORT'
 ```
 
 To add a server with a different name than its directory.
