@@ -56,7 +56,8 @@
   "devDependencies": {
     "mocha": "^1.21.4",
     "request": "^2.45.0",
-    "supertest": "^0.13.0"
+    "supertest": "^0.13.0",
+    "ws": "^0.7.0"
   },
   "license": "MIT"
 }

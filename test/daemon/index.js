@@ -1,7 +1,8 @@
-var request = require('request')
-var setup   = require('../setup')()
-var helper  = require('./helper')
-var config  = require('../../src/config')
+var request   = require('request')
+var WebSocket = require('ws')
+var setup     = require('../setup')()
+var helper    = require('./helper')
+var config    = require('../../src/config')
 
 describe('Katon', function() {
   this.timeout(10000);
@@ -141,7 +142,24 @@ describe('Katon', function() {
         done(err)
       }
     })
-
   })
 
+  it('Supports WebSocket', function(done) {
+    helper.add('websocket', 'node index.js')
+
+    setTimeout(function() {
+      var ws = new WebSocket('ws://127.0.0.1:' + config.httpPort, {
+        host: 'websocket.ka',
+        origin: 'websocket.ka'
+      })
+
+      ws.on('open', function() {
+        done()
+      })
+
+      ws.on('error', function(err) {
+        done(new Error(err))
+      })
+    }, 1000)
+  })
 })

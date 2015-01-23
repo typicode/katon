@@ -1,16 +1,18 @@
 var http      = require('http')
 var httpProxy = require('http-proxy')
+var net       = require('net')
 var chalk     = require('chalk')
 var procs     = require('./procs')
 var render    = require('./utils/render')
 var timer     = require('./utils/timer')
 var util      = require('util')
 
-function log(id, msg) {
-  util.log(chalk.green('[router] ') + msg + ' ' + chalk.grey(id))
+// Logger
+function log(id, msg, err) {
+  util.log(chalk.green('[router]'), msg, '[' + err + ']', chalk.grey(id))
 }
 
-// For http://www.app.ka will ['www', 'app']
+// For http://www.app.ka will return ['www', 'app']
 // For http://www.app.10.0.0.1.xip.io will return ['www', 'app']
 function removeTopLevelDomain(host) {
   if (/.xip.io$/.test(host)) {
@@ -30,95 +32,145 @@ function getSubdomainId(host) {
   return removeTopLevelDomain(host).join('.')
 }
 
+// Find proc based on host name
+function getProc(host) {
+  var domainId = getDomainId(host)
+  var subdomainId = getSubdomainId(host)
+
+  if (procs.list[subdomainId]) {
+    return procs.list[subdomainId]
+  } else {
+    return procs.list[domainId]
+  }
+}
+
+// Return true if proc exist
+function procExists(host) {
+  return typeof getProc(host) != 'undefined'
+}
+
+// Find, start and return proc based on host name
+function startProc(host) {
+  var proc = getProc(host)
+  try {
+    proc.start()
+  } catch (e) {
+    util.log(host, 'Can\'t start proc', e)
+  }
+  return proc
+}
+
 module.exports.createServer = function() {
 
   var server = http.createServer()
-  var proxy  = httpProxy.createProxyServer()
+  var proxy = httpProxy.createProxyServer()
 
-  server.on('request', function(req, res) {
+  // WebSocket
+  server.on('upgrade', function(req, socket, head) {
     var host = req.headers.host
+    var count = 0
+    var max = 3
 
-    log(host, 'Received request')
+    log(host, 'WebSocket request received')
 
-    if(/^index.ka$/.test(host) ||
-       /^katon.ka$/.test(host)) {
-      res.end(render('200.ejs', { procs: procs.list }))
-      return
+    // Test if proc exists for host
+    if (!procExists(host)) {
+      return log(host, 'Can\'t find proc')
     }
 
-    if (/.ka$/.test(host) || /.xip.io$/.test(host)) {
+    // Start process
+    var proc = startProc(host)
 
-      var domainId = getDomainId(host)
-      var subdomainId = getSubdomainId(host)
+    // Forward
+    function forward() {
+      // proxy.ws can be only used once, so we're trying to make a TCP connect
+      // before to know if port is open
+      var client = net.connect({port: proc.env.PORT}, function() {
+        // WebSocket request can be proxied, destroy TCP socket
+        client.destroy()
+        log(host, 'Proxying to ws://127.0.0.1:' + proc.env.PORT)
+        proxy.ws(req, socket, head,
+          { target: 'ws://127.0.0.1:' + proc.env.PORT },
+          function(err) {
+            log(host, 'Can\'t proxy WebSocket request')
+          }
+        )
+      })
 
-      if (procs.list[subdomainId]) {
-        var id = subdomainId
-        var proc = procs.list[subdomainId]
-      } else {
-        var id = domainId
-        var proc = procs.list[domainId]
-      }
-
-      if (proc) {
-
-        log(id, 'Found proc [' + proc.status + ']')
-
-        var port   = proc.env.PORT
-        var target = { target: 'http://127.0.0.1:' + port }
-
-        try { proc.start() }
-        catch(e) { log(id, e) }
-
-        var delay = 2000
-
-        log(id, 'Forwarding to ' + port)
-        proxy.web(req, res, target, function() {
-          log(id, 'Failed to forward, retry in ' + delay + ' ms')
+      client.on('error', function(err) {
+        log(host, 'Can\'t connect to ws://127.0.0.1:' + proc.env.PORT, err)
+        count += 1
+        if (count <= max) {
+          log(host, 'retry in 1 second')
           setTimeout(function() {
-            proxy.web(req, res, target, function() {
-              log(id, 'Failed to forward, last try in ' + delay + 'ms')
-              setTimeout(function() {
-                proxy.web(req, res, target)
-              }, delay)
-            })
-          }, delay)
-        })
-
-        timer(proc.id, function() {
-          log(id, 'No requests for 1 hour')
-          proc.stop()
-        })
-
-      } else {
-
-        log(id, 'Can\'t find proc')
-
-        res.statusCode = 404
-        res.end(render('404.html'))
-
-      }
-
-    } else {
-
-      log('', 'No host')
-
-      res.statusCode = 200
-      res.end(render('200.ejs', { procs: procs.list }))
-
+            forward()
+          }, 1000)
+        }
+      })
     }
 
+    forward()
   })
 
-  proxy.on('error', function(err, req, res) {
-    if (err.code === 'EADDRINUSE') {
-      return log('', err.code + ' check that port is not in use')
+  // HTTP
+  server.on('request', function(req, res) {
+    var host = req.headers.host
+    var count = 0
+    var max = 3
+
+    log(host, 'HTTP request received')
+
+    // Render katon home
+    if(/^index.ka$/.test(host) || /^katon.ka$/.test(host)) {
+      return res.end(render('200.ejs', { procs: procs.list }))
     }
 
-    var id = req.headers.host
+    // Verify host is set and valid
+    if (!(/.ka$/.test(host) || /.xip.io$/.test(host))) {
+      log(host, 'Not a valid Host')
+      res.statusCode = 200
+      return res.end(render('200.ejs', { procs: procs.list }))
+    }
 
-    log(id, 'Can\'t connect: ' + err)
-    res.statusCode = 502
-    res.end(render('502.html'))
+    // Test if proc exists for host
+    if (!procExists(host)) {
+      log(host, 'Can\'t find proc')
+      res.statusCode = 404
+      return res.end(render('404.html'))
+    }
+
+    // Start process
+    var proc = startProc(host)
+
+    // Proxy request
+    function forward() {
+      log(host, 'Proxying to http://127.0.0.1:' + proc.env.PORT)
+      proxy.web(req, res, {
+        target: 'http://127.0.0.1:' + proc.env.PORT
+      }, function(err, req, res) {
+        // If address is in use stop
+        if (err.code === 'EADDRINUSE') {
+          log(host, err.code + ' check that port is not in use')
+          res.statusCode = 502
+          return res.end(render('502.html'))
+        }
+
+        // Else retry
+        log(host, 'Can\'t connect, retry in 1 second [' + err + ']')
+        count += 1
+        if (count <= max) {
+          setTimeout(function() {
+            forward()
+          }, 1000)
+        } else {
+          log(host, 'Can\'t connect: ' + err)
+          res.statusCode = 502
+          res.end(render('502.html'))
+        }
+      })
+    }
+
+    forward()
   })
 
   return server
