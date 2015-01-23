@@ -11,7 +11,7 @@ var util      = require('util')
 // Logger
 function log(id, msg, err) {
   var str = chalk.green('[router]') + ' ' + msg
-  str += err ? '[' + err + '] ' : ' '
+  str += err ? ' [' + err + '] ' : ' '
   str += chalk.grey(id)
   util.log(str)
 }
