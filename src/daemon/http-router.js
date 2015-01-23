@@ -1,6 +1,7 @@
 var http      = require('http')
 var httpProxy = require('http-proxy')
 var net       = require('net')
+var address   = require('network-address')
 var chalk     = require('chalk')
 var procs     = require('./procs')
 var render    = require('./utils/render')
@@ -9,7 +10,9 @@ var util      = require('util')
 
 // Logger
 function log(id, msg, err) {
-  util.log(chalk.green('[router]'), msg, '[' + err + ']', chalk.grey(id))
+  var str = chalk.green('[router]') + ' ' + msg
+  str += err ? '[' + err + ']' : ''
+  util.log(str, chalk.grey(id))
 }
 
 // For http://www.app.ka will return ['www', 'app']
@@ -121,15 +124,22 @@ module.exports.createServer = function() {
     log(host, 'HTTP request received')
 
     // Render katon home
-    if(/^index.ka$/.test(host) || /^katon.ka$/.test(host)) {
-      return res.end(render('200.ejs', { procs: procs.list }))
+    var domain = getDomainId(host)
+    if (domain === 'index' || domain === 'katon') {
+      return res.end(render('200.ejs', {
+        procs: procs.list,
+        ip: address()
+      }))
     }
 
     // Verify host is set and valid
     if (!(/.ka$/.test(host) || /.xip.io$/.test(host))) {
       log(host, 'Not a valid Host')
       res.statusCode = 200
-      return res.end(render('200.ejs', { procs: procs.list }))
+      return res.end(render('200.ejs', {
+        procs: procs.list,
+        ip: address()
+      }))
     }
 
     // Test if proc exists for host
