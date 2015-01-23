@@ -3,7 +3,7 @@ var dns   = require('native-dns')
 var chalk = require('chalk')
 
 function log(str) {
-  util.log(chalk.magenta('[dns   ] ') + chalk.grey(str))
+  util.log(chalk.magenta('[dns   ] '))
 }
 
 module.exports.createServer = function() {
@@ -33,11 +33,11 @@ module.exports.createServer = function() {
       response.answer.push(aaaa)
 
     response.send()
-    log('Resolved ' + name)
+    log('Resolved ' + chalk.grey(name))
   })
 
   server.on('error', function (err, buff, req, res) {
-    log(err.stack)
+    log(chalk.grey(err.stack))
   })
 
   return server

@@ -11,8 +11,9 @@ var util      = require('util')
 // Logger
 function log(id, msg, err) {
   var str = chalk.green('[router]') + ' ' + msg
-  str += err ? '[' + err + ']' : ''
-  util.log(str, chalk.grey(id))
+  str += err ? '[' + err + '] ' : ' '
+  str += chalk.grey(id)
+  util.log(str)
 }
 
 // For http://www.app.ka will return ['www', 'app']
