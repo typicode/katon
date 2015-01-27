@@ -16,6 +16,8 @@ module.exports = function() {
     )
   })
 
+  console.log()
+  
   console.log(
     chalk.grey('Go to http://index.ka to view app list from your browser')
   )
