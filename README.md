@@ -11,7 +11,7 @@ Instead, add your development servers once to katon and they'll be autostarted a
   <a href="http://i.imgur.com/7oPMSbm.png">Click here to view a screenshot of katon + Express + Rails</a>
 </p>
 
-__katon supports any server: Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on Mac OS (Yosemite included).
+__katon supports any server: Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on Mac OS.
 
 ## Install
 
