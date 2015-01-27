@@ -53,14 +53,22 @@ function procExists(host) {
   return typeof getProc(host) != 'undefined'
 }
 
-// Find, start and return proc based on host name
+// Find, start, return proc based on host name
+// Proc is automatically stopped after 1 hour if this function is not called
 function startProc(host) {
   var proc = getProc(host)
+
   try {
     proc.start()
   } catch (e) {
     util.log(host, 'Can\'t start proc', e)
   }
+
+  timer(proc.id, function() {
+    log(proc.id, 'No requests for 1 hour')
+    proc.stop()
+  })
+
   return proc
 }
 
@@ -82,7 +90,7 @@ module.exports.createServer = function() {
       return log(host, 'Can\'t find proc')
     }
 
-    // Start process
+    // Start process or refresh it's timer
     var proc = startProc(host)
 
     // Forward
@@ -150,7 +158,7 @@ module.exports.createServer = function() {
       return res.end(render('404.html'))
     }
 
-    // Start process
+    // Start process or refresh it's timer
     var proc = startProc(host)
 
     // Proxy request
