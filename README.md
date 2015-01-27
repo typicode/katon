@@ -7,7 +7,7 @@ With katon, there's no need anymore to open a Terminal and manually start develo
 Instead, add your development servers once to katon and they'll be autostarted and always accessible on local .ka domains.
 
 <p align="center">
-  <img src="http://i.imgur.com/ovO1g86.png"><br>
+  <img src="http://i.imgur.com/2jrrIlY.png"><br>
   <a href="http://i.imgur.com/7oPMSbm.png">Click here to view a screenshot of katon + Express + Rails</a>
 </p>
 
