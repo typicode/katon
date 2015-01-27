@@ -1,17 +1,12 @@
 # katon [![](https://badge.fury.io/js/katon.svg)](http://badge.fury.io/js/katon) [![](https://travis-ci.org/typicode/katon.svg?branch=master)](https://travis-ci.org/typicode/katon)
 
-> Autostarts your development servers so that you can be more productive
+> Access your dev servers using local addresses
 
-With katon, there's no need anymore to open a Terminal and manually start developement servers each time you want to develop.
+Add your development servers __once__ to katon and they'll be __autostarted__ and __always accessible__ on local .ka domains.
 
-Instead, add your development servers once to katon and they'll be autostarted and always accessible on local .ka domains.
+![](http://i.imgur.com/AyFpCHj.png)
 
-<p align="center">
-  <img src="http://i.imgur.com/AyFpCHj.png"><br>
-  <a href="http://i.imgur.com/7oPMSbm.png">Click here to view a screenshot of katon + Express + Rails</a>
-</p>
-
-__katon supports any server: Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on Mac OS.
+katon supports any server: Node, Ruby, Python, Go, Java, PHP, ... that can be started with a command-line and runs on Mac OS.
 
 ## Install
 
