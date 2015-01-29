@@ -2,7 +2,7 @@
 
 > Access your dev servers using local addresses
 
-Add your development servers __once__ to katon and they'll be __autostarted__ and __always accessible__ on local .ka domains.
+Add your development servers __once__ to katon and they'll be __autostarted__ and __accessible__ on local .ka domains. No more messing with http://localhost:some_port
 
 ![](http://i.imgur.com/AyFpCHj.png)
 
