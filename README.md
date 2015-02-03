@@ -1,6 +1,6 @@
 # katon [![](https://badge.fury.io/js/katon.svg)](http://badge.fury.io/js/katon) [![](https://travis-ci.org/typicode/katon.svg?branch=master)](https://travis-ci.org/typicode/katon)
 
-> Access your dev servers using local addresses
+> Access your dev servers by their names
 
 Add your development servers __once__ to katon and they'll be __autostarted__ and __accessible__ on local .ka domains.
 
