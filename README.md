@@ -2,7 +2,7 @@
 
 > Access your dev servers by their names
 
-Add your development servers to katon and they'll be __accessible__ on local .ka domains and  __autostarted/stopped__ for you.
+katon is a development tool that makes dev servers __accessible__ on __beautiful__ local .ka domains. It also __autostarts/stops__ them for you.
 
 ![](http://i.imgur.com/AyFpCHj.png)
 
