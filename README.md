@@ -60,7 +60,6 @@ Using [xip.io](http://xip.io/) you can access your servers from other devices (i
 
 ```
 # Let's say your local address is 192.168.1.12
-# You can my-app.ka using this URL
 http://my-app.192.168.1.12.xip.io/
 ```
 
