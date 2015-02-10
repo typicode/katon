@@ -54,9 +54,17 @@ When adding a server, you can access it by its URL `http://app.ka`. But you can 
 
 If you want to map a server to a subdomain, let's say `api.app.ka`, simply use `katon add <cmd> api.app`.
 
-## xip.io
+## Access from other devices
 
-katon is also fully compatible with [xip.io](http://xip.io/) service.
+Using [xip.io](http://xip.io/) you can access your servers from other devices (iPad, iPhone, ...) on your LAN.
+
+```
+# Let's say your local address is 192.168.1.12
+# You can my-app.ka using this URL
+http://my-app.192.168.1.12.xip.io/
+```
+
+_You can find your local address using `ifconfig` or going to index.ka_
 
 ## Logs
 
