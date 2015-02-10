@@ -18,6 +18,8 @@ $ npm install -g katon
 
 To manually install katon, you can run `sudo katon install && katon start`.
 
+_Known issue: if Apache is running, it needs to be stopped to avoid conflict with katon._
+
 ## Add servers
 
 ```bash
