@@ -50,6 +50,11 @@ var port = process.env.PORT || 3000;
 
 The same technique can be applied with other languages too.
 
+## How it works
+- When you add a server using the `katon add` command, it's configuration is saved locally to `~/.katon/hosts/<app>` and an equivalent `~/.katon/logs/<app>` directory is also created.
+- The server is not started until you make your first request to your `<app>.ka` domain.
+- If no request is made to your `<app>.ka` server within an hour, then katon automatically stops. Therefore, Katon automatically manages resources by starting only needed servers and stopping them when they're not used.
+
 ## Subdomains
 
 When adding a server, you can access it by its URL `http://app.ka`. But you can also use subdomains (e.g. `http://foo.app.ka`, `http://bar.app.ka`, ...).
