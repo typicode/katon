@@ -67,10 +67,14 @@ Using [xip.io](http://xip.io/) you can access your servers from other devices (i
 
 ```
 # Let's say your local address is 192.168.1.12
-http://my-app.192.168.1.12.xip.io/
+http://<app_name>.192.168.1.12.xip.io/
 ```
 
 _You can find your local address using `ifconfig` or going to index.ka_
+
+## Access using HTTPS
+
+You can also use HTTPS to access your servers `https://<app_name>.ka`.
 
 ## Logs
 
