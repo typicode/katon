@@ -1,11 +1,11 @@
-var fs           = require('fs')
-var chalk        = require('chalk')
-var dnsServer    = require('./dns-server')
-var httpsProxy   = require('./https-proxy')
-var routerServer = require('./http-router')
-var procs        = require('./procs')
-var config       = require('../config')
-var util         = require('util')
+var fs         = require('fs')
+var chalk      = require('chalk')
+var util       = require('util')
+var dnsServer  = require('./dns-server')
+var httpsProxy = require('./https-proxy')
+var httpRouter = require('./http-router')
+var procs      = require('./procs')
+var config     = require('../config')
 
 function log(str) {
   util.log(chalk.red('[daemon] ') + str)
@@ -18,7 +18,7 @@ module.exports = {
 
     this.dns   = dnsServer.createServer()
     this.https = httpsProxy.createServer()
-    this.katon = routerServer.createServer()
+    this.http  = httpRouter.createServer()
 
     log('Loading procs')
     procs.load()
@@ -34,16 +34,16 @@ module.exports = {
     })
 
     log('Starting HTTP server on port ' + config.httpPort)
-    this.katon.listen(config.httpPort, function() {
-      log('Katon server started')
+    this.http.listen(config.httpPort, function() {
+      log('HTTP server started')
     })
   },
 
   stop: function(callback) {
     log('Stop')
 
-    this.katon.close(function() {
-      log('Katon server stopped')
+    this.http.close(function() {
+      log('HTTP server stopped')
     })
 
     this.https.close(function() {
