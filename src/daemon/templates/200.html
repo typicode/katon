@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <th>local</th>
+    <th>xip.io *</th>
+    <th>command</th>
+    <th>status</th>
+  </thead>
+  <% Object.keys(procs).forEach(function(name) { %>
+    <tr>
+      <td>
+        <a href="http://<%= name %>.ka/">http://<%= name %>.ka/</a>
+      </td>
+      <td>
+        <a href="http://<%= name %>.<%= ip %>.xip.io">http://<%= name %>.<%= ip %>.xip.io</a>
+      </td>
+      <td>
+        <%= procs[name].command.join(' ') %>
+      </td>
+      <td>
+        <%= procs[name].status %>
+      </td>
+    </tr>
+  <% }) %>
+</table>
+
+<p><em>* xip.io is a wildcard DNS service, you can use these addresses to access your development web server from devices on your local network, like iPads, iPhones, and other computers.</em></p>

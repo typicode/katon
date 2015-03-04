@@ -2,33 +2,16 @@
 <html>
 <head>
   <title>Katon</title>
-  <style>
-  	body {
-			padding: 50px;
-      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  	}
-  	a {
-  		color: black;
-  	}
-  	ul, li {
-  		list-style: none;
-      margin-top: 10px;
-  	}
-        .app {
-            font-weight: bold;
-            margin-right: 20px;
-        }
-        small {
-            color: #999;
-            margin-left: 10px;
-        }
-  </style>
+  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/flatly/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <h1>katon</h1>
-  <%- yield %>
-  <p>
-  	<a href="https://github.com/typicode/katon">View project on GitHub</a>
-  </p>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <a class="navbar-brand" href="http://index.ka">katon</a>
+      </div>
+    </nav>
+  <div class="container">
+    <%- yield %>
+  </div>
 </body>
 </html>

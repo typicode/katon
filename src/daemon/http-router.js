@@ -135,7 +135,7 @@ module.exports.createServer = function() {
     // Render katon home
     var domain = getDomainId(host)
     if (domain === 'index' || domain === 'katon') {
-      return res.end(render('200.ejs', {
+      return res.end(render('200.html', {
         procs: procs.list,
         ip: address()
       }))
@@ -145,7 +145,7 @@ module.exports.createServer = function() {
     if (!(/.ka$/.test(host) || /.xip.io$/.test(host))) {
       log(host, 'Not a valid Host')
       res.statusCode = 200
-      return res.end(render('200.ejs', {
+      return res.end(render('200.html', {
         procs: procs.list,
         ip: address()
       }))
@@ -171,7 +171,9 @@ module.exports.createServer = function() {
         if (err.code === 'EADDRINUSE') {
           log(host, err.code + ' check that port is not in use')
           res.statusCode = 502
-          return res.end(render('502.html'))
+          return res.end(render('502.html', {
+            name: host
+          }))
         }
 
         // Else retry
@@ -184,7 +186,9 @@ module.exports.createServer = function() {
         } else {
           log(host, 'Can\'t connect: ' + err)
           res.statusCode = 502
-          res.end(render('502.html'))
+          res.end(render('502.html', {
+            name: host
+          }))
         }
       })
     }
