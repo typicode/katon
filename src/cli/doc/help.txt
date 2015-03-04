@@ -1,15 +1,15 @@
 
 Usage:
-    katon add <cmd> [app_name]  Add server and use current dir name or app_name
-    katon rm [app_name]         Remove server by current dir name or app_name
-    katon open [app_name]       Open current dir or app_name in browser
-    katon reload [app_name]     Reload server by current dir or app_name
-    katon list                  List apps
-    katon tail [app_name]       Tail server log for current dir or app_name
-    katon tail all              Tail server log for all apps
-    katon start|stop            Daemon control
-    katon install|uninstall     Must be run to setup katon (use sudo)
-    katon status                Give status informations
+    katon add <cmd> [app_name]       Add server and use current dir name or app_name
+    katon rm [app_name]              Remove server by current dir name or app_name
+    katon open [app_name] [--https]  Open current dir or app_name in browser
+    katon reload [app_name]          Reload server by current dir or app_name
+    katon list                       List apps
+    katon tail [app_name]            Tail server log for current dir or app_name
+    katon tail all                   Tail server log for all apps
+    katon start|stop                 Daemon control
+    katon install|uninstall          Must be run to setup katon (use sudo)
+    katon status                     Give status informations
 
 Examples:
     katon add 'nodemon app.js'
