@@ -10,10 +10,8 @@ module.exports = function(args) {
   var file = config.hostsDir + '/' + host + '.json'
   if (fs.existsSync(file)) {
     touch.sync(file)
-    console.log(
-      '%s has been successfully stopped (to restart simply go http://%s.ka'),
-      chalk.cyan(host),
-      chalk.cyan(host))
+    console.log('%s has been successfully stopped', chalk.cyan(host))
+    console.log('To restart simply go to http://%s.ka', host)
   } else {
     console.log("Can\'t find %s, use katon list", chalk.red(host))
   }
