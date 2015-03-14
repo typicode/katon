@@ -24,3 +24,23 @@
 </table>
 
 <p><em>* xip.io is a wildcard DNS service, you can use these addresses to access your development web server from devices on your local network, like iPads, iPhones, and other computers.</em></p>
+<pre id="tail" class="pre-scrollable"></pre>
+
+<script>
+var tail   = document.getElementById('tail');
+var source = new EventSource('/tail');
+source.addEventListener('line', function(event) {
+  var message         = JSON.parse(event.data);
+  var entry           = document.createElement('div')
+  var prefix          = document.createElement('span')
+  prefix.textContent  = message.prefix + ':  '
+  prefix.className    = 'text-primary'
+  entry.appendChild(prefix)
+  var line            = document.createElement('span')
+  line.className      = 'text-nowrap'
+  line.textContent    = message.line
+  entry.appendChild(line)
+  tail.appendChild(entry)
+  tail.scrollTop      = entry.offsetTop
+});
+</script>
