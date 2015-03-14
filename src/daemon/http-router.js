@@ -79,13 +79,16 @@ function tailSSE(res) {
     'Cache-Control':  'no-cache',
     'Connection':     'keep-alive'
   });
-  var tail = new Tail()
+  var tail = new Tail('all', 10)
   tail.on('line', function(prefix, line) {
     var message = {
       prefix: prefix,
       line:   line.replace(/\[\d{2}m/g, '')
     }
     res.write('event: line\ndata: ' + JSON.stringify(message) + '\n\n');
+  })
+  res.on('close', function() {
+    tail.stop()
   })
   tail.start()
 }

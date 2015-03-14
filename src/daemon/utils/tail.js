@@ -1,8 +1,16 @@
-var Events      = require('events')
-var fs          = require('fs')
-var path        = require('path')
-var config      = require('../../config.js')
-var Util        = require('util')
+var chalk     = require('chalk')
+var Events    = require('events')
+var fs        = require('fs')
+var path      = require('path')
+var config    = require('../../config.js')
+var Util      = require('util')
+
+
+function log(msg, err) {
+  var str = chalk.blue('[tail]') + ' ' + msg
+  str += err ? ' [' + err + '] ' : ' '
+  Util.log(str)
+}
 
 
 function Tail(host, initialLines) {
@@ -30,6 +38,7 @@ Tail.prototype.start = function() {
 
 // Call this to end tailing
 Tail.prototype.stop = function() {
+  log('Stopped tailing')
   this.tailing = false
 }
 
@@ -47,14 +56,15 @@ Tail.prototype.tailAllLogFiles = function() {
       return config.logsDir + '/' + filename
     })
     .forEach(function(filename) {
-      var prefix = path.basename(filename, '.log')
-      tail.tailFile(filename, prefix)
+      var host = path.basename(filename, '.log')
+      tail.tailFile(filename, host)
     })
 }
 
 // This function dumps the end of the existing log file, and then starts
 // watching for changes.
-Tail.prototype.tailFile = function(filename, prefix) {
+Tail.prototype.tailFile = function(filename, host) {
+  log('Tailing ' + filename)
   var tail      = this
   var stream    = fs.createReadStream(filename, { encoding: 'utf8' })
   var lines     = []
@@ -77,25 +87,35 @@ Tail.prototype.tailFile = function(filename, prefix) {
   stream.on('end', function() {
     // Dump the tail of the log to the console and start watching for changes.
     //for (var i = 0; i < lines.length ; ++i)
-    for (var i in lines) {
-      tail.emit('line', prefix, lines[i])
-    }
-    if (tail.tailing)
-      tail.watchFile(filename, prefix, position)
+    for (var i in lines)
+      tail.emit('line', host, lines[i])
+    tail.watchFile(filename, host, position)
   })
   stream.on('error', function(error) {
+    log('Error tailing ' + filename, error)
     tail.emit('error', new Error("Cannot tail ' + filename + ', start server and try again"))
   })
 }
 
 
-// Watch file for changes.  When Katon appends to file we get a change event
+// Watch file for changes.
+//
+// When Katon appends to file we get a change event
 // and read from previous position forward.
-Tail.prototype.watchFile = function(filename, prefix, position) {
-  var tail = this
+//
+// filename - Filename
+// host     - Host name
+// position - Position in file to start streaming from
+Tail.prototype.watchFile = function(filename, host, position) {
+  var tail      = this
+  var streaming = false
   try {
-    var watcher = fs.watch(filename, function(event) {
-      if (!tail.tailing)
+    var watcher = fs.watch(filename, { persistent: false }, function() {
+      if (!tail.tailing) {
+        watcher.close()
+        return
+      }
+      if (streaming)
         return
 
       var stats = fs.statSync(filename)
@@ -103,20 +123,27 @@ Tail.prototype.watchFile = function(filename, prefix, position) {
         // File got truncated need to adjust position to new end of file
         position = stats.size
       } else if (stats.size > position) {
-        // File has more content, stop watching while we tail the stream
-        watcher.close()
-        tail.tailStream(filename, prefix, position)
+        streaming = true
+        tail.tailStream(filename, host, position, function(newPosition) {
+          position  = newPosition
+          streaming = false
+        })
       }
     })
   } catch (error) {
+    log('Error tailing ' + filename, error)
     tail.emit('error', new Error('Cannot tail ' + filename + ', start server and try again'))
   }
 }
 
 
-// Tail the end of the stream from the previous position.  When done, go back
-// to watching the file for changes.
-Tail.prototype.tailStream = function(filename, prefix, position) {
+// Tail the end of the stream from the previous position.
+//
+// filename - Filename
+// host     - Host name
+// position - Position in file to start streaming from
+// callback - Called on completion with new position (one argument)
+Tail.prototype.tailStream = function(filename, host, position, callback) {
   var tail          = this
   var streamOptions = {
     start:    position,
@@ -125,26 +152,17 @@ Tail.prototype.tailStream = function(filename, prefix, position) {
   var stream        = fs.createReadStream(filename, streamOptions)
   var lastLine      = ''
   stream.on('data', function(chunk) {
-    if (!tail.tailing) {
-      stream.close()
-      return
-    }
-
     var buffer = lastLine + chunk
     var lines  = buffer.split(/\n/)
     lastLine   = lines.pop()
     for (var i in lines) {
       var line = lines[i]
-      tail.emit('line', prefix, line)
+      tail.emit('line', host, line)
       position += line.length + 1
     }
   })
-
   stream.on('end', function() {
-    tail.watchFile(filename, prefix, position)
-  })
-  stream.on('error', function(error) {
-    tail.watchFile(filename, prefix, position)
+    callback(position)
   })
 }
 
