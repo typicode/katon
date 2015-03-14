@@ -16,30 +16,33 @@ function log(msg, err) {
 function Tail(host, initialLines) {
   this.host         = host || 'all'
   this.initialLines = initialLines
-  this.tailing      = false
+  this.logFiles     = null
 }
 Util.inherits(Tail, Events.EventEmitter)
 
 
 // Call this to start tailing
 Tail.prototype.start = function() {
-  if (this.tailing)
+  if (this.logFiles)
     return
 
   if (this.host == 'all') {
-    this.tailAllLogFiles()
+    this.logFiles = this.tailAllLogFiles()
   } else {
-    var logFile = config.logsDir + '/' + this.host + '.log'
-    this.tailFile(logFile)
+    var filename  = config.logsDir + '/' + this.host + '.log'
+    var logFile   = new LogFile(this, filename, this.host)
+    logFile.start()
+    this.logFiles = [ logFile ]
   }
-  this.tailing = true
 }
 
 
 // Call this to end tailing
 Tail.prototype.stop = function() {
   log('Stopped tailing')
-  this.tailing = false
+  this.logFiles.forEach(function(logFile) {
+    logFile.stop()
+  })
 }
 
 
@@ -48,28 +51,41 @@ Tail.prototype.stop = function() {
 // Tail all log files from the logs directory
 Tail.prototype.tailAllLogFiles = function() {
   var tail = this
-  fs.readdirSync(config.logsDir)
+  var logFiles = fs
+    .readdirSync(config.logsDir)
     .filter(function(filename) {
       return /\.log$/.test(filename)
     })
     .map(function(filename) {
       return config.logsDir + '/' + filename
     })
-    .forEach(function(filename) {
-      var host = path.basename(filename, '.log')
-      tail.tailFile(filename, host)
+    .map(function(filename) {
+      var host    = path.basename(filename, '.log')
+      var logFile = new LogFile(tail, filename, host)
+      logFile.start()
+      return logFile
     })
+  return logFiles
 }
 
-// This function dumps the end of the existing log file, and then starts
-// watching for changes.
-Tail.prototype.tailFile = function(filename, host) {
-  log('Tailing ' + filename)
-  var tail      = this
-  var stream    = fs.createReadStream(filename, { encoding: 'utf8' })
+
+// Maintains state for each log file
+function LogFile(tail, filename, host) {
+  this.filename     = filename
+  this.host         = host
+  this.position     = 0
+  this.initialLines = tail.initialLines
+  this.emit         = tail.emit.bind(tail)
+}
+
+
+LogFile.prototype.start = function() {
+  var logFile   = this
+  log('Tailing ' + logFile.filename)
+
+  var stream    = fs.createReadStream(logFile.filename, { encoding: 'utf8' })
   var lines     = []
   var buffer    = ''
-  var position  = 0
   stream.on('data', function(chunk) {
     buffer += chunk
     // Parse stream into lines and keep the last INITIAL_LINES in memory.
@@ -79,77 +95,58 @@ Tail.prototype.tailFile = function(filename, host) {
     while (match = buffer.match(/^.*\n/)) {
       var line = match[0]
       lines.push(line.slice(0, -1))
-      position += line.length
-      buffer    = buffer.slice(line.length)
+      logFile.position += line.length
+      buffer   = buffer.slice(line.length)
     }
-    lines = lines.slice(-this.initialLines)
+    lines = lines.slice(-logFile.initialLines)
   })
   stream.on('end', function() {
     // Dump the tail of the log to the console and start watching for changes.
     //for (var i = 0; i < lines.length ; ++i)
     for (var i in lines)
-      tail.emit('line', host, lines[i])
-    tail.watchFile(filename, host, position)
+      logFile.emit('line', logFile.host, lines[i])
+    logFile.watch()
   })
   stream.on('error', function(error) {
-    log('Error tailing ' + filename, error)
-    tail.emit('error', new Error("Cannot tail ' + filename + ', start server and try again"))
+    log('Error tailing ' + logFile.filename, error)
+    logFile.emit('error', new Error('Cannot tail ' + logFile.filename + ', start server and try again'))
   })
 }
 
 
 // Watch file for changes.
-//
-// When Katon appends to file we get a change event
-// and read from previous position forward.
-//
-// filename - Filename
-// host     - Host name
-// position - Position in file to start streaming from
-Tail.prototype.watchFile = function(filename, host, position) {
-  var tail      = this
+LogFile.prototype.watch = function() {
+  var logFile   = this
   var streaming = false
-  try {
-    var watcher = fs.watch(filename, { persistent: false }, function() {
-      if (!tail.tailing) {
-        watcher.close()
-        return
-      }
-      if (streaming)
-        return
 
-      var stats = fs.statSync(filename)
-      if (stats.size < position) {
-        // File got truncated need to adjust position to new end of file
-        position = stats.size
-      } else if (stats.size > position) {
-        streaming = true
-        tail.tailStream(filename, host, position, function(newPosition) {
-          position  = newPosition
-          streaming = false
-        })
-      }
-    })
-  } catch (error) {
-    log('Error tailing ' + filename, error)
-    tail.emit('error', new Error('Cannot tail ' + filename + ', start server and try again'))
+  this.watcher = fs.watch(this.filename, { persistent: false }, changeEvent)
+
+  function changeEvent() {
+    if (streaming)
+      return
+
+    var stats = fs.statSync(logFile.filename)
+    if (stats.size < logFile.position) {
+      // File got truncated need to adjust position to new end of file
+      logFile.position = stats.size
+    } else if (stats.size > logFile.position) {
+      streaming = true
+      logFile.tailStream(function() {
+        streaming = false
+      })
+    }
   }
 }
 
 
 // Tail the end of the stream from the previous position.
-//
-// filename - Filename
-// host     - Host name
-// position - Position in file to start streaming from
-// callback - Called on completion with new position (one argument)
-Tail.prototype.tailStream = function(filename, host, position, callback) {
-  var tail          = this
+LogFile.prototype.tailStream = function(callback) {
+  var logFile     = this
   var streamOptions = {
-    start:    position,
+    start:    logFile.position,
     encoding: 'utf8'
   }
-  var stream        = fs.createReadStream(filename, streamOptions)
+  var stream        = fs.createReadStream(logFile.filename, streamOptions)
   var lastLine      = ''
   stream.on('data', function(chunk) {
     var buffer = lastLine + chunk
@@ -157,13 +154,16 @@ Tail.prototype.tailStream = function(filename, host, position, callback) {
     lastLine   = lines.pop()
     for (var i in lines) {
       var line = lines[i]
-      tail.emit('line', host, line)
-      position += line.length + 1
+      logFile.emit('line', logFile.host, line)
+      logFile.position += line.length + 1
     }
   })
-  stream.on('end', function() {
-    callback(position)
-  })
+  stream.on('end', callback);
+}
+
+
+LogFile.prototype.stop = function() {
+  this.watcher.close()
 }
 
 
