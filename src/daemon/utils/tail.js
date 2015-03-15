@@ -39,7 +39,7 @@ Tail.prototype.start = function() {
 
 // Call this to end tailing
 Tail.prototype.stop = function() {
-  log('Stopped tailing')
+  // log('Stopped tailing')
   this.logFiles.forEach(function(logFile) {
     logFile.stop()
   })
@@ -81,7 +81,7 @@ function LogFile(tail, filename, host) {
 
 LogFile.prototype.start = function() {
   var logFile   = this
-  log('Tailing ' + logFile.filename)
+  //log('Tailing ' + logFile.filename)
 
   var stream    = fs.createReadStream(logFile.filename, { encoding: 'utf8' })
   var lines     = []
@@ -108,7 +108,6 @@ LogFile.prototype.start = function() {
     logFile.watch()
   })
   stream.on('error', function(error) {
-    log('Error tailing ' + logFile.filename, error)
     logFile.emit('error', new Error('Cannot tail ' + logFile.filename + ', start server and try again'))
   })
 }
@@ -159,6 +158,9 @@ LogFile.prototype.tailStream = function(callback) {
     }
   })
   stream.on('end', callback);
+  stream.on('error', function(error) {
+    logFile.emit('error', new Error('Cannot tail ' + logFile.filename + ', start server and try again'))
+  })
 }
 
 

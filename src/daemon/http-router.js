@@ -80,13 +80,17 @@ function tailSSE(res) {
     'Connection':     'keep-alive'
   });
   var tail = new Tail('all', 10)
-  tail.on('line', function(prefix, line) {
-    var message = {
-      prefix: prefix,
-      line:   line.replace(/\[\d{2}m/g, '')
-    }
-    res.write('event: line\ndata: ' + JSON.stringify(message) + '\n\n');
-  })
+  tail
+    .on('line', function(prefix, line) {
+      var message = {
+        prefix: prefix,
+        line:   line.replace(/\[\d{2}m/g, '')
+      }
+      res.write('event: line\ndata: ' + JSON.stringify(message) + '\n\n');
+    })
+    .on('error', function(error) {
+      log('all', 'Cannot tail logs', error)
+    })
   res.on('close', function() {
     tail.stop()
   })
