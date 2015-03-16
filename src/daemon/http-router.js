@@ -5,6 +5,7 @@ var address   = require('network-address')
 var chalk     = require('chalk')
 var procs     = require('./procs')
 var render    = require('./utils/render')
+var Tail      = require('./utils/tail')
 var timer     = require('./utils/timer')
 var util      = require('util')
 
@@ -73,6 +74,31 @@ function startProc(host) {
   return proc
 }
 
+function tailSSE(res) {
+  res.writeHead(200, {
+    'Content-Type':   'text/event-stream; charset=utf-8',
+    'Cache-Control':  'no-cache',
+    'Connection':     'keep-alive'
+  });
+  var tail = new Tail('all', 10)
+  tail
+    .on('line', function(prefix, line) {
+      var message = {
+        prefix: prefix,
+        line:   line.replace(/\[\d{2}m/g, '')
+      }
+      res.write('event: line\ndata: ' + JSON.stringify(message) + '\n\n');
+    })
+    .on('error', function(error) {
+      log('all', 'Cannot tail logs', error)
+    })
+  res.on('close', function() {
+    tail.stop()
+  })
+  tail.start()
+}
+
+
 module.exports.createServer = function() {
 
   var server = http.createServer()
@@ -136,10 +162,15 @@ module.exports.createServer = function() {
     // Render katon home
     var domain = getDomainId(host)
     if (domain === 'index' || domain === 'katon') {
-      return res.end(render('200.html', {
-        procs: procs.list,
-        ip: address()
-      }))
+      if (req.url == '/tail') {
+        tailSSE(res)
+        return
+      } else {
+        return res.end(render('200.html', {
+          procs: procs.list,
+          ip: address()
+        }))
+      }
     }
 
     // Verify host is set and valid
