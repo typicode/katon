@@ -14,7 +14,7 @@ var INITIAL_LINES = 10
 function tailStream(filename, prefix, position) {
   var streamOptions = {
     start:    position,
-    encoding: 'utf-8'
+    encoding: 'utf8'
   }
   var stream = fs.createReadStream(filename, streamOptions)
 
@@ -64,7 +64,7 @@ function watchFile(filename, prefix, position) {
 // This function dumps the end of the existing log file, and then starts
 // watching for changes.
 function tailFile(filename, prefix) {
-  var stream    = fs.createReadStream(filename, 'utf-8')
+  var stream    = fs.createReadStream(filename, { encoding: 'utf8' })
   var lines     = []
   var buffer    = ''
   var position  = 0
