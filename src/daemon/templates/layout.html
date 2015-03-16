@@ -3,13 +3,18 @@
 <head>
   <title>Katon</title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .container {
+      max-width: 960px
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <a class="navbar-brand" href="//index.ka">katon</a>
-      </div>
-    </nav>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <a class="navbar-brand" href="//index.ka">katon</a>
+    </div>
+  </nav>
   <div class="container">
     <%- yield %>
   </div>

@@ -36,16 +36,17 @@ function getSubdomainId(host) {
   return removeTopLevelDomain(host).join('.')
 }
 
-// Find proc based on host name
-function getProc(host) {
+// Find procId based on host name
+function getProcId(host) {
   var domainId = getDomainId(host)
   var subdomainId = getSubdomainId(host)
 
-  if (procs.list[subdomainId]) {
-    return procs.list[subdomainId]
-  } else {
-    return procs.list[domainId]
-  }
+  return procs.list[subdomainId] ? subdomainId : domainId
+}
+
+// Find proc based on host name
+function getProc(host) {
+  return procs.list[getProcId(host)]
 }
 
 // Return true if proc exist
@@ -172,7 +173,7 @@ module.exports.createServer = function() {
           log(host, err.code + ' check that port is not in use')
           res.statusCode = 502
           return res.end(render('502.html', {
-            name: host
+            name: getProcId(host)
           }))
         }
 
@@ -187,7 +188,7 @@ module.exports.createServer = function() {
           log(host, 'Can\'t connect: ' + err)
           res.statusCode = 502
           res.end(render('502.html', {
-            name: host
+            name: getProcId(host)
           }))
         }
       })
