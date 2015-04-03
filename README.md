@@ -6,7 +6,9 @@ katon is a development tool that makes dev servers __accessible__ on __beautiful
 
 ![](http://i.imgur.com/AyFpCHj.png)
 
-katon supports any server: __Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on Mac OS.
+katon supports any server: __Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on __OS X__.
+
+Linux and Windows users, see [minihost](https://github.com/typicode/minihost) as a lightweight alternative.
 
 ## Install
 
