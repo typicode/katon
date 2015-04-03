@@ -8,7 +8,7 @@ katon is a development tool that makes dev servers __accessible__ on __beautiful
 
 katon supports any server: __Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on __OS X__.
 
-Linux and Windows users, see [minihost](https://github.com/typicode/minihost) as a lightweight alternative.
+Linux and Windows users, see [minihost](https://github.com/typicode/minihost).
 
 ## Install
 
