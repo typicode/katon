@@ -19,9 +19,12 @@ function log(id, msg, err) {
 
 // For http://www.app.ka will return ['www', 'app']
 // For http://www.app.10.0.0.1.xip.io will return ['www', 'app']
+// For http://www.app.ngrok.io will return ['www', 'app']
 function removeTopLevelDomain(host) {
   if (/.xip.io$/.test(host)) {
     return host.split('.').slice(0, -6)
+  } else if (/.ngrok.io$/.test(host)) {
+    return host.split('.').slice(0, -2)
   } else {
     return host.split('.').slice(0, -1)
   }
@@ -174,7 +177,7 @@ module.exports.createServer = function() {
     }
 
     // Verify host is set and valid
-    if (!(/.ka$/.test(host) || /.xip.io$/.test(host))) {
+    if (!(/.ka$/.test(host) || /.xip.io$/.test(host) || /.ngrok.io$/.test(host))) {
       log(host, 'Not a valid Host')
       res.statusCode = 200
       return res.end(render('200.html', {
