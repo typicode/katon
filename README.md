@@ -72,6 +72,20 @@ http://<app_name>.192.168.1.12.xip.io/
 
 _You can find your local address using `ifconfig` or going to index.ka_
 
+## Remote access behind NAT/firewall
+
+Using [ngrok.com](http://ngrok.com/) you can share access to your servers with others, when running behind a firewall or NAT.
+
+First, follow the instructions to install ngrok, then [register on the site](https://dashboard.ngrok.com/user/signup) to enable custom subdomains.
+
+Then run ngrok with your application name as the subdomain:
+
+```
+ngrok http -subdomain app_name 80
+```
+
+This exposes port 80 to the internet on *app_name.ngrok.io*. **Use at your own risk: all of your web hosts are accessible on this port while ngrok is running.**
+
 ## Access using HTTPS
 
 You can also use HTTPS to access your servers `https://<app_name>.ka`.
