@@ -35,15 +35,6 @@ describe('Katon', function() {
     }, done)
   })
 
-  it('Add node > GET http://node.ngrok.io', function(done) {
-    helper.add('node', 'node index.js')
-
-    helper.GET('node.ngrok.io', {
-      status: 200,
-      body: 'OK'
-    }, done)
-  })
-  
   it('Add node > GET http://node.ka', function(done) {
     helper.add('node', 'node index.js')
 
