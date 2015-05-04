@@ -1,13 +1,36 @@
 var chalk       = require('chalk')
+var config      = require('../../config.js')
+var fs          = require('fs')
+var listHosts   = require('../utils/list-hosts')
 var Tail        = require('../../daemon/utils/tail')
-var pathToHost  = require('../utils/path-to-host')
 
 
 // Number of lines to show from end of log.
 var INITIAL_LINES = 10
 
+// Return host name for current working directory
+// Directory usually, not necessarily, same as host name
+function getHostName(cwd) {
+  var hostNames = listHosts()
+    .map(function(name) {
+      var filename = config.hostsDir + '/' + name
+      var host = JSON.parse(fs.readFileSync(filename))
+      return [name.replace('.json', ''), host.cwd]
+    })
+    .filter(function(nameAndPath) {
+      var path = nameAndPath[1]
+      return path === cwd
+    })
+    .map(function(nameAndPath) {
+      var name = nameAndPath[0]
+      return name
+    })
+  return hostNames[0]
+}
+
+
 module.exports = function(args) {
-  var host  = args[0] || pathToHost(process.cwd())
+  var host  = args[0] || getHostName(process.cwd())
   var tail  = new Tail(host, INITIAL_LINES);
   tail
     .on('line', function(prefix, line) {
