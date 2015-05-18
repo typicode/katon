@@ -41,7 +41,7 @@ module.exports = function(args) {
 
     if (e === 'PATH') continue
 
-    if (process.env.hasOwnProperty[e]) {
+    if (process.env.hasOwnProperty(e)) {
       env[e] = process.env[e]
     } else {
       return console.log('Can\'t find ' + e + ' environment variable')
