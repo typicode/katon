@@ -111,7 +111,7 @@ module.exports.createServer = function() {
   server.on('upgrade', function(req, socket, head) {
     var host = req.headers.host
     var count = 0
-    var max = 3
+    var max = 9
 
     log(host, 'WebSocket request received')
 
