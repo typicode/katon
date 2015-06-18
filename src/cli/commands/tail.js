@@ -28,6 +28,20 @@ function getHostName(cwd) {
   return hostNames[0]
 }
 
+var COLORS = ['blue', 'magenta', 'green', 'yellow', 'cyan', 'gray'];
+var mappingColors = {};
+var idx = 0;
+
+function colorPrefix (prefix) {
+  if (!mappingColors.hasOwnProperty(prefix)) {
+    if (idx >= COLORS.length) {
+      idx = 0;
+    }
+    mappingColors[prefix] = COLORS[idx++];
+  }
+  return chalk[mappingColors[prefix]](prefix);
+}
+
 
 module.exports = function(args) {
   var host  = args[0] || getHostName(process.cwd())
@@ -35,7 +49,7 @@ module.exports = function(args) {
   tail
     .on('line', function(prefix, line) {
       if (prefix)
-        process.stdout.write(chalk.blue('[' + prefix + ']  '))
+        process.stdout.write(colorPrefix('[' + prefix + ']  '))
       process.stdout.write(line + '\n')
     })
     .on('error', function(error) {
