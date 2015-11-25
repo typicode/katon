@@ -8,7 +8,9 @@ katon is a development tool that makes dev servers __accessible__ on __beautiful
 
 katon supports any server: __Node, Ruby, Python, Go, Java, PHP, ...__ that can be started with a command-line and runs on __OS X__.
 
-_Note: for a lighter and cross-platform version, see [__hotel__](https://github.com/typicode/hotel)._
+### Linux, Windows
+
+Please use [hotel](https://github.com/typicode/hotel).
 
 ## Install
 
