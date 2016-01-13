@@ -1,5 +1,13 @@
 # katon [![](https://badge.fury.io/js/katon.svg)](http://badge.fury.io/js/katon) [![](https://travis-ci.org/typicode/katon.svg?branch=master)](https://travis-ci.org/typicode/katon)
 
+---
+
+__Note__ except if you need a particular feature in katon, please use [hotel](https://github.com/typicode/hotel). Hotel is cross-platform and doesn't require admin privileges to be installed.
+
+A huge thank you to all the [people](https://github.com/typicode/katon/graphs/contributors) who contributed to katon!
+
+---
+
 > Access your dev servers by their names
 
 katon is a development tool that makes dev servers __accessible__ on __beautiful__ local .ka domains. It also __autostarts/stops__ them for you.
