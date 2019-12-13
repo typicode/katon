@@ -127,7 +127,7 @@ $ rvm use ruby-2.0.0-p576 && katon add 'bundle exec unicorn' --env GEM_PATH
 # Will use GEM_PATH previously set by rvm
 ```
 
-For Node users, to keep access to katon CLI accross Node versions, add an alias to your .profile and reopen the Terminal.
+For Node users, to keep access to katon CLI across Node versions, add an alias to your .profile and reopen the Terminal.
 
 ```bash
 echo "alias katon=`which katon`" >> ~/.profile
@@ -145,7 +145,7 @@ If you're stuck, feel free to create an issue.
 $ npm rm -g katon
 ```
 
-This will run the uninstall script wich does basically `katon stop && sudo katon uninstall`. To remove katon completely, run also `rm -rf ~/.katon`.
+This will run the uninstall script which does basically `katon stop && sudo katon uninstall`. To remove katon completely, run also `rm -rf ~/.katon`.
 
 # Credits
 
